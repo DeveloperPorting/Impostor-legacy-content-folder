@@ -1,0 +1,15 @@
+{
+	"songs": [
+		["49", "noob49", [90, 91, 255]],
+		["Don't Lied", "purple", [153, 55, 123]],
+		["Suspect", "detective", [90, 91, 123]]
+	],
+	
+	"storyName": "Somewhere Else",
+	"weekName": "DLC Week",
+	"weekBefore": "",
+	
+	"startUnlocked": false,
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

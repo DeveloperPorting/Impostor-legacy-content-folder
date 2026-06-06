@@ -1,0 +1,144 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				102,
+				-257
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "animations/impostor idle"
+		},
+		{
+			"offsets": [
+				80,
+				-225
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "animations/impostor down"
+		},
+		{
+			"offsets": [
+				106,
+				-257
+			],
+			"flipY": false,
+			"loop": false,
+			"fps": 24,
+			"anim": "ayo",
+			"flipX": false,
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18
+			],
+			"name": "animations/red look"
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				219,
+				-289
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "animations/swag impostor left",
+			"indices": [],
+			"flipX": false
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				43,
+				-290
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "animations/swag impostor right",
+			"indices": [],
+			"flipX": false
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				-3,
+				-234
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "animations/impostor up2",
+			"indices": [],
+			"flipX": false
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/story/red/red",
+	"position": [
+		0,
+		100
+	],
+	"dance_every": 2,
+	"gameover_intial_sound": null,
+	"scalableOffsets": false,
+	"gameover_confirm_sound": null,
+	"healthicon": "red",
+	"gameover_character": null,
+	"vslice_sustains": true,
+	"flip_x": false,
+	"healthbar_colour": -4510419,
+	"camera_position": [
+		-130,
+		290
+	],
+	"gameover_loop_sound": null,
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="squig.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle instance 10000" x="0" y="0" width="143" height="223"/>
+	<SubTexture name="idle instance 10001" x="0" y="0" width="143" height="223"/>
+	<SubTexture name="idle instance 10002" x="145" y="0" width="143" height="220" frameX="0" frameY="-2" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10003" x="145" y="0" width="143" height="220" frameX="0" frameY="-2" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10004" x="145" y="222" width="143" height="210" frameX="0" frameY="-11" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10005" x="145" y="222" width="143" height="210" frameX="0" frameY="-11" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10006" x="290" y="0" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10007" x="290" y="0" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10008" x="290" y="217" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10009" x="290" y="217" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10010" x="290" y="217" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10011" x="290" y="217" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10012" x="290" y="217" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+	<SubTexture name="idle instance 10013" x="290" y="217" width="143" height="215" frameX="0" frameY="-7" frameWidth="143" frameHeight="223"/>
+</TextureAtlas>

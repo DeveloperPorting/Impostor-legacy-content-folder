@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="platform.png">
+	<!-- Created with Adobe Animate version 24.0.12.3 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="danger0000" x="0" y="0" width="550" height="184" frameX="-86" frameY="0" frameWidth="636" frameHeight="195"/>
+	<SubTexture name="danger0001" x="555" y="0" width="550" height="194" frameX="-86" frameY="0" frameWidth="636" frameHeight="195"/>
+	<SubTexture name="danger0002" x="1110" y="0" width="550" height="195" frameX="-86" frameY="0" frameWidth="636" frameHeight="195"/>
+	<SubTexture name="danger0003" x="0" y="200" width="550" height="193" frameX="-86" frameY="0" frameWidth="636" frameHeight="195"/>
+	<SubTexture name="danger0004" x="555" y="200" width="606" height="190" frameX="-30" frameY="0" frameWidth="636" frameHeight="195"/>
+	<SubTexture name="danger0005" x="1166" y="200" width="636" height="173" frameX="0" frameY="0" frameWidth="636" frameHeight="195"/>
+	<SubTexture name="floating0000" x="0" y="398" width="550" height="141" frameX="0" frameY="0" frameWidth="550" frameHeight="193"/>
+	<SubTexture name="floating0001" x="555" y="398" width="550" height="169" frameX="0" frameY="0" frameWidth="550" frameHeight="193"/>
+	<SubTexture name="floating0002" x="1110" y="398" width="550" height="186" frameX="0" frameY="0" frameWidth="550" frameHeight="193"/>
+	<SubTexture name="floating0003" x="0" y="589" width="550" height="193"/>
+	<SubTexture name="floating0004" x="555" y="589" width="550" height="190" frameX="0" frameY="0" frameWidth="550" frameHeight="193"/>
+	<SubTexture name="floating0005" x="1110" y="589" width="550" height="167" frameX="0" frameY="0" frameWidth="550" frameHeight="193"/>
+</TextureAtlas>

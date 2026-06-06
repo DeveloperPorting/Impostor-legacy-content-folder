@@ -1,0 +1,12 @@
+{
+    "tabs": [
+        {
+            "title": "Impostor Legacy",
+            "fromWeeks": ["week1", "week2", "week2Bonus", "week3"]
+        },
+        {
+            "title": "Impostor Legacy DLC",
+            "fromWeeks": ["weekDLC", "weekDLCBonus"]
+        }
+    ]
+}

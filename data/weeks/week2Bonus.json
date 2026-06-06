@@ -1,0 +1,20 @@
+{
+	"songs": [
+		["Double Trouble", "double-trouble", [0, 57, 62], "doubletrouble", "Rareblin", [], 0, false, true]
+	],
+	
+	"section": "bonus",
+	
+	"storyName": "Week 2 Bonus",
+	"weekBefore": "week2",
+	"weekName": "Week 2 Bonus",
+	
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"hideFreeplay": false,
+	
+	"node": {
+		"parent": "week2",
+		"direction": "east"
+	}
+}

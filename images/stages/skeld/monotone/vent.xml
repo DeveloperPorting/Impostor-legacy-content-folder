@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Vent.png">
+	<!-- Created with Adobe Flash CS6 12.0.0.481 -->
+	<SubTexture name="Vent Close0000" x="3" y="1215" width="708" height="173" frameX="-191" frameY="-444" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0001" x="802" y="650" width="759" height="201" frameX="-176" frameY="-422" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0002" x="802" y="650" width="759" height="201" frameX="-176" frameY="-422" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0003" x="3" y="650" width="794" height="560" frameX="-135" frameY="-77" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0004" x="939" y="3" width="929" height="623" frameX="-1" frameY="-15" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0005" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0006" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0007" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0008" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Close0009" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0000" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0001" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0002" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0003" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0004" x="3" y="3" width="931" height="642" frameX="0" frameY="0" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0005" x="939" y="3" width="929" height="623" frameX="-1" frameY="-15" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0006" x="3" y="650" width="794" height="560" frameX="-135" frameY="-77" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0007" x="802" y="650" width="759" height="201" frameX="-176" frameY="-422" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0008" x="802" y="650" width="759" height="201" frameX="-176" frameY="-422" frameWidth="935" frameHeight="642"/>
+	<SubTexture name="Vent Open0009" x="3" y="1215" width="708" height="173" frameX="-191" frameY="-444" frameWidth="935" frameHeight="642"/>
+</TextureAtlas>

@@ -1,0 +1,35 @@
+﻿{"ATLAS": {"SPRITES":[ 
+{"SPRITE" : {"name": "0000","x":246,"y":290,"w":151,"h":138,"rotated": false}},
+{"SPRITE" : {"name": "0001","x":902,"y":302,"w":111,"h":62,"rotated": false}},
+{"SPRITE" : {"name": "0002","x":770,"y":538,"w":172,"h":81,"rotated": false}},
+{"SPRITE" : {"name": "0003","x":531,"y":282,"w":234,"h":291,"rotated": false}},
+{"SPRITE" : {"name": "0004","x":402,"y":290,"w":96,"h":188,"rotated": false}},
+{"SPRITE" : {"name": "0005","x":526,"y":578,"w":77,"h":149,"rotated": false}},
+{"SPRITE" : {"name": "0006","x":2,"y":286,"w":117,"h":216,"rotated": false}},
+{"SPRITE" : {"name": "0007","x":608,"y":578,"w":153,"h":67,"rotated": false}},
+{"SPRITE" : {"name": "0008","x":363,"y":550,"w":158,"h":76,"rotated": false}},
+{"SPRITE" : {"name": "0009","x":2,"y":2,"w":267,"h":279,"rotated": false}},
+{"SPRITE" : {"name": "0010","x":124,"y":286,"w":117,"h":214,"rotated": false}},
+{"SPRITE" : {"name": "0011","x":246,"y":433,"w":151,"h":112,"rotated": false}},
+{"SPRITE" : {"name": "0012","x":2,"y":507,"w":163,"h":94,"rotated": false}},
+{"SPRITE" : {"name": "0013","x":770,"y":302,"w":127,"h":135,"rotated": false}},
+{"SPRITE" : {"name": "0014","x":2,"y":621,"w":185,"h":35,"rotated": false}},
+{"SPRITE" : {"name": "0015","x":274,"y":2,"w":252,"h":283,"rotated": false}},
+{"SPRITE" : {"name": "0016","x":170,"y":550,"w":188,"h":66,"rotated": false}},
+{"SPRITE" : {"name": "0017","x":791,"y":2,"w":231,"h":295,"rotated": false}},
+{"SPRITE" : {"name": "0018","x":947,"y":538,"w":64,"h":81,"rotated": false}},
+{"SPRITE" : {"name": "0019","x":770,"y":282,"w":1,"h":1,"rotated": false}},
+{"SPRITE" : {"name": "0020","x":770,"y":442,"w":187,"h":91,"rotated": false}},
+{"SPRITE" : {"name": "0021","x":770,"y":282,"w":1,"h":1,"rotated": false}},
+{"SPRITE" : {"name": "0022","x":770,"y":282,"w":1,"h":1,"rotated": false}},
+{"SPRITE" : {"name": "0023","x":531,"y":2,"w":255,"h":275,"rotated": false}}
+]},
+"meta": {
+"app": "Adobe Animate",
+"version": "21.0.0.35450",
+"image": "spritemap1.png",
+"format": "RGBA8888",
+"size": {"w":1024,"h":729},
+"resolution": "1"
+}
+}
