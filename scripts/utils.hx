@@ -1,8 +1,10 @@
 import flixel.text.FlxText;
 import flixel.addons.text.FlxTypeText;
+import flixel.util.FlxStringUtil;
 
 import funkin.backend.DebugDisplay;
 import funkin.backend.math.Vector3;
+import funkin.utils.MathUtil;
 //import funkin.data.GameFlags;
 import funkin.data.ClientPrefs;
 //import funkin.data.CosmicubeData;
@@ -20,6 +22,16 @@ public var dbText:String = '';
 public var bfOff:Dynamic = -1;
 public var dadOff:Dynamic = -1;
 public var showDevInfo:Bool = false;
+
+var rankThresholds:Array<{min: Float, name: String}> = [
+	{min: 99.0, name: "P"},
+	{min: 95.0, name: "S"},
+	{min: 90.0, name: "A"},
+	{min: 80.0, name: "B"},
+	{min: 70.0, name: "C"},
+	{min: 60.0, name: "D"},
+	{min: 50.0, name: "E"}
+];
 
 // Akinator game below vvvvvvvvvvv
 
@@ -144,13 +156,14 @@ function onMoveCamera(whosTurn:Bool)
 
 function modifyGUI()
 {
-	timeBar.setColors(0xFF44d844, 0xFF2e412e);
-	timeTxt.x += 120;
-	timeBar.x -= 337;
-	timeTxt.y = ClientPrefs.downscroll ? FlxG.height - 35 : 29;
-	timeTxt.size = 14;
-	timeTxt.borderSize = 1;
-	timeTxt.setFormat(Paths.font("vcr.ttf", false), 14, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	playHUD.timeBar.setColors(0xFF44d844, 0xFF2e412e);
+	playHUD.timeTxt.x += 110;
+	playHUD.timeBar.x -= 337;
+	playHUD.timeTxt.y += 10;
+	playHUD.timeTxt.size = 14;
+	playHUD.timeTxt.borderSize = 1;
+	playHUD.timeTxt.setFormat(Paths.font("vcr.ttf"), 14, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	playHUD.scoreTxt.clearFormats();
 	if (hasColor) playHUD.scoreTxt.color = dad.healthColour;
 	
 	ratingPop = (.47 / .42);
@@ -171,12 +184,37 @@ function modifyGUI()
 	}
 }
 
+function getRank(accuracy:Float):String
+{
+	for (rule in rankThresholds)
+	{
+		if (accuracy >= rule.min) return rule.name;
+	}
+	
+	return "F";
+}
+
+function onUpdateScore()
+{
+	var accuracyText:String = "N/A";
+	var rankText:String = "N/A";
+
+	if (songScore > 0 || songMisses > 0)
+	{
+		accuracyText = MathUtil.floorDecimal(ratingPercent * 100, 2) + "%";
+		rankText = getRank(MathUtil.floorDecimal(ratingPercent * 100, 2));
+	}
+	
+	playHUD.scoreTxt.text = "Score: " + songScore + " | Misses: " + songMisses + " | Accuracy: " + accuracyText + " | Rank: " + rankText;
+	return Function_Stop;
+}
+
 function onPopUpScorePost(note, rating)
 {
 	if (playHUD.ratingGraphic != null)
 	{
 		// functionality still exists
-		if (ClientPrefs.colorText == 'Enabled DX') ratingGraphic.color = scoreTxt.color;
+		if (ClientPrefs.colorText == 'Enabled DX') playHUD.ratingGraphic.color = scoreTxt.color;
 		
 		playHUD.ratingGraphic.x = ((FlxG.width / 2) - (playHUD.ratingGraphic.width / 2) + comboX);
 		playHUD.ratingGraphic.y = (ClientPrefs.downScroll ? (FlxG.height - playHUD.ratingGraphic.height - 50) : 55);
@@ -223,7 +261,7 @@ function onUpdate(elapsed)
 	
 	if (showDevInfo)
 	{
-		dbText = '\nVS IMPOSTOR LEGACY v' + Main.LEGACY_VERSION
+		dbText = '\nVS IMPOSTOR LEGACY v1.0.2'
 			+ '\nHealth: '
 			+ game.health
 			+ '\nDad Camera, BF Camera:'
@@ -252,6 +290,11 @@ function onUpdate(elapsed)
 			+ getBool(' | Shaders', ClientPrefs.shaders)
 			+ '\nAllocated Notes: ' + notes.length;
 	}
+}
+
+function onUpdatePost(elapsed)
+{
+	playHUD.timeTxt.text = PlayState.SONG.song.toUpperCase();
 }
 
 public function getBool(sss:String, bbb:Bool, ?withSlashN:Bool = true):String
@@ -340,7 +383,7 @@ function onEvent(eventName, value1, value2)
 		case '_placeholder':
 			if (showDevInfo) trace('vs placeholder');
 		case 'Reactor Beep':
-			flashSprite.alpha = 0.3;
+			flashSprite?.alpha = 0.3;
 		case 'Change Character':
 			if (hasColor) scoreTxt.color = dad.healthColour == FlxColor.BLACK ? FlxColor.WHITE : dad.healthColour;
 		case 'flash':
