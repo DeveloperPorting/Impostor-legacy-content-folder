@@ -21,7 +21,7 @@ function onLoad()
 	
 	for (i in 0...2) // maybe this is doin too much idk
 	{
-		var bar = new FlxSprite().makeGraphic(FlxG.width + 3, 90, FlxColor.BLACK);
+		var bar = new FlxSprite().makeScaledGraphic(FlxG.width + 3, 90, FlxColor.BLACK);
 		bar.y = i == 1 ? 630 : 0;
 		bars.add(bar);
 	}
@@ -34,55 +34,48 @@ function onLoad()
 	finaleFlashbackStuff.animation.play('moog');
 	finaleFlashbackStuff.setGraphicSize(Std.int(finaleFlashbackStuff.width * 1.6));
 	finaleFlashbackStuff.alpha = 0.001;
-	finaleFlashbackStuff.antialiasing = ClientPrefs.globalAntialiasing;
 	finaleFlashbackStuff.scrollFactor.set(); // this matters !??
 	
-	var defeatthing:FlxSprite = new FlxSprite(-400, 2000);
-	defeatthing.frames = Paths.getSparrowAtlas('stages/void/defeat');
-	defeatthing.animation.addByPrefix('bop', 'defeat', 24, false);
-	defeatthing.animation.play('bop');
+	var defeatthing:FlxSprite = new FlxSprite(-400, 2000, Paths.image('stages/void/finale/defeat'));
+	// defeatthing.frames = Paths.getSparrowAtlas('stages/void/defeat');
+	// defeatthing.animation.addByPrefix('bop', 'defeat', 24, false);
+	// defeatthing.animation.play('bop');
 	defeatthing.setGraphicSize(Std.int(defeatthing.width * 1.3));
 	defeatthing.scrollFactor.set(0.8, 0.8);
-	defeatthing.antialiasing = ClientPrefs.globalAntialiasing;
 	defeatFinaleStuff.add(defeatthing);
 	
 	var mainoverlayDK:FlxSprite = new FlxSprite(250, 475).loadGraphic(Paths.image('stages/void/defeatfnf'));
 	mainoverlayDK.setGraphicSize(Std.int(mainoverlayDK.width * 4));
 	mainoverlayDK.updateHitbox();
 	mainoverlayDK.alpha = 0.0001;
-	mainoverlayDK.antialiasing = ClientPrefs.globalAntialiasing;
 	defeatFinaleStuff.add(mainoverlayDK);
 	
-	var bg0:FlxSprite = new FlxSprite(-600, -400).makeGraphic(3000, 2000, 0xFF0D0A1B);
+	var bg0:FlxSprite = new FlxSprite(-600, -400).makeScaledGraphic(3000, 2000, 0xFF0D0A1B);
+	
+	var bgScale = 1.3;
 	
 	var bg1:FlxSprite = new FlxSprite(800, -270).loadFromSheet(ext + 'props', 'dead');
 	bg1.scrollFactor.set(0.8, 0.8);
-	bg1.scale.set(1.1, 1.1);
-	bg1.antialiasing = ClientPrefs.globalAntialiasing;
+	bg1.scale.set(bgScale, bgScale);
 	
 	var bg2:FlxSprite = new FlxSprite(-790, -530).loadFromSheet(ext + 'props', 'bg');
 	bg2.updateHitbox();
-	bg2.antialiasing = ClientPrefs.globalAntialiasing;
 	bg2.scrollFactor.set(0.9, 0.9);
-	bg2.scale.set(1.1, 1.1);
+	bg2.scale.set(bgScale, bgScale);
 	
 	var bg3:FlxSprite = new FlxSprite(370, 1200).loadFromSheet(ext + 'props', 'splat');
 	bg3.updateHitbox();
-	bg3.antialiasing = ClientPrefs.globalAntialiasing;
-	bg3.scale.set(1.1, 1.1);
+	bg3.scale.set(bgScale, bgScale);
 	
 	var bg4:FlxSprite = new FlxSprite(990, -380).loadFromSheet(ext + 'props', 'lamp');
 	bg4.updateHitbox();
-	bg4.antialiasing = ClientPrefs.globalAntialiasing;
-	bg4.scale.set(1.1, 1.1);
+	bg4.scale.set(bgScale, bgScale);
 	
 	var bg5:FlxSprite = new FlxSprite(-750, 160).loadFromSheet(ext + 'props', 'fore');
 	bg5.updateHitbox();
-	bg5.antialiasing = ClientPrefs.globalAntialiasing;
-	bg5.scale.set(1.1, 1.1);
+	bg5.scale.set(bgScale, bgScale);
 	
 	var dark:FlxSprite = new FlxSprite(-950, -160).loadFromSheet(ext + 'props', 'dark');
-	dark.antialiasing = ClientPrefs.globalAntialiasing;
 	dark.scale.set(1.3, 1.3);
 	dark.blend = BlendMode.MULTIPLY;
 	
@@ -90,13 +83,13 @@ function onLoad()
 	finaleLight.frames = Paths.getSparrowAtlas(ext + 'light');
 	finaleLight.animation.addByPrefix('bop', 'light', 24, false);
 	finaleLight.animation.play('bop');
+	finaleLight.setGraphicSize(Std.int(finaleLight.width * 4)); // GRRR
+	finaleLight.updateHitbox();
 	finaleLight.setGraphicSize(Std.int(finaleLight.width * 1.1));
-	finaleLight.antialiasing = ClientPrefs.globalAntialiasing;
 	finaleLight.scrollFactor.set(0.8, 0.8);
 	finaleLight.blend = BlendMode.ADD;
 	
-	// since we lowkey barely see this 3000x2000 graphic
-	if (!ClientPrefs.lowQuality) finaleBGStuff.add(bg0);
+	finaleBGStuff.add(bg0);
 	finaleBGStuff.add(bg1);
 	finaleBGStuff.add(bg2);
 	finaleFGStuff.add(bg3);
@@ -135,7 +128,7 @@ function onCreatePost()
 	lightoverlay.antialiasing = ClientPrefs.globalAntialiasing;
 	add(lightoverlay);
 	
-	finaleDarkFG = new FlxSprite(-1000, -900).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+	finaleDarkFG = new FlxSprite(-1000, -900).makeScaledGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
 	finaleDarkFG.scrollFactor.set();
 	add(finaleDarkFG);
 	
@@ -149,45 +142,45 @@ function onCreatePost()
 	modManager.setValue("alpha", 1, 1);
 	refreshZ();
 	
-	if (ClientPrefs.shaders)
+		if (ClientPrefs.shaders)
 	{
-		if (hasBfSkin && !rimlightExcludedSkins.contains(ClientPrefs.bfSkin))
+		var blackRimlightBase:ExtraDropShadowShader = new funkin.game.shaders.ExtraDropShadowShader();
+		
+		blackRimlightBase.threshold = .1;
+		blackRimlightBase.strength = .85;
+		blackRimlightBase.setColorMatrix([
+			.3, .5, -.2, 0, -50,
+			-.25, .1, .05, 0, 10,
+			.4, .25, .6, 0, -92,
+			0, 0, 0, 1, 0
+		]);
+		blackRimlightBase.addLayer([
+			.5, 0, 1, 0, 192,
+			.1, 1, -.5, 0, 64,
+			0, 0, .35, 0, 64,
+			0, 0, 0, 1, 0
+		], 10, 14, .01);
+		blackRimlightBase.addLayer(
+			blackRimlightBase.addLayer([
+				.9, .7, .4, 0, 4,
+				-.2, .3, .1, 0, -18,
+				.2, .2, .4, 0, -28,
+				0, 0, 0, 1, 0
+			], 12, 40, .01, .4)
+		.colorMatrix, 96, 24, .01, .4);
+		
+		if (hasBfSkin && boyfriend.getFlag('backlit') != true)
 		{
-			var bfRim:DropShadowShader; // pause
-			bfRim = new DropShadowShader();
-			bfRim.setAdjustColor(-60, 25, -9, -9);
-			bfRim.color = 0xFFff2b2b;
-			bfRim.angle = 45;
-			bfRim.distance = 25;
-			bfRim.threshold = 0.07;
-			boyfriend.shader = bfRim;
+			bfRim = blackRimlightBase;
 			bfRim.attachedSprite = boyfriend;
-			boyfriend.animation.onFrameChange.add(function() {
-				if (bfRim.attachedSprite != null)
-				{
-					bfRim.updateFrameInfo(boyfriend.frame);
-				}
-			});
 			boyfriend.useRenderTexture = true;
 		}
 		
 		if (hasPet)
 		{
-			var petRim:DropShadowShader; // pause
-			petRim = new DropShadowShader();
-			petRim.setAdjustColor(-60, 25, -9, 3);
-			petRim.color = 0xFFff2b2b;
-			petRim.angle = 45;
-			petRim.distance = 25;
-			petRim.threshold = 0.1;
-			pet.shader = petRim;
+			petRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(blackRimlightBase);
 			petRim.attachedSprite = pet;
-			pet.animation.onFrameChange.add(function() {
-				if (petRim.attachedSprite != null)
-				{
-					petRim.updateFrameInfo(pet.frame);
-				}
-			});
+			pet.useRenderTexture = true;
 		}
 	}
 	

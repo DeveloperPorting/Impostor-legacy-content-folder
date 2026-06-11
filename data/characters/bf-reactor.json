@@ -2,6 +2,17 @@
 	"animations": [
 		{
 			"offsets": [
+				-2,
+				6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "BF HEY"
+		},
+		{
+			"offsets": [
 				-5,
 				0
 			],

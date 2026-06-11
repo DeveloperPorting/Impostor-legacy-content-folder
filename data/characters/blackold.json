@@ -1,4 +1,5 @@
 {
+    "pausePortrait": "black",
 	"animations": [
 		{
 			"offsets": [
@@ -90,7 +91,7 @@
 		140
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 10,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": false
 }

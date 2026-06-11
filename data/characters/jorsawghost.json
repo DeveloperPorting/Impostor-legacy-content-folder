@@ -59,24 +59,25 @@
 	"no_antialiasing": false,
 	"image": "characters/jorsawsee/ghost",
 	"position": [
-		110,
+		50,
 		-20
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
-	"healthicon": "jorsawsee",
+	"healthicon": "jorsawseeghost",
 	"gameover_character": null,
 	"vslice_sustains": false,
 	"flip_x": false,
 	"healthbar_colour": -14188569,
+	"pausePortrait": "jorsawsee",
 	"camera_position": [
 		-130,
 		300
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": false
 }

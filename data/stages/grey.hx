@@ -8,18 +8,18 @@ var isChrom:Bool;
 var chromAmount:Float = 0;
 var chromFreq:Int = 1;
 var chromTween:FlxTween;
-var crowd:FlxSprite;
+public var crowd:FlxSprite;
 var caShader:ChromaticAbberation;
 var bfdead:FlxSprite;
 
 function onBeatHit()
 {
-	/*if (curBeat % chromFreq == 0)
+	if (curBeat % chromFreq == 0)
 	{
 		if (chromTween != null) chromTween.cancel();
 		caShader.amount = chromAmount;
 		chromTween = FlxTween.tween(caShader, {amount: 0}, 0.45, {ease: FlxEase.sineOut});
-	}*/
+	}
 	if (curBeat % 4 == 0) crowd.animation.play('bop', true);
 }
 
@@ -79,9 +79,9 @@ function onCreatePost()
 			bfdead.color = 0xffa0c0d6;
 		}
 	}
-	/*caShader = new ChromaticAbberation(0);
+	caShader = new ChromaticAbberation(0);
 	caShader.amount = -0.5;
-	if (ClientPrefs.shaders) FlxG.camera.filters = [new ShaderFilter(caShader.shader)];*/
+	if (ClientPrefs.shaders) FlxG.camera.filters = [new ShaderFilter(caShader.shader)];
 	
 	var grayfg:FlxSprite = new FlxSprite(1200, 1030).loadGraphic(Paths.image(ext
 		+ 'grayfg'
@@ -105,66 +105,54 @@ function onCreatePost()
 	
 	if (ClientPrefs.shaders)
 	{
-		/*if (hasBfSkin && game.boyfriend.curCharacter != 'bfairship')
+		var rimlightBase:ExtraDropShadowShader = new funkin.game.shaders.ExtraDropShadowShader();
+		
+		rimlightBase.setColorMatrix([
+			0.3, 0.2, 0, 0, 9,
+		    -0.5, 0.77, 0.2, 0, 13,
+			   0, -0.1, 0.69, 0, 20,
+			   0, 0, 0, 1, 0
+		]);
+		rimlightBase.threshold = .02;
+		rimlightBase.strength = .7;
+		rimlightBase.addLayer(
+			rimlightBase.addLayer([
+				1.5, 0, 0, 0, -8,
+				0, .8, .1, 0, 59,
+				.1, 0, .8, 0, 57,
+				0, 0, 0, 1, 0
+			], 20, 25, .01)
+		.colorMatrix, 90, 15, .01);
+		
+		if (hasBfSkin && boyfriend.curCharacter != 'bfairship' && boyfriend.getFlag('backlit') != true)
 		{
-			var bfRim:DropShadowShader;
-			bfRim = new DropShadowShader();
-			bfRim.setAdjustColor(-40, -25, -25, -25);
-			bfRim.color = 0xFF447F80;
-			bfRim.angle = 50;
-			bfRim.threshold = 0.07;
-			bfRim.distance = 25;
-			boyfriend.shader = bfRim;
+			bfRim = rimlightBase;
 			bfRim.attachedSprite = boyfriend;
-			boyfriend.animation.onFrameChange.add(function() {
-				if (bfRim.attachedSprite != null)
-					bfRim.updateFrameInfo(boyfriend.frame);
-			});
 			boyfriend.useRenderTexture = true;
 		}
 		
-		if (hasGfSkin)
+		if (hasGfSkin && gf.getFlag('backlit') != true)
 		{
-			var gfRim:DropShadowShader; 
-			gfRim = new DropShadowShader();
-			gfRim.setAdjustColor(-20, -25, -25, -25);
-			gfRim.color = 0xFF447F80;
-			gfRim.angle = 75;
-			gfRim.threshold = 0.07;
-			gfRim.distance = 15;
-			gf.shader = gfRim;
+			gfRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(rimlightBase);
+			gfRim.layers[0].distance = gfRim.layers[1].distance = 20;
+			gfRim.layers[0].angle = 60;
+			gfRim.layers[1].angle = 120;
 			gfRim.attachedSprite = gf;
-			gf.animation.onFrameChange.add(function() {
-				if (gfRim.attachedSprite != null)
-					gfRim.updateFrameInfo(gf.frame);
-			});
 			gf.useRenderTexture = true;
 		}
-		
 		if (hasPet)
 		{
-			var petRim:DropShadowShader;
-			petRim = new DropShadowShader();
-			petRim.setAdjustColor(-20, -25, -25, -25);
-			petRim.color = 0xFF447F80;
-			petRim.angle = 65;
-			petRim.threshold = 0.07;
-			petRim.distance = 20;
-			pet.shader = petRim;
+			petRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(rimlightBase);
 			petRim.attachedSprite = pet;
-			pet.animation.onFrameChange.add(function() {
-				if (petRim.attachedSprite != null)
-					petRim.updateFrameInfo(pet.frame);
-			});
-		}*/
+		}
 	}
 	else
 	{
-		/*if (hasBfSkin && boyfriend.curCharacter != 'bfairship') boyfriend.color = 0xffa0c0d6;
+		if (hasBfSkin && boyfriend.curCharacter != 'bfairship') boyfriend.color = 0xffa0c0d6;
 		
 		if (hasGfSkin) gf.color = 0xffa0c0d6;
 		
-		if (hasPet) pet.color = 0xffa0c0d6;*/
+		if (hasPet) pet.color = 0xffa0c0d6;
 	}
 }
 

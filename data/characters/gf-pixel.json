@@ -71,8 +71,8 @@
 	"image": "characters/gf/gfPixel",
     "dance_every": 1,
 	"position": [
-		0,
-		0
+		270,
+		252
 	],
 	"healthicon": "gf",
 	"flip_x": false,
@@ -86,5 +86,8 @@
 		80
 	],
 	"sing_duration": 4,
-	"scale": 5.99999999999999
+	"scale": 6,
+	"flags": {
+		"isPixel": true
+	}
 }

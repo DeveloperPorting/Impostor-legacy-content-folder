@@ -1,9 +1,9 @@
-//import funkin.objects.SnowEmitter;
+import funkin.objects.SnowEmitter;
 
 public var speaker:FlxSprite;
 public var bfdead:FlxSprite;
 var snowAlpha = 1;
-//var snowEmitter:SnowEmitter;
+var snowEmitter:SnowEmitter;
 var crowd:FlxSprite;
 var outroVid:PsychVideoSprite;
 var ext = 'stages/polus/red/';
@@ -29,14 +29,15 @@ function onLoad()
 	var ground:FlxSprite = new FlxSprite(-1350, 80).loadGraphic(Paths.image(ext + 'polus_custom_floor'));
 	add(ground);
 	
-	/*snowEmitter = new SnowEmitter(-600, -600, 2700);
+	snowEmitter = new SnowEmitter(-600, -600, 2700);
 	snowEmitter.start(false, ClientPrefs.lowQuality ? 0.1 : 0.05);
 	snowEmitter.scrollFactor.x.set(1, 1.5);
 	snowEmitter.scrollFactor.y.set(1, 1.5);
 	add(snowEmitter);
 	snowEmitter.alpha.active = false;
 	snowEmitter.onEmit.add((particle) -> particle.alpha = snowAlpha);
-	snowEmitter.zIndex = 13;*/
+	snowEmitter.zIndex = 13;
+	snowEmitter.lifespan.set(5);
 	
 	speaker = new FlxSprite(300, 185);
 	speaker.frames = Paths.getSparrowAtlas(ext + 'speakerlonely');
@@ -69,6 +70,7 @@ function onCreatePost()
 	crowd.frames = Paths.getSparrowAtlas(ext + 'boppers_meltdown');
 	crowd.animation.addByPrefix('bop', 'BoppersMeltdown', 24, false);
 	crowd.animation.play('bop');
+	crowd.scale.set(0.9,0.9);
 	crowd.scrollFactor.set(1.5, 1.5);
 	crowd.antialiasing = true;
 	// crowd2.scale.set(1, 1); // are we fucking fr
@@ -80,7 +82,7 @@ function onCreatePost()
 
 function onSongStart()
 {
-	//if (hasBfSkin && game.boyfriend.curCharacter == 'redp' && pet.curPet == 'minicrewmate') game.unlockAchievementPopup('red_handed');
+	if (hasBfSkin && game.boyfriend.curCharacter == 'redp' && pet.curPet == 'minicrewmate') game.unlockAchievementPopup('red_handed');
 }
 
 function onBeatHit()

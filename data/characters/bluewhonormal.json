@@ -1,4 +1,5 @@
 {
+    "pausePortrait": "who",
 	"animations": [
 		{
 			"loop": false,
@@ -35,17 +36,6 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "yfronts",
-			"fps": 24,
-			"name": "yfronts",
-			"indices": []
-		},
-		{
-			"loop": false,
 			"flipY": false,
 			"offsets": [
 				-2,
@@ -69,6 +59,50 @@
 			"name": "right",
 			"indices": [],
 			"flipX": false
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "yfronts",
+			"fps": 24,
+			"name": "yfronts",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle-scary",
+			"fps": 24,
+			"name": "scaryidle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "woah",
+			"fps": 24,
+			"name": "woah",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "gettingit",
+			"fps": 24,
+			"name": "gettingit",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -91,7 +125,7 @@
 		290
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": false
 }

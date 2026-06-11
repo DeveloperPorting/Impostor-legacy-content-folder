@@ -9,7 +9,7 @@
 	"weekBefore": "week3",
 	"weekName": "...",
 	
-	"startUnlocked": true,
+	"startUnlocked": false,
 	"hideStoryMode": false,
 	"hideFreeplay": false,
 	

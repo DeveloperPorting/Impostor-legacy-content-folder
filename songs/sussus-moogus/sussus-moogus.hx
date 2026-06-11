@@ -1,4 +1,4 @@
 function onLoad()
 {
-	videoCutscene('week1/sussus-moogus');
+	videoCutscene('week1/sussus-moogus', true);
 }

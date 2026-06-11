@@ -1,6 +1,6 @@
 {
     "name": "Arabic (Modern Standard Arabic)",
-    "translation_credits": "GamerZone & Ilyas",
+    "translation_credits": "GamerZone & Ilyas & AsserelrefaeyYT",
     "special": [
         "smallerDialogue",
         "rightToLeft"
@@ -9,7 +9,11 @@
         "vcr.ttf": "ar.ttf",
         "liber.ttf": "ar.ttf",
         "liberbold.ttf": "arBold.ttf",
+        "ariblk.ttf": "arBold.ttf",
         "AmaticSC-Bold.ttf": "ar.ttf"
+    },
+    "flags": {
+    	"dialogueLeading": -22
     },
     "lang": {
         "score": "ﺔﺠﻴﺘﻨﻟﺍ",
@@ -24,6 +28,8 @@
         "innersloth": "Innersloth",
         "motorfrog": "MOTORFROG",
         "resumesong": "ﺔﻴﻨﻏﻷﺍ لﺎﻤﻛﺇ",
+        "leavechartingmode": "ﻞﻳﺪﻌﺘﻟﺍ ﻊﺿﻭ ﻦﻣ جﻭﺮﺨﻟﺍ",
+        "skiptotime": "ﺖﻗﻭ ﻰﻟﺇ ﻞﻘﺘﻧﺇ",
         "restartsong": "ﺔﻴﻨﻏﻷﺍ ةﺩﺎﻋﺇ",
         "backtomenu": "ﺔﻤﺋﺎﻘﻟﺍ ﻰﻟﺇ ةﺩﻮﻌﻟﺍ",
         "awards_counter": "@ :حﻮﺘﻔﻣ",
@@ -42,6 +48,11 @@
         "dialogue_grey": "يﺩﺎﻣﺮﻟﺍ",
         "dialogue_pink": "ﺔﻳﺩﺭﻮﻟﺍ",
         "video_skip": "ﻲﻄﺨﺘﻠﻟ عﻮﺟﺭ ﻂﻐﺿﺇ",
+                
+        // the AWARDS SECTION
+        // now properly split off for better organization
+        // HINTS are shown if you don't have the achievement, the BIO is the actual method of unlock
+        // not all awards have hints!
         "AWARDNAME_week1": "ﺔﻠﻜﺸﻤﻟﺍ ﺖﻠﺣ",
         "AWARDBIO_week1": ".(1) لﻭﻷﺍ عﻮﺒﺳﻷﺍ مﺰﻫﺇ",
         "AWARDNAME_week2": "MIRA ﻲﻓ نﻮﻨﺟ",
@@ -105,6 +116,7 @@
         "AWARDHINT_im_hungry": ".ﻪﻴﻧﺎﺗ ﻪﺘﺣ ﻲﻓ ﺔﺘﻔﻜﻟﺍ ﺬﺧﺍ نﺎﺠﻨﺘﺒﻟﺍ",
         "AWARDNAME_the_hundred": "100%",
         "AWARDBIO_the_hundred": ".ﻲﻧﺎﻏﻷﺍ ﻊﻴﻤﺟ مﺰﻫﺇﻭ ،ﻦﻴﻘﻓﺍﺮﻤﻟﺍﻭ ﺮﻫﺎﻈﻤﻟﺍ ﻊﻴﻤﺟ ﺢﺘﻓﺇ ،تﺍﺯﺎﺠﻧﻹﺍ ﻊﻴﻤﺟ ﻰﻠﻋ ﻞﺼﺣﺃ",
+        //awards over
         "shop_equip": "ﻊﺿ",
         "shop_equipped": "ﻊﺿﻮﻟﺍ ﻢﺗ",
         "shop_locked": "ﻞﻔﻘﻣ",
@@ -271,11 +283,90 @@
         "rhm": ".يﺮﻨﻴﻫ ،كﺍﺭﺃ",
         "attack0": "!ﻊﻴﻤﺠﻟﺍ ﺖﻤﺼﻴﻟ",
         "attack1": ".ﺔﻬﺒﺟ ،ﻢﻤﻫ",
-        "torture0": "؟ﻦﻣ-م-م",
+        "torture0": "؟ﻦﻣ-ﻣ-ﻣ",
         "torture1": "؟ﺎﻧﺃ ﻦﻳﺃ-أ",
-        "torture2": "؟أﺪﺒﻧ ﺎﻣ ﺎﻤﻟ",
+        "torture2": "؟أﺪﺒﻧ ﻻ ﺎﻤﻟ",
         "torture3": "؟ةﺪﻋﺎﺴﻤﻟﺍ ﻲﻨﻨﻜﻤﻳﺃ ،هﻭﺃ",
         "torture4": "(لﺍﺪﺟ)",
+        "o20":"اﺫﺎﻣ",
+        "o21":"ﻖﺤﺑ اﺫﺎﻣ",
+        "o22":"-ﺠﻟﺍ ﻖﺤﺑ اﺫﺎﻣ",
+
+        // cutscene
+		"cutscene_moogus0": "*مﺩ ﺮﺛﺎﻨﺗ*",
+		
+		"cutscene_polusending0": "تﺍﻮﻣﻷﺍ",
+		"cutscene_polusending1": "؟ﻦﻳﺃ",
+		"cutscene_polusending2": "؟ﻲﺘﻌﺒﻗ نﻮﺒﺤﺗ ﻞﻫ",
+		"cutscene_polusending3": "؟ﻦﻣ",
+		"cutscene_polusending4": "ﻲﻟ ﺎﻘﺗﺮﺒﻟﺍ ﺎﻬﻳﺃ ﺖﻤﺻﺃ",
+		"cutscene_polusending5": "ﻲﻟ ﺎﻘﺗﺮﺑ ﺎﻳ ﻚﺴﻔﻧ ﻞﺘﻗﺃ",
+		"cutscene_polusending6": "ﻞﺟﺭ ﺎﻳ ﻞﺣﺭﺇ",
+		"cutscene_polusending7": "ﺎﻨﻫ ﻦﻣ ﻞﺣﺭﺇ ﺎﻴﻓﺮﺣ ﻲﻟ ﺎﻘﺗﺮﺒﻟﺍ ﺎﻬﻳﺃ ﻚﺒﺤﻳ ﺪﺣﺃ ﻻ",
+		"cutscene_polusending8": "؟اﺫﺎﻤﻟ",
+		"cutscene_polusending9": "ءﻮﺳﻷﺍ ﻢﺘﻧﺃ",
+		"cutscene_polusending10": "ﻢﺘﻬﻧ ﻻ",
+		"cutscene_polusending11": "؟اﺫﺎﻣ",
+		"cutscene_polusending12": "!جﺮﺤﻣ",
+		"cutscene_polusending13": "؟ﺎﻣ",
+		"cutscene_polusending14": "؟ﻦﻴﻜﻧﺎﻓ ﺖﻳﺎﻧ يﺪﻳﺍﺮﻓ ﻦﻋ ﻢﺘﻌﻤﺳ ﻞﻫ",
+		"cutscene_polusending15": "ﻻ",
+		"cutscene_polusending16": "!ﻪﻟ مﺩﺎﻗ ﻊﺑﺍﺭ ﺚﻳﺪﺤﺗ ﻦﻋ ﺖﻌﻤﺳﻭ ﺮﺘﺳﻮﺒﻣﻹﺍ دﻮﻣ ﻰﻋﺪﻳ دﻮﻣ كﺎﻨﻫ ﺎﻫﻮﺒﻌﻠﺗ ﺖﻧﺃ ﻢﻜﻴﻠﻋ",
+		"cutscene_polusending17": "ﻞﺟﺭ ﺎﻳ سﺮﺧﺇ ءﻲﺳ دﻮﻤﻟﺍ كﺍﺫ",
+		"cutscene_polusending18": "ﺪﻴﺟ ﻮﻫ ﻞﺑ ﻻ",
+		"cutscene_polusending19": "ﻦﻴﻜﻧﺎﻓ ﺖﻳﺎﻧ يﺪﻳﺍﺮﻓ ﺔﺒﻌﻟ لﻮﺣ ةﺮﻴﺜﻛ ﺎﻣﺍﺭﺩ كﺎﻨﻫ ﻢﻤﻫ",
+		"cutscene_polusending20": "ﺔﻳﺩﺭﻮﻟﺍ ﺎﻬﺘﻳﺃ ﻲﺘﻤﺻﺃ",
+		"cutscene_polusending21": "ﺮﺘﺳﻮﺒﻣﻹﺍ ﻮﻫ ﻲﻠﻘﻧﺮﻘﻟﺍ نﺃ ﻦﻇﺃ",
+		"cutscene_polusending22": "ﻖﻤﺣﺃ ﺎﻳ ﻲﻨﻠﻌﺟﺇ",
+		"cutscene_polusending23": "!ﺎﻧﺃ ﺲﻴﻟ",
+		"cutscene_polusending24": "!ﻦﻴﻨﻛﺎﻓ ﺖﻳﺎﻧ يﺪﻳﺍﺮﻓ ﺐﺣﺃ",
+		"cutscene_polusending25": "ﺮﻀﺧﻷﺍ ﻪﻧﺃ ﺪﻘﺘﻋﺃ",
+		"cutscene_polusending26": "ﻪﻴﻠﻋ ﺖﻴﻄﺣ",
+		"cutscene_polusending27": "قﺮﺧﺃ ﺎﻳ ﺎﻧﺃ ﺲﻴﻟ",
+		"cutscene_polusending28": "؟ﻦﻣ",
+		"cutscene_polusending29": "ﺮﻤﺣﻷﺍ ﻪﻧﺇ",
+		"cutscene_polusending30": ".ئﺪﻫﺇ ،ﺎﻧﺃ ﺲﻴﻟ !ﻞﺟﺭ ﺎﻳ",
+		"cutscene_polusending31": "!يﺯﺎﻬﺟ ﺐﻧﺎﺠﺑ ﻦﻛﺃ ﻢﻟ",
+		"cutscene_polusending32": "ﺔﻳﺎﻐﻠﻟ ﻻﻮﻘﻌﻣ ﺮﻣﻷﺍ وﺪﺒﻳ",
+		
+		"cutscene_mando0": "!ﺐﻴﻴﺑ :ﺪﻨﻳﺮﻔﻳﻮﺑ",
+		
+		"cutscene_votingtime0": "؟اﺬﻜﻫ ﻲﻣﺎﻣﺃ ﺺﺨﺸﻟﺍ كﺍﺫ ﺖﻠﺘﻗ اﺫﺎﻤﻟ",
+		"cutscene_votingtime1": "؟ﻚﺘﻠﻜﺸﻣ ﺎﻣ",
+		"cutscene_votingtime2": "!ﻖﻤﺣﺃ ﺎﻳ سﺮﺧﺇ",
+		"cutscene_votingtime3": "*ﻒﻬﻠﻳ ﻒﻴﺷﺭﻭ*",
+		"cutscene_votingtime4": ".ﺮﻴﺨﻟ ﺎﺑ ﺮﺸﺒﻳ ﻻ اﺬﻫ ،ﻻ هﻭﺃ",
+		
+		"cutscene_turbulence0": ".ﺮﻴﻄﻳ سﺎﻐﻧﺎﻣ ﺪﻳﺭ ﻞﻌﺠﻧ فﻮﺳ",
+		"cutscene_turbulence1": "*خﺮﺼﻳ ﺪﻨﻳﺮﻔﻳﻮﺑ*",
+		"cutscene_turbulence2": ".ﺎﺒﺗ",
+		"cutscene_turbulence3": "*!اﺩ-ﺎﺗ*",
+		
+		"cutscene_henry0": "ﺖﻗﻮﻟﺍ ﺲﻔﻧ ﻲﻓ",
+		"cutscene_henry1": "لﺎﻏﺩﻷﺍ ﻲﻓ ةﺪﻋﺎﻗ ﻲﻓ",
+		"cutscene_henry2": "اﺪﺟ اﺪﻴﻌﺑ ،اﺪﻴﻌﺑ",
+		"cutscene_henryfail0": "!ﺔﻟﻮﺻﻮﻣ طﻮﻴﺧ ﻻ",
+		"cutscene_henryfail1": "؟ﻢﻜﻟ ﺎﺣ ﻒﻴﻛ ...اﺫﺇ",
+		"cutscene_henryending0": "ﺔﻤﻬﻤﻟﺍ ﺖﻠﻤﺘﻛﺇ",
+		"cutscene_henryending1": "ﺐﻴﻏ ﺖﻴﺟﺩﺎﻏ- \"!ﻚﻴﻠﻋ ﻰﺼﻌﻳ ﻦﻟ زﺎﻬﺠﻟﺍ اﺬﻫ\"\n!ﻪﺑ ﺖﻤﻠﺣ ﺎﻤﻟ ﺎﻃ يﺬﻟﺍ ﻢﺴﺠﻟﺍ ﻰﻟﺇ ﻚﺴﻔﻧ لﻮﺣ\nرﻮﺗﺎﻜﻔﻴﻜﻴﺘﺴﻟﺍ",
+		
+		"cutscene_boilingpoint0": ".ﻪﻟ ﺪﻌﻣ ﻪﻧﺄﻛﻭ ﺮﻣﻷﺍ وﺪﺒﻳ ،قﺎﻓﺭ ﺎﻳ فﺮﻋﺃ ﻻ",
+		"cutscene_boilingpoint1": ".ﻲﺠﺴﻔﻨﺒﻟﺍ ﻪﻧﺃ ﺪﻘﺘﻋﺃ",
+		
+		"cutscene_delusion0": "ﺮﺿﺎﺤﻟﺍ ﺖﻗﻮﻟﺍ",
+		"cutscene_delusion1": "دﺎﻄﻨﻤﻟﺍ",
+		
+		"cutscene_finale0": ".ﻚﻟﺬﻛ ﺲﻴﻟﺃ ،اﺪﺟ ﻞﺻﺍﻮﺘﻣ ﺖﻧﺃ",
+		"cutscene_finalegibberish": "&%!$@%$&/@|$!\"&%_-%$-&_&%@!-<o>-!?",
+		"cutscene_finalegibberish2": "!!-_%.?!\"?.-<@>-.!_?$=)(.@_.%&",
+		"cutscene_finale1": "...ﻚﻓﺎﻘﻳﺇﻭ \"ﺐﻌﺼﻟﺍ ﻞﻤﻌﻟﺍ\" ﻞﻌﻓ ﻰﻠﻋ وﺭﺪﻘﻳ ﻢﻟ اﺫﺇ",
+		"cutscene_finale2": "ﻲﺴﻔﻨﺑ رﻮﻣﻷﺍ مﺎﻣﺯ ﻲﻟﻮﺗ ﻰﻟﺇ ﺮﻄﺿﺄﺳ",
+		"cutscene_finale3": "لﻼﺧ",
+		"cutscene_finale4": ".ﺔﻟﻮﺟ",
+		"cutscene_finale5": ".ةﺪﺣﺍﻭ",
+		"cutscene_finale6": ".ةﺮﻴﺧﺃ",
+		
+		// dialogue
         "dialogue_moogus0": "): ﻲﻨﺘﻤﻟﺁ ﺪﻘﻟ",
         "dialogue_moogus1": "!رﺬﺘﻋﺃ ،هﻭﺃ",
         "dialogue_moogus2": "!!ﺪﻨﻳﺮﻔﻳﻮﺑ ﺎﻳ ﻪﺒﺘﻧﺇ",
@@ -409,7 +500,10 @@
         "dialogue_pinkwave7": "...",
         "doubletrouble0": ".\"ﻞﺑﺍﺮﺗ ﻞﺑﺍﺩ\" ﺐﻌﻟ نﻷﺍ ﻊﻴﻄﺘﺴﺗ",
         "doubletrouble1": "(!ﺔﻴﻓﺎﺿﻹﺍ ﻲﻧﺎﻏﻷﺍ ﺪﻨﻋ !ﺮﺤﻟﺍ رﺎﻴﺘﺧﻹﺍ ﺔﻤﺋﺎﻗ ﻲﻓ)",
-        "victory0": "!ﻞﻌﻔﻟﺎﺑ تﺰﻓ ﺪﻘﻟ ؟ﻢﺘﻬﻳ ﻦﻣ",
+        "victory0": "!ﻞﻌﻔﻟ ﺎﺑ تﺰﻓ ﺪﻘﻟ ؟ﻢﺘﻬﻳ ﻦﻣ",
+                
+        // i'm so sorry.... options!
+
         "opt_category_adjustdelay": "ﺆﻃﺎﺒﺘﻟﺍ ﻞﻳﺪﻌﺗ",
         "opt_category_controls": "ﻢﻜﺤﺘﻟﺍ",
         "opt_category_gameplay": "ﺐﻌﻠﻟﺍ",
@@ -423,6 +517,8 @@
         "opt_controllermode_desc": ".ﺐﻌﻠﻟ ﻢﻜﺤﺘﻟﺍ زﺎﻬﺟ مﺍﺪﺨﺘﺳﺈﺑ ﺢﻤﺴﻳ",
         "opt_downscroll": "ﻲﻠﻔﺴﻟﺍ ﻚﻳﺮﺤﺘﻟﺍ",
         "opt_downscroll_desc": ".ﻞﻔﺳﻷﺍ ﻰﻟﺇ ﻰﻠﻋﻷﺍ ﻦﻣ كﺮﺤﺘﺗ ﻢﻬﺳﻷﺍ ﻞﻌﺠﻳ",
+        "opt_middlescroll": "ﻂﺳﻭﻷﺍ ﻚﻳﺮﺤﺘﻟﺍ",
+		"opt_middlescroll_desc": "(.ﻢﺼﺨﻟﺍ ﻢﻬﺳﺃ ﻲﻔﺨﻳﻭ ﻂﺳﻮﻟﺍ ﻲﻓ ﺐﻋﻼﻟﺍ ﻢﻬﺳﺃ ﻊﻀﻳ) \n.ﻂﺳﻭﻷﺍ ﻚﻳﺮﺤﺘﻟﺍ ﻞﻌﻔﻳ",
         "opt_ghosttapping": "ﻲﺿﺎﻐﺘﻤﻟﺍ ﺮﻘﻨﻟﺍ",
         "opt_ghosttapping_desc": ".ﻢﻬﺳﻷﺍ بﺎﻴﻏ ﺪﻨﻋ ءﺎﻄﺧﻷﺍ ﻞﻫﺎﺠﺘﻳ",
         "opt_sustainsasonenote": "ﺪﺣﺍﻭ ﻢﻬﺴﻛ ﺔﻠﻳﻮﻄﻟﺍ ﻢﻬﺳﻷﺍ رﺎﺒﺘﻋﺇ",
@@ -442,7 +538,7 @@
         "opt_antialiasing": "فﺍﻮﺤﻟﺍ ﻢﻴﻌﻨﺗ",
         "opt_antialiasing_desc": "(Anti-Aliasing) .طﻮﻄﺨﻟﺍ ﺢﺿﻮﻳﻭ ﺔﻨﺸﺨﻟﺍ فﺍﻮﺤﻟﺍ ﻞﻳﺰﻳ ﺎﻤﻣ ،فﺍﻮﺤﻟﺍ ﻢﻴﻌﻨﺗ ﻞﻐﺸﻳ",
         "opt_debugdisplaytype": "ضﺮﻌﻟﺍ عﻮﻧ ﺢﻴﺤﺼﺗ",
-        "opt_debugdisplaytype_desc": ".تﺎﻣﻮﻠﻌﻣ يﺃ ضﺮﻌﻳ ﻻ \"Disabled\"\n.ﺢﻴﺤﺼﺘﻟﺍ تﺎﻣﻮﻠﻌﻣ ﺐﻧﺎﺟ ﻰﻟﺇ ءﻲﺸﻟﺍ ﺲﻔﻧ ضﺮﻌﻳ \"Advanced\"و ،ةﺮﻛﺍﺬﻟﺍﻭ ﺔﻴﻧﺎﺜﻟﺍ ﻲﻓ رﻮﺼﻟﺍ لﺪﻌﻣ ضﺮﻌﻳ \"Simple\"\n.ﺔﺷﺎﺸﻟﺍ رﺎﺴﻳ ﻰﻠﻋﺃ ﻲﻓ ﺎﻬﺿﺮﻋ ﻢﺘﻴﺳ ﻲﺘﻟﺍ تﺎﻣﻮﻠﻌﻤﻟﺍ عﻮﻧ ﻲﻓ ﻢﻜﺤﺘﻳ",
+        "opt_debugdisplaytype_desc": ".تﺎﻣﻮﻠﻌﻣ يﺃ ضﺮﻌﻳ ﻻ \"ﺊﻔﻄﻣ\"\n.ﺢﻴﺤﺼﺘﻟﺍ تﺎﻣﻮﻠﻌﻣ ﺐﻧﺎﺟ ﻰﻟﺇ ءﻲﺸﻟﺍ ﺲﻔﻧ ضﺮﻌﻳ \"مﺪﻘﺘﻣ\"و ،ةﺮﻛﺍﺬﻟﺍﻭ ﺔﻴﻧﺎﺜﻟﺍ ﻲﻓ رﻮﺼﻟﺍ لﺪﻌﻣ ضﺮﻌﻳ \"ﻂﻴﺴﺑ\"\n.ﺔﺷﺎﺸﻟﺍ رﺎﺴﻳ ﻰﻠﻋﺃ ﻲﻓ ﺎﻬﺿﺮﻋ ﻢﺘﻴﺳ ﻲﺘﻟﺍ تﺎﻣﻮﻠﻌﻤﻟﺍ عﻮﻧ ﻲﻓ ﻢﻜﺤﺘﻳ",
         "opt_framerate": "رﻮﺼﻟﺍ لﺪﻌﻣ",
         "opt_framerate_desc": "(FPS) .ﺔﻴﻧﺎﺜﻟﺍ ﻲﻓ ﺎﻬﺿﺮﻋ ﻦﻜﻤﻤﻟﺍ رﻮﺼﻠﻟ ﻰﺼﻗﻷﺍ دﺪﻌﻟﺍ ﺮﻴﻐﻳ",
         "opt_hidehud": "ﺔﻴﺳﺃﺮﻟﺍ ضﺮﻌﻟﺍ ﺔﺷﺎﺷ ءﺎﻔﺧﺇ",
@@ -477,12 +573,45 @@
         "opt_opponentnotes_desc": ".ﻢﺼﺨﻟﺍ ﻢﻬﺳﺃ ﺮﻬﻈﻳ",
         "opt_language": "ﺔﻐﻠﻟﺍ",
         "opt_language_desc": "!ﻲﺳﺎﺳﻷﺍ ﻞﻤﻌﻟﺍ ﻢﻗﺎﻃ جﺭﺎﺧ صﺎﺨﺷﺃ ﻞﺒﻗ ﻦﻣ ﻢﻬﺘﻤﺟﺮﺗ ﻢﺗ \"(United States) English\" ىﻮﺳ تﺎﻐﻠﻟﺍ ﻞﻛ :ﺔﻈﺣﻼﻣ !ﻚﺘﻐﻟ ﺮﺘﺧﺇ",
+        "opt_subtitles": "ﺔﻤﺟﺮﺘﻟﺍ",
+		"opt_subtitles_desc": "..ﺔﻴﻨﻏﺃ وﺃ ﻦﻴﺸﻴﻤﻴﻧﺇ لﻼﺧ يﺰﻴﻠﺠﻧﺇ مﻼﻛ يﺃ ءﺎﻨﺛﺃ ﺔﺷﺎﺸﻟﺍ ﻰﻠﻋ ﺔﻤﺟﺮﺗ ﺮﻬﻈﺘﺳ",
+		"opt_unlockedFramerate": "رﻮﺼﻟﺍ لﺪﻌﻣ ﻞﻔﻗ ﺢﺘﻓ",
+		"opt_unlockedFramerate_desc": ".ﺔﺒﻌﻠﻟﺍ ﺔﺑﺎﺠﺘﺳﺍ ﻦﻣﺯ ﻞﻴﻠﻘﺗ ﻲﻓ ﺪﻋﺎﺴﻳ ﺪﻗ ﻪﻨﻜﻟﻭ ،ﺞﻟ ﺎﻌﻤﻟﺍ ﺔﻗﺎﻃ ﻦﻣ ﺪﻳﺰﻤﻟﺍ ﻚﻠﻬﺘﺴﻳ .رﻮﺼﻟﺍ لﺪﻌﻣ ﻞﻔﻗ ﺢﺘﻔﻳ",
+		"opt_vsyncMode": "ﻲﺳﺃﺮﻟﺍ ﻦﻣﺍﺰﺘﻟﺍ",
+		"opt_vsyncMode_desc": ".ﺔﺷﺎﺸﻟﺍ قﺰﻤﺗ ﻊﻨﻤﻟ ﻚﺘﺷﺎﺷ ﺚﻳﺪﺤﺗ لﺪﻌﻣ ﻊﻣ رﻮﺼﻟﺍ لﺪﻌﻣ ﺔﻨﻣﺍﺰﻤﺑ مﻮﻘﻳ",
+		"opt_backgroundStrumlines": "ﺔﻴﻔﻠﺨﻟﺍ ﻢﻬﺳﻷﺍ",
+		"opt_backgroundStrumlines_desc": ".ﺔﻴﻓﺎﺿﺇ تﺎﻴﺼﺨﺷ دﻮﺟﻭ ﺔﻟ ﺎﺣ ﻲﻓ ﺔﻴﻓﺎﺿﻹﺍ تﺎﻴﺼﺨﺸﻠﻟ ﻢﻬﺳﻷﺍ ﺮﻬﻈﻳ",
+		"opt_discord": "RP دﺭﻮﻜﺴﻳﺪﻟﺍ",
+		"opt_discord_desc": ".ﻚﺑ صﺎﺨﻟﺍ دﺭﻮﻜﺴﻳﺪﻟﺍ بﺎﺴﺣ ﻰﻠﻋ دﻮﻤﻟﺍ ﺐﻌﻠﺗ ﻚﻧﺃ ﺮﻬﻈﻳ",
+        		
+		// options choices
+		
+		"choice_generic_disabled": "ﻞﻔﻘﻣ",
+		"choice_generic_enabled": "ﻞﻌﻔﻣ",
+		
+		"choice_debug_simple": "ﻂﻴﺴﺑ",
+		"choice_debug_advanced": "مﺪﻘﺘﻣ",
+		
+		"choice_vsync_adaptive": "ﻒﻴﻜﺘﻣ",
+		
+		"choice_timebar_songname": "ﺔﻴﻨﻏﻷﺍ ﻢﺳﺇ",
+		"choice_timebar_timeleft": "ﻲﻘﺒﺘﻤﻟﺍ ﺖﻗﻮﻟﺍ",
+		"choice_timebar_timeelapsed": "ﻲﻀﻘﻨﻤﻟﺍ ﺖﻗﻮﻟﺍ",
+		
+		"choice_scoredisplay_rank": "ﺔﺒﺗﺮﻟﺍ",
+		"choice_scoredisplay_accuracy": "ﺔﻗﺪﻟﺍ",
+		"choice_scoredisplay_both": "ﺎﻤﻫﻼﻛ", // both rank and accuracy
+        
+        // some new misc menu stuff    
         "rand": "ﻲﺋﺍﻮﺸﻋ",
         "reset": "ةﺩﺎﻋﺇ",
         "select": "رﺎﻴﺘﺧﺇ",
         "back": "عﻮﺟﺮﻟﺍ",
         "conf": "ﺪﻴﻛﺄﺗ",
         "locker": "ﺔﻧﺍﺰﺨﻟﺍ",
+        // and now the final lines...
+        // write from the perspective of Detective... Gruff, and cool!
+        // he walks into a dark room...
         "weirdroute0": ".?ﻚﻟﺬﻛ ﺲﻴﻟﺃ ،ﺔﻨﻴﻔﺴﻟﺍ ﻦﻣﺃ ﺔﻓﺮﻏ",
         "weirdroute1": "...ﻪﺴﻔﻧ ءﺎﻘﻠﺗ ﻦﻣ ﺊﻔﻄﻨﻳﻭ ﻞﻐﺘﺸﻳ بﻮﺳﺎﺤﻟﺍ ...ﻢﻗﺎﻄﻟﺍ ﻲﻓ ﺐﻋﺮﻟﺍ تﺭﺎﺛﺃ ﺔﻓﺮﻐﻟﺍ هﺬﻫ",
         "weirdroute2": ".ﻪﻴﻠﻋ ةﺮﻈﻧ ﻲﻘﻠﻨﻟ ؟ﺢﻴﺤﺻ اﺬﻫﺃ ،اﺬﻫ ﻞﻌﻔﺑ ﺮﺧﺁ ﺺﺨﺷ مﻮﻘﻳ ﻦﻟ ،ﺎﻨﺴﺣ",
@@ -490,6 +619,25 @@
         "weirdroute4": ".هﺪﻴﺟﺃ ﺎﻣ ﻞﻌﻓﻷ ﺖﻗﻮﻟﺍ نﺎﺣ",
         "weirdroute5": ".نﻵﺍ ﻢﻤﺤﻟﺍ ضﻮﺣ ﻲﻓ ﺢﺒﺴﻳ ﻪﻧﺇ ...ﺐﺳﺎﻨﻤﻟﺍ ﺖﻗﻮﻟﺍ ﻲﻓ ﻪﻔﻗﻭﺃ ﻢﻟ ﻲﻨﻨﻜﻟ ،ﻞﺟﺮﻟﺍ ﻚﻟﺫ نﺄﺸﺑ ﺎﺒﻳﺮﻏ ًﺎﺌﻴﺷ كﺎﻨﻫ نﺃ ﺖﻤﻠﻋ ﺎﻤﻟ ﺎﻃ .ﺮﻤﺣﻷﺍ",
         "weirdroute6": "...ﻦﺘﺑﺎﻜﻟﺍ",
-        "weirdroute7": "ﺰﻣﺮﻟﺍ ﻞﺧﺩﺃ"
+        "weirdroute7": "ﺰﻣﺮﻟﺍ ﻞﺧﺩﺃ",
+
+		"reset_score_question": "؟@ ﺔﻴﻨﻏﻷ ﺎﻴﻠﻌﻟﺍ ﺔﺟﺭﺪﻟﺍ فﺬﺣ",
+		"skins_disclaimer": "ﺮﺤﻟﺍ رﺎﻴﺘﺧﻹﺍ ﻊﺿﻭ ﻲﻓ نﻭﺮﻬﻈﻳ ﻂﻘﻓ نﻮﻘﻓﺍﺮﻤﻟﺍﻭ ﺮﻫﺎﻈﻤﻟﺍ",
+		"freeplay_highscore": "ﺎﻴﻠﻌﻟﺍ ﺔﺟﺭﺪﻟﺍ",
+
+		"opt_laneUnderlayStyle": "ﺔﻴﻔﻠﺨﻟﺍ ﺔﻘﺒﻄﻟﺍ ﺮﻬﻈﻣ",
+		"opt_laneUnderlayStyle_desc": ".ﺔﻴﻠﻔﺴﻟﺍ (تﺎﻘﺒﻄﻟﺍ وﺃ) ﺔﻘﺒﻄﻟﺍ ﺮﻬﻈﻣ وﺃ نﺎﻜﻣ ﺮﻴﻐﻳ",
+		"opt_opponentLaneUnderlay": "ﻢﺼﺨﻟﺍ ﻢﻬﺳﻷ ﺔﻴﻠﻔﺴﻟﺍ ﺔﻘﺒﻄﻟﺍ",
+		"opt_opponentLaneUnderlay_desc": ".ﻢﺼﺨﻟﺍ ﻢﻬﺳﻷ ﺔﻴﻔﻠﺨﻟﺍ ﺔﻘﺒﻄﻟﺍ ﺮﻬﻈﻳ",
+
+		"choice_generic_yes": "ﻢﻌﻧ",
+		"choice_generic_no": "ﻻ",
+
+		"choice_laneUnderlayStyle_a": "ﺔﺠﻴﺘﻨﻟﺍ مﺎﻣﺃ",
+		"choice_laneUnderlayStyle_b": "ﺔﺠﻴﺘﻨﻟﺍ ﻒﻠﺧ",
+		"choice_laneUnderlayStyle_c": "ءاﺩﻷﺍ ﻂﻳﺮﺷ ﻒﻠﺧ",
+		"choice_laneUnderlayStyle_d": "ﺔﻴﺷﻼﺘﻣ",
+
+		"reset_score": "ﺎﻴﻠﻌﻟﺍ ﺔﺟﺭﺪﻟﺍ فﺬﺣ"
     }
 }

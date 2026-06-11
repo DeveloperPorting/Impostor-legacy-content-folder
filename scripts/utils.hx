@@ -1,10 +1,11 @@
+/*import funkin.objects.FunkinCaptionGroup;
+import funkin.objects.FunkinCaption;*/
+
 import flixel.text.FlxText;
 import flixel.addons.text.FlxTypeText;
-import flixel.util.FlxStringUtil;
 
 import funkin.backend.DebugDisplay;
 import funkin.backend.math.Vector3;
-import funkin.utils.MathUtil;
 //import funkin.data.GameFlags;
 import funkin.data.ClientPrefs;
 //import funkin.data.CosmicubeData;
@@ -12,26 +13,14 @@ import funkin.data.ClientPrefs;
 
 using StringTools;
 
-public var comboX:Float = 0; // Offset midscroll bullshit. fuck.
+public var comboX:Float = (ClientPrefs.middleScroll ? 440 : 0); // Offset midscroll bullshit. fuck.
 var combosPadding:Float = 0;
 var flashSprite:FlxSprite;
-var lyric_box:FlxSprite;
-var lyric_text:FlxText;
 var reactorFade:Float = 3;
 public var dbText:String = '';
 public var bfOff:Dynamic = -1;
 public var dadOff:Dynamic = -1;
 public var showDevInfo:Bool = false;
-
-var rankThresholds:Array<{min: Float, name: String}> = [
-	{min: 99.0, name: "P"},
-	{min: 95.0, name: "S"},
-	{min: 90.0, name: "A"},
-	{min: 80.0, name: "B"},
-	{min: 70.0, name: "C"},
-	{min: 60.0, name: "D"},
-	{min: 50.0, name: "E"}
-];
 
 // Akinator game below vvvvvvvvvvv
 
@@ -60,6 +49,9 @@ public var hasPet = false;
 **/
 public var hasColor = false;
 
+/*public var captionGroup:FunkinCaptionGroup;
+public var caption:FunkinCaption;*/
+
 // CAMERA SHIT
 var camBopInterval:Int = 4;
 var camBopIntensity:Float = 1;
@@ -69,25 +61,30 @@ var camTwistIntensity:Float = 0;
 var camTwistIntensity2:Float = 3;
 var camTwist:Bool = false;
 
+public var tauntCharacter:Character;
+
 function onLoad()
 {
-	/*hasBfSkin = (ClientPrefs.bfSkin != 'default' && !isStoryMode);
+	hasBfSkin = (ClientPrefs.bfSkin != 'default' && !isStoryMode);
 	hasGfSkin = (ClientPrefs.gfSkin != 'default' && !isStoryMode);
-	hasPet = (ClientPrefs.pet != '' && !isStoryMode);*/
+	hasPet = (ClientPrefs.pet != '' && !isStoryMode);
 	hasColor = (ClientPrefs.colorText != 'Disabled');
+	
+	/*captionGroup = new FunkinCaptionGroup(500);
+	captionGroup.camera = camOther;*/
 }
 
 function onCreatePost()
 {
 	modifyGUI();
-
+	
 	if (!ClientPrefs.inDevMode) return;
 	var WATERMARK:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu/pause/looksie_extreme_demon'));
 	WATERMARK.camera = camOther;
 	WATERMARK.alpha = 0.3;
 	WATERMARK.setPosition((FlxG.width - WATERMARK.width), (FlxG.height - WATERMARK.height));
 	add(WATERMARK);
-
+	
 	DebugDisplay.addPlugin(() -> ('[ TAB to expand or collapse dev info ]' + (showDevInfo ? dbText : '')));
 }
 
@@ -156,15 +153,15 @@ function onMoveCamera(whosTurn:Bool)
 
 function modifyGUI()
 {
-	playHUD.timeBar.setColors(0xFF44d844, 0xFF2e412e);
-	playHUD.timeTxt.x += 110;
-	playHUD.timeBar.x -= 337;
-	playHUD.timeTxt.y += 10;
-	playHUD.timeTxt.size = 14;
-	playHUD.timeTxt.borderSize = 1;
-	playHUD.timeTxt.setFormat(Paths.font("vcr.ttf"), 14, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-	playHUD.scoreTxt.clearFormats();
-	if (hasColor) playHUD.scoreTxt.color = dad.healthColour;
+	timeBar.setColors(0xFF44d844, 0xFF2e412e);
+	timeTxt.x = PlayState.STRUM_X + (FlxG.width / 2) - 585;
+	timeBar.x = timeTxt.x;
+	timeBar.y = timeTxt.y + (timeTxt.height / 4) - 5;
+	timeTxt.x += 10;
+	timeTxt.y += 8;
+	timeTxt.width = 400;
+	timeTxt.setFormat(Paths.font("vcr.ttf", false), 14, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	if (hasColor) scoreTxt.color = dad.healthColour;
 	
 	ratingPop = (.47 / .42);
 	combosPop = (.35 / .33);
@@ -182,31 +179,6 @@ function modifyGUI()
 			combosScale = .33;
 			combosPadding = -30;
 	}
-}
-
-function getRank(accuracy:Float):String
-{
-	for (rule in rankThresholds)
-	{
-		if (accuracy >= rule.min) return rule.name;
-	}
-	
-	return "F";
-}
-
-function onUpdateScore()
-{
-	var accuracyText:String = "N/A";
-	var rankText:String = "N/A";
-
-	if (songScore > 0 || songMisses > 0)
-	{
-		accuracyText = MathUtil.floorDecimal(ratingPercent * 100, 2) + "%";
-		rankText = getRank(MathUtil.floorDecimal(ratingPercent * 100, 2));
-	}
-	
-	playHUD.scoreTxt.text = "Score: " + songScore + " | Misses: " + songMisses + " | Accuracy: " + accuracyText + " | Rank: " + rankText;
-	return Function_Stop;
 }
 
 function onPopUpScorePost(note, rating)
@@ -250,7 +222,16 @@ function onPopUpScorePost(note, rating)
 
 function onUpdate(elapsed)
 {
-	flashSprite?.alpha = FlxMath.lerp(flashSprite?.alpha, 0, elapsed * reactorFade);
+	/*if (controls.NOTE_TAUNT_P && !inCutscene && !cpuControlled)
+	{
+		var tauntCharacter:Character = (tauntCharacter ?? boyfriend);
+		
+		if (tauntCharacter.hasAnim('hey'))
+		{
+			tauntCharacter.playAnim('hey');
+			tauntCharacter.specialAnim = tauntCharacter.holding = true;
+		}
+	}*/
 	
 	if (!ClientPrefs.inDevMode) return;
 	if (FlxG.keys.justPressed.TAB)
@@ -261,7 +242,8 @@ function onUpdate(elapsed)
 	
 	if (showDevInfo)
 	{
-		dbText = '\nVS IMPOSTOR LEGACY v1.0.2'
+		dbText = '\nVS IMPOSTOR LEGACY v'
+			+ Main.LEGACY_VERSION
 			+ '\nHealth: '
 			+ game.health
 			+ '\nDad Camera, BF Camera:'
@@ -280,6 +262,7 @@ function onUpdate(elapsed)
 			+ 's)'
 			+ '\n'
 			+ getBool('Story Mode', PlayState.isStoryMode)
+			+ (PlayState.isStoryMode ? getBool('\nIn Cutscene', inCutscene) : '')
 			+ '\nQueued Currency (score / 600): '
 			+ Std.int(songScore / 600)
 			+ '\nCharacters: '
@@ -288,40 +271,81 @@ function onUpdate(elapsed)
 			+ getBool('Low Quality', ClientPrefs.lowQuality)
 			+ getBool(' | Photosensitive', ClientPrefs.photosensitive)
 			+ getBool(' | Shaders', ClientPrefs.shaders)
-			+ '\nAllocated Notes: ' + notes.length;
+			+ '\nAllocated Notes: '
+			+ notes.length;
 	}
 }
 
-function onUpdatePost(elapsed)
+function setTauntCharacter(note:Note)
 {
-	playHUD.timeTxt.text = PlayState.SONG.song.toUpperCase();
+	final playField = note.playField;
+	
+	if (playField?.isPlayer) // jsut made some bullshit
+	{
+		tauntCharacter = (note.owner ?? (note.gfNote ? gf : null));
+		tauntCharacter ??= (note.singers == null ? playField.owner : note.singers[0]);
+		
+		if (tauntCharacter == boyfriend) tauntCharacter = null; // ok
+	}
 }
+
+function noteMiss(note:Note) setTauntCharacter(note);
+function goodNoteHit(note:Note) setTauntCharacter(note);
+function extraNoteHit(note:Note) setTauntCharacter(note);
 
 public function getBool(sss:String, bbb:Bool, ?withSlashN:Bool = true):String
 {
 	return (withSlashN ? '\n' : '') + sss + ': ' + (bbb ? 'ON' : 'OFF');
 }
 
-function onFirstEventPush(eventName) // I had to add this callback to all scripts it was only being called by event scripts (which makes sense)
+function onFirstEventPush(event:EventNote) // I had to add this callback to all scripts it was only being called by event scripts (which makes sense)
 {
-	switch (eventName)
+	switch (event.event)
 	{
-	    case 'Reactor Beep':
-	        flashSprite = new FlxSprite(0, 0).makeGraphic(1280, 720, 0xFFb30000);
+		case 'Reactor Beep':
+			flashSprite = new FlxSprite(0, 0).makeScaledGraphic(1280, 720, 0xFFb30000);
 			flashSprite.alpha = 0.001;
-			flashSprite.cameras = [camOther];
-			add(flashSprite);
-		case 'Optional Captions':
-			lyric_box = new FlxSprite().makeGraphic(1, 1, 0xAA000000);
-			lyric_text = new FlxText(0, 520, -1, '', 32);
-			lyric_text.setFormat(Paths.font("liberbold.ttf"), 24, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			for (i in [lyric_box, lyric_text])
+			
+			if (ClientPrefs.photosensitive)
 			{
-				i.cameras = [camOther];
-				i.visible = false;
-				add(i);
+				flashSprite.camera = camHUD;
+				insert(0, flashSprite);
 			}
+			else
+			{
+				flashSprite.camera = camOther;
+				add(flashSprite);
+			}
+		case 'Optional Captions':
+			prepareCaptions();
 	}
+}
+
+public function prepareCaptions():Void
+{
+	if (!ClientPrefs.subtitles || caption != null) return;
+	
+	add(captionGroup).add(caption = new FunkinCaption());
+	caption.visible = false;
+}
+
+public function showCaption(string:String, ?y:Float):Void
+{
+	if (!ClientPrefs.subtitles) return;
+	
+	prepareCaptions();
+	
+	caption.set(string, y ?? captionGroup.defaultY);
+	caption.visible = true;
+	
+	if (showDevInfo) trace(caption.text);
+}
+
+public function hideCaption():Void
+{
+	if (caption == null) return;
+	
+	caption.visible = false;
 }
 
 /**
@@ -334,35 +358,12 @@ public function nullBlank(val)
 
 function onEvent(eventName, value1, value2)
 {
-    onFirstEventPush(eventName);
 	switch (eventName)
 	{
 		case 'Optional Captions':
-			if (lyric_box == null)
-			{
-				lyric_box = new FlxSprite().makeGraphic(1, 1, 0xAA000000);
-				lyric_text = new FlxText(0, 520, -1, '', 32);
-				lyric_text.setFormat(Paths.font("liberbold.ttf"), 24, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				for (i in [lyric_box, lyric_text])
-				{
-					i.cameras = [camOther];
-					i.visible = false;
-					add(i);
-				}
-			}
-			if (nullBlank(value1) || value1 == '0' || ClientPrefs.language == 'english')
-			{
-				lyric_box.visible = lyric_text.visible = false;
-				return;
-			}
-			if (showDevInfo) trace(Lang.str(value1));
-			lyric_box.visible = lyric_text.visible = true;
-			lyric_text.text = Lang.str(value1);
-			lyric_box.setGraphicSize(Std.int(lyric_text.width + 20), Std.int(lyric_text.height));
-			lyric_box.updateHitbox();
-			lyric_text.x = (FlxG.width - lyric_text.width) / 2;
-			lyric_text.y = Std.int(nullBlank(value2) ? 500 : value2);
-			lyric_box.setPosition(lyric_text.x - 10, lyric_text.y);
+			if (nullBlank(value1) || value1 == '0') return hideCaption();
+			
+			showCaption(value1, nullBlank(value2) ? null : Std.parseInt(value2));
 		case 'Set Cams':
 			var coords = value1.split(',');
 			var zoomy = Std.parseFloat(value2);
@@ -383,7 +384,20 @@ function onEvent(eventName, value1, value2)
 		case '_placeholder':
 			if (showDevInfo) trace('vs placeholder');
 		case 'Reactor Beep':
-			flashSprite?.alpha = 0.3;
+			if (flashSprite != null)
+			{
+				FlxTween.cancelTweensOf(flashSprite);
+				if (ClientPrefs.photosensitive)
+				{
+					FlxTween.tween(flashSprite, {alpha: .15}, .2, {ease: FlxEase.sineOut, onComplete: function() FlxTween.tween(flashSprite, {alpha: 0}, .4, {ease: FlxEase.quadInOut})});
+				}
+				else
+				{
+					flashSprite.alpha = .3;
+					FlxTween.tween(flashSprite, {alpha: 0}, 1 / reactorFade);
+				}
+			}
+			
 		case 'Change Character':
 			if (hasColor) scoreTxt.color = dad.healthColour == FlxColor.BLACK ? FlxColor.WHITE : dad.healthColour;
 		case 'flash':
@@ -392,17 +406,15 @@ function onEvent(eventName, value1, value2)
 			// also used for identity crisis idk why dont blame me shrug
 			switch (charType)
 			{
-				case 0:
+				case 0, 1:
 					camGame.flash(FlxColor.WHITE, 0.35);
-				case 1:
-					camGame.flash(FlxColor.WHITE, 0.35);
-				case 2:
+				case 2, 3:
 					camGame.flash(FlxColor.WHITE, 0.55);
-				// darkMono.visible = true;
-				case 3:
-					camGame.flash(FlxColor.WHITE, 0.55);
-					// darkMono.visible = false;
-					// saxguy.visible = false;
+			}
+			if (ClientPrefs.photosensitive)
+			{
+				camGame._fxFlashAlpha *= .5;
+				camGame._fxFlashDuration /= .5;
 			}
 		case 'Extra Cam Zoom':
 			var _zoom:Float = Std.parseFloat(value1);

@@ -1,3 +1,5 @@
+import funkin.data.ClientPrefs;
+
 var ext:String = 'stages/skeld/jads/';
 
 function onLoad()
@@ -34,20 +36,16 @@ function onStepHit()
 	switch (woo_party)
 	{
 		case 1:
-			camGame.zoom += .008;
-			camHUD.zoom += .008;
+			bump(0.008, 0.008);
 			
 		case 2:
-			camGame.zoom += .016;
-			camHUD.zoom += .016;
+			bump(0.016, 0.016);
 			
 		case 3:
-			camGame.zoom += .008;
-			camHUD.zoom += .016;
+			bump(0.008, 0.016);
 			
 		case 4:
-			camGame.zoom += .02;
-			camHUD.zoom += .02;
+			bump(0.02, 0.02);
 			
 			if (ClientPrefs.flashing)
 			{
@@ -56,4 +54,12 @@ function onStepHit()
 				camGame._fxFlashAlpha = .1;
 			}
 	}
+}
+
+function bump(game:Float, hud:Float)
+{
+	if (!ClientPrefs.camZooms) return;
+	
+	camGame.zoom += game;
+	camHUD.zoom += hud;
 }

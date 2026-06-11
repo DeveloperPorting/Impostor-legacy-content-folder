@@ -98,6 +98,34 @@ function onLoad()
 	add(lamp);
 }
 
+function onUpdatePost()
+{
+	if (ClientPrefs.inDevMode)
+	{
+		if (showDevInfo) dbText = dbText + '\nPress 1,2,4,5 to switch Monototone Attack character';
+		if (FlxG.keys.justPressed.ONE)
+		{
+			PlayState.attackCharacter = 0;
+			FlxG.resetState();
+		}
+		if (FlxG.keys.justPressed.TWO)
+		{
+			PlayState.attackCharacter = 1;
+			FlxG.resetState();
+		}
+		if (FlxG.keys.justPressed.FOUR)
+		{
+			PlayState.attackCharacter = 2;
+			FlxG.resetState();
+		}
+		if (FlxG.keys.justPressed.FIVE)
+		{
+			PlayState.attackCharacter = 3;
+			FlxG.resetState();
+		}
+	}
+}
+
 function postModifierRegister():Void
 {
 	game.playFields.members[2].owner = game.gf;
@@ -106,28 +134,45 @@ function postModifierRegister():Void
 	for (i in playFields.members)
 	{
 		final player:Bool = (i.ID == PlayState.attackCharacter);
+		final orgID = (3 - i.ID);
+		final wrap = Math.floor(orgID / 2) == Math.floor((3 - PlayState.attackCharacter) / 2);
 		
 		i.isPlayer = i.playerControls = i.noteSplashes = player;
 		i.autoPlayed = !player;
-	}
-	
-	modManager.setValue("transformX", -315.999999884564, 2);
-	modManager.setValue("transformX", 315.999999884564, 3);
-	
-	if (PlayState.attackCharacter < 2)
-	{
-		game.playFields.members[2].visible = false;
-		game.playFields.members[3].visible = false;
-		modManager.setValue("alpha", 1, 2);
-		modManager.setValue("alpha", 1, 3);
-	}
-	else
-	{
-		game.playFields.members[0].visible = false;
-		game.playFields.members[1].visible = false;
-		modManager.setValue("alpha", 1, 0);
-		modManager.setValue("alpha", 1, 1);
 		
+		if (ClientPrefs.middleScroll) continue;
+		
+		if (wrap)
+		{
+			i.zIndex = 999;
+			
+			if (i.ID >= 2 && !ClientPrefs.middleScroll) modManager.setValue("transformX", 315 * (i.ID == 2 ? -1 : 1), i.ID);
+		}
+		else
+		{
+			i.underlay.kill();
+			
+			modManager.setValue("noteAlpha", 1, i.ID);
+			modManager.setValue("alpha", 0.7, i.ID);
+			modManager.setValue("stealth", 0.5, i.ID);
+			modManager.setValue("transformZ", -1, i.ID);
+			modManager.setValue("transformY", -90 * (ClientPrefs.downScroll ? -1 : 1), i.ID);
+			modManager.setValue("stealthPastReceptors", 1, i.ID);
+			
+			if (i.ID >= 2)
+			{
+				final space = 865;
+				// modManager.setValue("opponentSwap", 0.5, i.ID);
+				modManager.setValue("transformX", i.ID == 2 ? -(space) : space, i.ID);
+			}
+			else modManager.setValue("opponentSwap", -0.85, i.ID);
+		}
+	}
+	
+	refreshZ(playFields);
+	
+	if (PlayState.attackCharacter >= 2)
+	{
 		iconP2.changeIcon('fabs');
 		iconP1.changeIcon('biddle');
 		
@@ -149,6 +194,15 @@ function postModifierRegister():Void
 				iconP2.changeIcon('biddle');
 		}
 	}
+}
+
+function onSpawnNotePost(note)
+{
+	final orgID = (3 - note.player);
+	final wrap = Math.floor(orgID / 2) == Math.floor((3 - PlayState.attackCharacter) / 2);
+	
+	note.zIndex = wrap ? 999 : 0;
+	refreshZ(notes);
 }
 
 function onCreatePost()

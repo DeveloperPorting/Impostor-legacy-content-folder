@@ -6,5 +6,9 @@
 	
 	"boyfriend": [2550, 650],
 	"girlfriend": [1600, 650],
-	"opponent": [1250, 680]
+	"opponent": [1250, 680],
+	
+	"flags": {
+		"airship": true
+	}
 }

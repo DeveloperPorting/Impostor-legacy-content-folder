@@ -29,8 +29,10 @@
 {"SPRITE":{"name":"27","x":287,"y":2,"w":265,"h":406,"rotated":false}},
 {"SPRITE":{"name":"28","x":818,"y":2,"w":281,"h":368,"rotated":false}},
 {"SPRITE":{"name":"29","x":1871,"y":443,"w":143,"h":126,"rotated":false}},
-{"SPRITE":{"name":"30","x":693,"y":478,"w":95,"h":90,"rotated":false}},
-{"SPRITE":{"name":"31","x":818,"y":371,"w":153,"h":134,"rotated":false}}]},
+{"SPRITE":{"name":"30","x":1240,"y":496,"w":65,"h":80,"rotated":false}},
+{"SPRITE":{"name":"31","x":1656,"y":458,"w":65,"h":80,"rotated":false}},
+{"SPRITE":{"name":"32","x":818,"y":371,"w":153,"h":134,"rotated":false}},
+{"SPRITE":{"name":"33","x":693,"y":478,"w":70,"h":82,"rotated":false}}]},
 "meta":{
 "app":"Adobe Animate (Better TA Extension)",
 "version":"21.0.0.35450",

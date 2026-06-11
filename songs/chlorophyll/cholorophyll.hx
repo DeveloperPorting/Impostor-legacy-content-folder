@@ -1,8 +1,10 @@
+import funkin.data.ClientPrefs;
+
 public function modchart(step:Int):Void
 {
 	switch (step)
 	{
-		case 128: 
+		case 128:
 			woo_party = 1;
 		case 256, 384, 768, 896:
 			defaultCamZoom = 1.1;
@@ -18,8 +20,12 @@ public function modchart(step:Int):Void
 			woo_party = 1;
 		case 752, 758, 764:
 			woo_party = 0;
-			camGame.zoom += 0.03;
-			camHUD.zoom += 0.03;
+			if (ClientPrefs.camZooms)
+			{
+				camGame.zoom += 0.03;
+				camHUD.zoom += 0.03;
+			}
+			
 		case 260, 388, 772, 900:
 			woo_party = 2;
 			defaultCamZoom = 0.9;

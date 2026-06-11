@@ -1,4 +1,5 @@
 {
+    "pausePortrait": "drip",
 	"animations": [
 		{
 			"loop": false,

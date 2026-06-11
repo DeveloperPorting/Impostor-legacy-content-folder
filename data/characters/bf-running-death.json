@@ -3,7 +3,7 @@
 		{
 			"loop": false,
 			"offsets": [
-				80,
+				0,
 				0
 			],
 			"anim": "firstDeath",
@@ -12,33 +12,33 @@
 			"indices": []
 		},
 		{
-			"loop": false,
+			"loop": true,
 			"offsets": [
-				-39,
-				-230
+				0,
+				0
 			],
 			"anim": "deathLoop",
 			"fps": 24,
-			"name": "loop death",
+			"name": "death loop",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				-39,
-				-142
+				0,
+				0
 			],
 			"anim": "deathConfirm",
 			"fps": 24,
-			"name": "confirm death",
+			"name": "death confirm",
 			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/gameover/bfrun_death",
+	"image": "characters/bf/bfRun",
 	"position": [
-		-10,
-		350
+		-450,
+		250
 	],
 	"healthicon": "bf",
 	"flip_x": true,

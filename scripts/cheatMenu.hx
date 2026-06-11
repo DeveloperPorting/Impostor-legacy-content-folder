@@ -33,5 +33,21 @@ function onCreatePost()
 		shButton.text = getBool('SH', ClientPrefs.shaders);
 	});
 	dbGroup.add(shButton);
+	
+	msButton = new FlxButton(GAYLINE * 5, 700, getBool('MS', ClientPrefs.middleScroll), () -> {
+		ClientPrefs.middleScroll = !ClientPrefs.middleScroll;
+		ClientPrefs.flush();
+		msButton.text = getBool('MS', ClientPrefs.middleScroll);
+	});
+	dbGroup.add(msButton);
 	// getBool('Low Quality Mode', ClientPrefs.lowQuality) + getBool('Flashing Lights', ClientPrefs.flashing);
+}
+
+function onUpdate()
+{
+	if (ClientPrefs.inDevMode || PlayState.chartingMode)
+	{
+		if (FlxG.keys.pressed.THREE) playbackRate = 2;
+		if (FlxG.keys.released.THREE) playbackRate = 1;
+	}
 }

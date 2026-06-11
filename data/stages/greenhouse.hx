@@ -1,7 +1,6 @@
 import funkin.game.shaders.ColorSwap;
 
 import flixel.effects.particles.FlxEmitterMode;
-import flixel.effects.particles.FlxParticle;
 
 public var ext = 'stages/mira/greenhouse/';
 public var greymira:FlxSprite;
@@ -45,6 +44,7 @@ function onLoad()
 	
 	var sun:FlxSprite = new FlxSprite(-400, -1100).loadGraphic(Paths.image(ext + 'the sun'));
 	sun.scrollFactor.set(0.8, 0.8);
+	sun.blend = BlendMode.ADD;
 	add(sun);
 	
 	pinkVignette = new FlxSprite(0, 0).loadGraphic(Paths.image(ext + 'vignette'));

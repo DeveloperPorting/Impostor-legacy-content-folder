@@ -9,15 +9,17 @@ var retry:FlxAnimate;
 
 function onGameOverStart()
 {
-	nene = new Character(PlayState.instance.gf.getScreenPosition().x, PlayState.instance.gf.getScreenPosition().y, 'nenelobby');
-	nene.x += gf.positionArray[0] - PlayState.instance.gf.positionArray[0];
-	nene.y += gf.positionArray[1] - PlayState.instance.gf.positionArray[1];
-	nene.skipDance = true;
-	nene.animation.onFinish.add(function(name:String) {
-		nene.visible = false;
-	});
-	nene.playAnim('kill');
-	GameOverSubstate.instance.add(nene);
+	if (gf.getFlag('knifenene')) {
+		nene = new Character(PlayState.instance.gf.getScreenPosition().x, PlayState.instance.gf.getScreenPosition().y, gf.curCharacter);
+		nene.x += gf.positionArray[0] - PlayState.instance.gf.positionArray[0];
+		nene.y += gf.positionArray[1] - PlayState.instance.gf.positionArray[1];
+		nene.skipDance = true;
+		nene.animation.onFinish.add(function(name:String) {
+			nene.visible = false;
+		});
+		nene.playAnim('kill');
+		GameOverSubstate.instance.add(nene);
+	}
 	
 	retry = new FlxAnimate(boyfriend.getScreenPosition().x + 312.25, boyfriend.getScreenPosition().y - 1.5);
 	retry.frames = Paths.getSparrowAtlas("characters/gameover/Pico_Death_Assets");

@@ -16,7 +16,7 @@ function onCreatePost()
 		video.updateHitbox();
 		video.screenCenter();
 	});
-	if (isStoryMode || repeatedCutscenes) songEndCallback = meltEnd;
+	if (isStoryMode || !videoCheckStory || repeatedCutscenes) songEndCallback = meltEnd;
 }
 
 function onEvent(eventName, value1, value2)
@@ -24,7 +24,7 @@ function onEvent(eventName, value1, value2)
 	switch (eventName)
 	{
 		case 'Meltdown Video':
-			meltdownVid();
+			if (boyfriend.curCharacter == 'bf-ghost') meltdownVid();
 	}
 }
 
@@ -32,7 +32,8 @@ function onUpdate()
 {
 	if (outroCutscene)
 	{
-		if(controls.BACK) {
+		if (controls.BACK)
+		{
 			outroCutscene = false;
 			video.destroy();
 			endSong();
@@ -47,13 +48,15 @@ function onUpdate()
 
 function meltEnd()
 {
-	video.onEnd(() -> {
-		endSong();
-	});
 	canPause = false;
 	outroCutscene = true;
 	camOther.bgColor = FlxColor.BLACK;
-	if (video.load(Paths.video(Paths.sanitize('week1/post-week1')))) video.delayAndStart();
+	
+	videoCheckStory = false;
+	PlayState.seenCutscene = false;
+	videoCutscene('week1/post-week1', false, true, function() endSong());
+	PlayState.seenCutscene = true;
+	
 	textFade();
 }
 

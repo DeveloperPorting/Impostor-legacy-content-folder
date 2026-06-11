@@ -15,11 +15,11 @@ var farSpeedPass:Array<Float> = [11000, 11000, 11000, 11000, 11000, 11000, 11000
 var ext:String = 'stages/mira/ejected/';
 var platform:FlxSprite;
 
-//var grayShader:ColorMatrixShader = (ClientPrefs.shaders ? new funkin.game.shaders.ColorMatrixShader() : null);
+var grayShader:ColorMatrixShader = (ClientPrefs.shaders ? new funkin.game.shaders.ColorMatrixShader() : null);
 
 function onLoad()
 {
-	//if (grayShader != null) grayShader.setAdjustColor(-7, -6, 0, -30);
+	if (grayShader != null) grayShader.setAdjustColor(-7, -6, 0, -30);
 	
 	// 21.3
 	
@@ -83,7 +83,7 @@ function onLoad()
 	middleBuildings[0].y = 8570.5;
 	leftBuildings[0].y = 14050.2;
 	
-	platform = new FlxSprite(955, 1210);
+	platform = new FlxSprite(955, 1200);
 	platform.frames = Paths.getSparrowAtlas('stages/common/platform');
 	platform.animation.addByPrefix('bop', 'floating', 24, true);
 	platform.animation.play('bop');
@@ -95,13 +95,13 @@ function onLoad()
 function onCreatePost()
 {
 	// thanks fnf wekly
-	/*if (hasBfSkin && game.boyfriend.curCharacter != 'bf-ghost')
+	if (hasBfSkin && !boyfriend.getFlag('floating'))
 	{
 		platform.shader = grayShader;
 		platform.alpha = 1;
-	}*/
+	}
 	
-	//pet.shader = gf.shader = boyfriend.shader = dad.shader = grayShader;
+	pet.shader = gf.shader = boyfriend.shader = dad.shader = grayShader;
 	
 	if (!ClientPrefs.lowQuality && ClientPrefs.flashing)
 	{
@@ -172,15 +172,22 @@ function onCreatePost()
 	speedlines.alpha = 0.5;
 	add(speedlines);
 	
-	/*pet.origin.set(pet.width / 2, pet.height - 50);
+	pet.origin.set(pet.width / 2, pet.height / 2);
 	
-	pet.setColorTransform(1, 1, 1, 2, 0, 20, 40, -128);
-	pet.scrollFactor.set(1.2,1.2);
-	pet.angularVelocity = 900;*/
+	pet.setColorTransform(1, 1, 1, 1, 0, 20, 40, -127);
+	pet.colorTransform.alphaMultiplier = 2; // fuck you funkin crew.
+	pet.scrollFactor.set(1.2, 1.2);
+	
+	if (pet.getFlag('spin') != false) pet.angularVelocity = 450;
 }
 
 function onUpdate(elapsed)
 {
+	if (!gf.getFlag('floating') && hasGfSkin) gf.angle = -25 + Math.sin(Conductor.songPosition / 500) * 10;
+
+	pet.x += Math.sin(Conductor.songPosition / 100) * 200 * FlxG.elapsed; //ive got a final test in 2 hours wish me luck
+	pet.y = 800 + Math.sin(Conductor.songPosition / 100) * 50;
+	
 	var musicTime:Float = Conductor.songPosition;
 	funTime = musicTime;
 	if (speedlines != null) speedlines.y = -(funTime * 2 * (ClientPrefs.flashing ? 1.75 : .75));
@@ -258,15 +265,13 @@ function onUpdate(elapsed)
 		}
 	}
 	
-	if (!tweeningChar && !inCutscene && (!hasBfSkin || game.boyfriend.curCharacter == 'bf-ghost'))
+	if (!tweeningChar && !inCutscene)
 	{
 		tweeningChar = true;
-		FlxTween.tween(boyfriendGroup, {x: FlxG.random.float(BF_X - 15, BF_X + 15), y: FlxG.random.float(BF_Y - 15, BF_Y + 15)}, 0.4, {
-			ease: FlxEase.smoothStepInOut,
-			onComplete: function(twn:FlxTween) {
-				tweeningChar = false;
-			}
-		});
+		
+		if (!hasBfSkin || boyfriend.getFlag('floating'))
+			FlxTween.tween(boyfriendGroup, {x: FlxG.random.float(BF_X - 15, BF_X + 15), y: FlxG.random.float(BF_Y - 15, BF_Y + 15)}, 0.4, {ease: FlxEase.smoothStepInOut});
+		
 		FlxTween.tween(gf,
 			{
 				x: FlxG.random.float(game.GF_X - 10, game.GF_X + 10),
@@ -275,14 +280,17 @@ function onUpdate(elapsed)
 			{
 				ease: FlxEase.smoothStepInOut
 			});
+		
 		FlxTween.tween(dad, {x: FlxG.random.float(DAD_X - 15, DAD_X + 15), y: FlxG.random.float(game.DAD_Y - 15, DAD_Y + 15)}, 0.4, {
-			ease: FlxEase.smoothStepInOut
+			ease: FlxEase.smoothStepInOut,
+			onComplete: function(_) tweeningChar = false
 		});
 	}
+	
 	if (!inCutscene && ClientPrefs.flashing) camGame.shake(0.002, 0.1);
 	
 	if (fgCloud != null)
 	{
-		fgCloud.y = FlxMath.lerp(fgCloud.y, fgCloud.y - 0.01, FlxMath.bound(elapsed * ejectedSpeed, 0, 1));
+		fgCloud.y = FlxMath.lerp(-402 - 300, -402 - 500, songPercent);
 	}
 }

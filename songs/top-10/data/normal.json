@@ -2,6 +2,10 @@
 	"song": {
 		"player1": "bf",
 		"player2": "top",
+		"arrowSkins": [
+			"top",
+			"top"
+		],
 		"notes": [
 			{
 				"sectionBeats": 4,

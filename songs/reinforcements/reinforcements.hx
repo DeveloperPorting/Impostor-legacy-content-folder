@@ -18,8 +18,9 @@ function onLoad()
 	stage.add(mom);
 	mom.zIndex = 1;
 	mom.visible = false;
-	we_have_mom_boy = true;
 }
+
+function onCreatePost() pauseOverwrite = 'henry';
 
 function iSeeYouEnry()
 {

@@ -1,6 +1,7 @@
 function onCreatePost()
 {
 	health = 1; // hmm
+	comboX = 440;
 	playHUD.updateIconsPosition();
 	playHUD.updateIconPos = false;
 	modManager.setValue("opponentSwap", 0.5, 0);

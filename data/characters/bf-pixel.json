@@ -64,7 +64,7 @@
 			"fps": 24,
 			"anim": "singLEFTmiss",
 			"indices": [],
-			"name": "missleft"
+			"name": "miss left"
 		},
 		{
 			"offsets": [
@@ -75,7 +75,7 @@
 			"fps": 24,
 			"anim": "singDOWNmiss",
 			"indices": [],
-			"name": "missdown"
+			"name": "miss down"
 		},
 		{
 			"offsets": [
@@ -86,7 +86,7 @@
 			"fps": 24,
 			"anim": "singUPmiss",
 			"indices": [],
-			"name": "missup"
+			"name": "miss up"
 		},
 		{
 			"offsets": [
@@ -97,7 +97,7 @@
 			"fps": 24,
 			"anim": "singRIGHTmiss",
 			"indices": [],
-			"name": "missright"
+			"name": "miss right"
 		},
 		{
 			"offsets": [
@@ -109,27 +109,16 @@
 			"anim": "hey",
 			"indices": [],
 			"name": "hey"
-		},
-		{
-			"offsets": [
-				8,
-				0
-			],
-			"loop": true,
-			"fps": 24,
-			"anim": "scared",
-			"indices": [],
-			"name": "scared"
 		}
 	],
 	"no_antialiasing": true,
 	"image": "characters/bf/pixel/bfPixel",
 	"position": [
-		-5,
-		375
+		183,
+		547
 	],
 	"dance_every": 2,
-	"gameover_intial_sound": null,
+	"gameover_intial_sound": "stage/fnf_loss_sfx-pixel",
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
 	"healthicon": "bf-pixel",
@@ -144,5 +133,8 @@
 	"gameover_loop_sound": null,
 	"sing_duration": 4,
 	"scale": 6,
-	"_editor_isPlayer": true
+	"_editor_isPlayer": true,
+	"flags": {
+		"isPixel": true
+	}
 }

@@ -55,9 +55,6 @@ Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
 	<SubTexture name="impostor idle0006" x="2873" y="2919" width="568" height="387" frameX="-1" frameY="-1" frameWidth="576" frameHeight="395"/>
 	<SubTexture name="impostor idle0007" x="2873" y="2919" width="568" height="387" frameX="-1" frameY="-1" frameWidth="576" frameHeight="395"/>
 	<SubTexture name="impostor idle0008" x="2300" y="2919" width="568" height="388" frameX="-1" frameY="-0" frameWidth="576" frameHeight="395"/>
-	<SubTexture name="impostor idle0009" x="2300" y="2919" width="568" height="388" frameX="-1" frameY="-0" frameWidth="576" frameHeight="395"/>
-	<SubTexture name="impostor idle0010" x="2300" y="2919" width="568" height="388" frameX="-1" frameY="-0" frameWidth="576" frameHeight="395"/>
-	<SubTexture name="impostor idle0011" x="2300" y="2919" width="568" height="388" frameX="-1" frameY="-0" frameWidth="576" frameHeight="395"/>
 	<SubTexture name="impostor right0000" x="636" y="2502" width="650" height="388" frameX="-0" frameY="-0" frameWidth="686" frameHeight="388"/>
 	<SubTexture name="impostor right0001" x="636" y="2502" width="650" height="388" frameX="-0" frameY="-0" frameWidth="686" frameHeight="388"/>
 	<SubTexture name="impostor right0002" x="3283" y="1204" width="533" height="369" frameX="-153" frameY="-0" frameWidth="686" frameHeight="388"/>

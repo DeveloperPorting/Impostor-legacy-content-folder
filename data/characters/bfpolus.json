@@ -1,203 +1,147 @@
 {
+	"pausePortrait": "",
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
-				0,
-				0
+				11,
+				1
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "BF idle dance",
-			"indices": []
+			"indices": [],
+			"name": "BF idle dance"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				15,
-				-10
+				10
 			],
-			"anim": "singLEFT",
-			"fps": 24,
-			"name": "BF NOTE LEFT0",
-			"indices": []
-		},
-		{
 			"loop": false,
-			"offsets": [
-				-10,
-				-50
-			],
-			"anim": "singDOWN",
 			"fps": 24,
-			"name": "BF NOTE DOWN0",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-40,
-				20
-			],
-			"anim": "singUP",
-			"fps": 24,
-			"name": "BF NOTE UP0",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-51,
-				-5
-			],
-			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "BF NOTE RIGHT0",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				13,
-				8
-			],
 			"anim": "singLEFTmiss",
-			"fps": 24,
-			"name": "BF NOTE LEFT MISS",
-			"indices": []
+			"indices": [],
+			"name": "BF NOTE LEFT MISS"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-18,
-				-29
+				1,
+				-32
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "BF NOTE DOWN MISS",
-			"indices": []
+			"indices": [],
+			"name": "BF NOTE DOWN MISS"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-29,
-				19
+				-2,
+				73
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUPmiss",
-			"fps": 24,
-			"name": "BF NOTE UP MISS",
-			"indices": []
+			"indices": [],
+			"name": "BF NOTE UP MISS"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-36,
-				12
-			],
-			"anim": "singRIGHTmiss",
-			"fps": 24,
-			"name": "BF NOTE RIGHT MISS",
-			"indices": []
-		},
-		{
-			"loop": true,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "idle-loop",
-			"fps": 24,
-			"name": "BF idle dance",
-			"indices": [
-				10,
-				11,
-				12,
+				-27,
 				13
-			]
-		},
-		{
-			"loop": true,
-			"offsets": [
-				15,
-				-10
 			],
-			"anim": "singLEFT-loop",
+			"loop": false,
 			"fps": 24,
-			"name": "BF NOTE LEFT0",
-			"indices": [
-				12,
-				13,
-				14,
-				15
-			]
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "BF NOTE RIGHT MISS"
 		},
 		{
-			"loop": true,
+			"offsets": [
+				1,
+				73
+			],
+			"flipY": false,
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"flipX": false,
+			"indices": [],
+			"name": "BF NOTE UP"
+		},
+		{
 			"offsets": [
 				-40,
-				20
+				9
 			],
-			"anim": "singUP-loop",
+			"flipY": false,
+			"loop": false,
 			"fps": 24,
-			"name": "BF NOTE UP0",
-			"indices": [
-				11,
-				12,
-				13,
-				14
-			]
-		},
-		{
-			"loop": true,
-			"offsets": [
-				-10,
-				-50
-			],
-			"anim": "singDOWN-loop",
-			"fps": 24,
-			"name": "BF NOTE DOWN0",
-			"indices": [
-				26,
-				27,
-				28,
-				29
-			]
+			"anim": "singRIGHT",
+			"flipX": false,
+			"indices": [],
+			"name": "BF NOTE RIGHT"
 		},
 		{
 			"offsets": [
-				-51,
-				-5
+				1,
+				-44
 			],
-			"loop": true,
+			"flipY": false,
+			"loop": false,
 			"fps": 24,
-			"anim": "singRIGHT-loop",
-			"indices": [
-				11,
-				12,
-				13,
-				14
+			"anim": "singDOWN",
+			"flipX": false,
+			"indices": [],
+			"name": "BF NOTE DOWN"
+		},
+		{
+			"offsets": [
+				15,
+				9
 			],
-			"name": "BF NOTE RIGHT0"
+			"flipY": false,
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"flipX": false,
+			"indices": [],
+			"name": "BF NOTE LEFT"
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				8,
+				9
+			],
+			"anim": "hey",
+			"fps": 24,
+			"name": "BF HEY!!",
+			"indices": [],
+			"flipX": false
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/bf/bfpolus",
+	"image": "characters/bf/bfpolusstatic",
 	"position": [
 		5,
 		340
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
+	"flags": {},
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
 	"healthicon": "bf",
-	"gameover_character": "bf-dead",
+	"afterimages": true,
+	"gameover_character": "bf-polus-dead",
 	"vslice_sustains": false,
 	"flip_x": true,
 	"healthbar_colour": -13520687,
 	"camera_position": [
-		0,
-		0
+		682,
+		-702
 	],
 	"gameover_loop_sound": null,
 	"sing_duration": 4,

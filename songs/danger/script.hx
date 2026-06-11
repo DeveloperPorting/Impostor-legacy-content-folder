@@ -9,14 +9,6 @@ function onCreatePost()
 	camSpecialThing([1634.05, -54.3], [1734.05, -54.3], 0.3);
 }
 
-function onUpdatePost(elapsed)
-{
-	if (FlxG.keys.justPressed.Z && ClientPrefs.inDevMode)
-	{
-		triggerEventNote('Change Character', '1', 'black-run-alt');
-	}
-}
-
 function onBeatHit()
 {
 	switch (curBeat)

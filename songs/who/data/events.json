@@ -71,7 +71,7 @@
 					],
 					[
 						"Play Animation",
-						"wtf",
+						"wtf1",
 						"BF"
 					]
 				]
@@ -133,6 +133,11 @@
 						"Cam lock in Who",
 						"in",
 						""
+					],
+					[
+						"Play Animation",
+						"ffs",
+						"BF"
 					]
 				]
 			],
@@ -163,6 +168,11 @@
 						"Cam lock in Who",
 						"in",
 						"dad"
+					],
+					[
+						"Play Animation",
+						"gettingit",
+						"Dad"
 					]
 				]
 			],
@@ -193,6 +203,11 @@
 						"Cam lock in Who",
 						"",
 						""
+					],
+					[
+						"Play Animation",
+						"woah",
+						"Dad"
 					]
 				]
 			],
@@ -213,6 +228,11 @@
 						"Cam lock in Who",
 						"in",
 						""
+					],
+					[
+						"Alt Idle Animation",
+						"Dad",
+						"-scary"
 					]
 				]
 			],
@@ -223,6 +243,11 @@
 						"Cam lock in Who",
 						"in",
 						"dad"
+					],
+					[
+						"Alt Idle Animation",
+						"Dad",
+						""
 					]
 				]
 			],
@@ -307,7 +332,7 @@
 				]
 			],
 			[
-				82451.6129032259,
+				82439.5161290324,
 				[
 					[
 						"Change Character",
@@ -330,9 +355,9 @@
 				84387.0967741936,
 				[
 					[
-						"Change Character",
-						"0",
-						"whitemad"
+						"Play Animation",
+						"wtf2",
+						"BF"
 					]
 				]
 			],
@@ -373,6 +398,26 @@
 						"Cam lock in Who",
 						"",
 						""
+					]
+				]
+			],
+			[
+				88258.0645161291,
+				[
+					[
+						"Change Character",
+						"0",
+						"whitemad"
+					]
+				]
+			],
+			[
+				89419.3548387098,
+				[
+					[
+						"Cam lock in Who",
+						"in",
+						"dad"
 					]
 				]
 			],
@@ -480,19 +525,19 @@
 				100653.225806452,
 				[
 					[
-						"Play Animation",
-						"yfronts",
-						"Dad"
+						"Cam lock in Who",
+						"in",
+						"dad"
 					]
 				]
 			],
 			[
-				100657.258064516,
+				100661.290322581,
 				[
 					[
-						"Cam lock in Who",
-						"in",
-						"dad"
+						"Play Animation",
+						"yfronts",
+						"Dad"
 					]
 				]
 			],
@@ -517,12 +562,22 @@
 				]
 			],
 			[
-				104516.129032258,
+				103741.935483871,
 				[
 					[
 						"Change Character",
-						"0",
-						"whitemad"
+						"BF",
+						"whitefuck"
+					]
+				]
+			],
+			[
+				103747.983870968,
+				[
+					[
+						"Play Animation",
+						"getit",
+						"BF"
 					]
 				]
 			],
@@ -533,6 +588,11 @@
 						"Cam lock in Who",
 						"in",
 						""
+					],
+					[
+						"Alt Idle Animation",
+						"Dad",
+						"-scary"
 					]
 				]
 			],
@@ -553,6 +613,16 @@
 						"Cam lock in Who",
 						"in",
 						"dad"
+					]
+				]
+			],
+			[
+				110612.903225807,
+				[
+					[
+						"Alt Idle Animation",
+						"Dad",
+						""
 					]
 				]
 			],

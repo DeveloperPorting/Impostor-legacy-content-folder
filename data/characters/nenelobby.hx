@@ -33,6 +33,12 @@ function onCreatePost()
 		}
 	}
 }
+function goodNoteHit()
+{
+	if (combo == 50) gf.playAnimForDuration('combo50', 1.2, true);
+	
+	if (combo == 200) gf.playAnimForDuration('combo200', 1.2, true);
+}
 
 var animationFinished:Bool = false;
 

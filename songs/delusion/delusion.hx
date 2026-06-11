@@ -1,4 +1,4 @@
 function onLoad()
 {
-	videoCutscene(songName);
+	videoCutscene('delusion', true);
 }

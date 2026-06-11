@@ -1,4 +1,5 @@
 {
+	"pausePortrait": "",
 	"animations": [
 		{
 			"offsets": [
@@ -102,8 +103,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-3,
-				5
+				0,
+				0
 			],
 			"anim": "hey",
 			"fps": 24,
@@ -115,14 +116,16 @@
 	"image": "characters/bf/cosmicube/jorsawBF",
 	"position": [
 		-10,
-		260
+		223
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
+	"flags": {},
 	"scalableOffsets": false,
 	"gameover_confirm_sound": "Jorsawsee_End",
 	"healthicon": "bf",
-	"gameover_character": "bf-dead",
+	"afterimages": true,
+	"gameover_character": "genericDeath-black",
 	"vslice_sustains": false,
 	"flip_x": true,
 	"healthbar_colour": -13520687,

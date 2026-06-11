@@ -10,7 +10,6 @@ var skyLight:FlxSprite;
 var claw:FlxSprite;
 var sun:FlxSprite;
 var colorSwap:HSLColorSwap;
-var dadX:Float, dadY:Float;
 var coolX:Float = 5000;
 var speed:Float = 2;
 
@@ -82,8 +81,6 @@ function onCreatePost()
 	}
 	
 	dad.scrollFactor.set(.9, .9);
-	dadX = dad.x;
-	dadY = dad.y;
 	
 	evil();
 	
@@ -95,8 +92,16 @@ function evil():Void
 { // stupid bf claw stuff
 	var controller = (boyfriend.animateAtlas?.animation ?? boyfriend.animation);
 	
-	boyfriend.x = claw.x;
-	boyfriend.y = claw.y;
+	var idleOffset = (boyfriend.animOffsets.get('idle') ?? boyfriend.animOffsets.get('danceLeft') ?? [0, 0]).copy();
+	for (offset in boyfriend.animOffsets)
+	{
+		offset[0] -= idleOffset[0];
+		offset[1] -= idleOffset[1];
+	}
+	
+	boyfriend.legacyOffset = boyfriend.rotatableOffsets = false;
+	boyfriend.setPosition(claw.x, claw.y);
+	boyfriend.updateHitbox();
 	
 	if (boyfriend.animateAtlas != null)
 	{
@@ -113,39 +118,40 @@ function evil():Void
 		for (name in boyfriend.animOffsets.keys())
 		{
 			var offset = boyfriend.animOffsets.get(name);
-			var frames = controller.getByName(name)?.frames;
+			var anim = controller.getByName(name);
 			
-			if (frames == null) continue;
+			if (anim?.frames == null) continue;
 			
-			var poseBounds = boyfriend.animateAtlas.timeline.getBounds(frames[frames.length - 1]);
+			var poseBounds = anim.timeline.getBounds(anim.frames[anim.frames.length - 1]);
 			
-			offset[0] = Math.max((poseBounds.x - idleBounds.x) * .5, 0);
-			offset[1] = Math.max((poseBounds.y - idleBounds.y) * .5, 0);
+			offset[0] = Math.max(offset[1] * .5, 0);
+			offset[1] = Math.max(offset[0] * .5, 0);
+			
+			if (boyfriend.animateAtlas.timeline.name != anim.timeline.name) continue;
+			
+			offset[0] += Math.max((poseBounds.x - idleBounds.x) * .5, 0);
+			offset[1] += Math.max((idleBounds.y - poseBounds.y) * .5, 0);
 		}
 	}
 	else
 	{
 		for (offset in boyfriend.animOffsets)
 		{
-			offset[0] = Math.max(offset[0] * .5, 0);
-			offset[1] = Math.max(offset[1] * .5, 0);
+			offset[0] = Math.max(offset[1] * .5, 0);
+			offset[1] = Math.max(offset[0] * .5, 0);
 		}
 	}
 	
 	boyfriend.angle = -90;
 	
-	switch (boyfriend.curCharacter)
-	{ // for the proportionally impaired
-		case 'pinkplayable':
-			boyfriend.x -= 60;
-			boyfriend.y += 40;
-		case 'minigrey':
-			boyfriend.x -= 80;
-			boyfriend.y += 20;
-		default:
+	var turbOffset = boyfriend.getFlag('turbulenceOffset'); // for the proportionally impaired
+	if (turbOffset != null)
+	{
+		boyfriend.x += (turbOffset[0]);
+		boyfriend.y += (turbOffset[1]);
 	}
 	
-	boyfriend.x += ((boyfriend.width - boyfriend.height) * -.5 + 50);
+	boyfriend.x += ((boyfriend.height - boyfriend.width) * .5 + 50);
 	boyfriend.y += ((claw.height - boyfriend.width * boyfriend.scale.x) * .5 + 10);
 	
 	// bro
@@ -164,8 +170,7 @@ function evil():Void
 			if (StringTools.startsWith(anim.name, a))
 			{
 				var newName:String = ('temp' + renameAnims.get(a) + anim.name.substr(a.length));
-				controller.rename(anim.name, newName);
-				anim.name = newName;
+				boyfriend.renameAnim(anim.name, newName);
 				queued.push(anim);
 				break;
 			}
@@ -173,32 +178,10 @@ function evil():Void
 	}
 	for (anim in queued)
 	{
-		controller.rename(anim.name, anim.name.substr('temp'.length));
-		anim.name = anim.name.substr('temp'.length);
+		boyfriend.renameAnim(anim.name, anim.name.substr('temp'.length));
 	}
 	
-	queued.resize(0);
-	for (anim in boyfriend.animOffsets.keys())
-	{
-		for (a in renameAnims.keys())
-		{
-			if (StringTools.startsWith(anim, a))
-			{
-				var newName:String = ('temp' + renameAnims.get(a) + anim.substr(a.length));
-				boyfriend.animOffsets.set(newName, boyfriend.animOffsets.get(anim));
-				boyfriend.animOffsets.remove(anim);
-				queued.push(newName);
-				break;
-			}
-		}
-	}
-	for (anim in queued)
-	{
-		boyfriend.animOffsets.set(anim.substr('temp'.length), boyfriend.animOffsets.get(anim));
-		boyfriend.animOffsets.remove(anim);
-	}
-	
-	boyfriend.playAnim(boyfriend.__prevPlayedAnimation);
+	boyfriend.playAnim(boyfriend.getAnimName(), true);
 }
 
 function onMoveCamera(whosTurn:Bool):Void
@@ -302,10 +285,11 @@ function delta(n:Float, min:Float, max:Float)
 	return FlxMath.bound(FlxMath.remapToRange(n, min, max, 0, 1), 0, 1);
 }
 
+public var crazy:Float = 1;
 var musicTime:Float = 0;
 var musicDelta:Float = 0;
 
-function onUpdate(elapsed:Float):Void
+function onUpdatePost(elapsed:Float):Void
 {
 	if (isDead) return;
 	
@@ -321,37 +305,10 @@ function onUpdate(elapsed:Float):Void
 		musicTime = Conductor.songPosition;
 	}
 	
-	var crazy:Float = 1;
-	dad.x = dadX;
-	dad.y = dadY;
-	
-	// STUPID math stuff
-	
-	if (musicTime >= 108214)
-	{ // faster
-		bfOff[0] = (1000 + FlxEase.sineInOut(delta(musicTime, 108214, 124058)) * 150);
-		bfOff[1] = (800 + FlxEase.sineInOut(delta(musicTime, 108214, 124058)) * 150);
-		
-		dadOff[0] = (360 + FlxEase.quadIn(delta(musicTime, 108214, 124058)) * 2000);
-		dadOff[1] = (400 + FlxEase.quadIn(delta(musicTime, 108214, 124058)) * 500);
-		dad.x += (FlxEase.quadIn(delta(musicTime, 108214, 124058)) * 2100); // good bye mungus
-		dad.x += (FlxEase.quartIn(delta(musicTime, 123800, 124158)) * 2200);
-		dad.y += (FlxEase.quintIn(delta(musicTime, 108214, 124158)) * 300);
-		
-		if (musicTime < 124058)
-		{
-			crazy += (FlxEase.sineIn(delta(musicTime, 108214, 124058)) * 4);
-		}
-		else
-		{
-			crazy += (4 - FlxEase.quadOut(delta(musicTime, 124058, 124058 + 2500)) * 4);
-		}
-	}
-	
 	if (ClientPrefs.flashing)
 	{
-		camGame.shake(0.001 * (crazy * 2 - 1), 0.1);
-		camHUD.shake(0.001 * (crazy * 1 - 1), 0.1);
+		camGame.shake(.001 * (crazy * 2 - 1), .1);
+		camHUD.shake(.001 * (crazy - 1), .1);
 	}
 	else
 	{
@@ -397,7 +354,7 @@ function onUpdate(elapsed:Float):Void
 			
 			if (isProp) cloud.y += (Math.sin(Conductor.songPosition / z * 20) * .2);
 			
-			if (cloud.x >= FlxG.width * 2) cloud.kill();
+			if (cloud.x >= FlxG.width * 3) cloud.kill();
 		}
 	}
 	
@@ -430,7 +387,6 @@ function onGameOverPost()
 	var bf:Character = subState.boyfriend;
 	
 	bf.angle = -90;
-	bf.y -= bf.width;
 	
 	FlxTween.tween(bf, {x: bf.x + 2000, angle: 90}, .55, {ease: FlxEase.quadIn, startDelay: .35});
 	FlxTween.tween(bf, {y: bf.y + 1800}, .55, {ease: FlxEase.quartIn, startDelay: .33, onComplete: () -> bf.visible = false});

@@ -1,6 +1,4 @@
 var ext = 'stages/henry/';
-public var mom:Character;
-public var we_have_mom_boy:Bool = false;
 
 function onLoad()
 {
@@ -8,64 +6,29 @@ function onLoad()
 	add(bg);
 }
 
-function onCountdownStarted()
-{
-	if (!we_have_mom_boy) return;
-	
-	var fakeStartTimer = new FlxTimer().start((Conductor.crotchet / 1000) / playbackRate, function(tmr:FlxTimer) {
-		mom.onBeatHit(tmr.loopsLeft);
-	}, 5);
-}
-
 function onEvent(n, v1, v2)
 {
 	switch (n)
 	{
 		case 'Ellie Drop':
+			pauseOverwrite = 'ellie';
 			mom.visible = true;
 			dad.playAnim('shock', false);
 			dad.specialAnim = true;
 			mom.playAnim('enter', false);
 			mom.specialAnim = true;
 			iconP2.changeIcon('ellie');
+			
 		default:
 			switch (v1)
 			{
 				case 'forcecamtarget':
-					switch (v2)
+					camCurTarget = switch (v2)
 					{
-						case 'mom':
-							camCurTarget = mom;
-						default:
-							camCurTarget = null;
+						case 'mom': mom;
+						default: null;
 					}
 			}
-	}
-}
-
-function onBeatHit()
-{
-	if (we_have_mom_boy) mom.onBeatHit(curBeat);
-}
-
-function onUpdate(elapsed)
-{
-	if (FlxG.keys.justPressed.Q && ClientPrefs.inDevMode)
-	{
-		setSongTime(70 * 1000);
-		clearNotesBefore(Conductor.songPosition);
-	}
-}
-
-function opponentNoteHitPre(note)
-{
-	if (note.noteType == 'Opponent 2 Sing')
-	{
-		note.owner = mom;
-	}
-	else if (note.noteType == 'Both Opponents Sing')
-	{
-		characterSing(mom, note);
 	}
 }
 

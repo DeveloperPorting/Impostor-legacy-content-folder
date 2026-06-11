@@ -1,5 +1,8 @@
 import flixel.FlxSprite;
 import flixel.text.FlxText;
+import funkin.game.huds.PsychHUD;
+
+using StringTools;
 
 var ext = 'stages/jorsawsee/victory/';
 
@@ -25,6 +28,9 @@ var leftBitches:FlxSprite;
 var rightBitches:FlxSprite;
 var overlay:FlxSprite;
 var void:FlxSprite;
+
+final victoryMissString:String = Lang.str('victory0');
+final missString:String = Lang.str('misses');
 
 function onCountdownTick()
 {
@@ -126,53 +132,21 @@ function onLoad()
 	add(victory);
 }
 
-function onSongStart()
+function onUpdateScorePost(_):Void overrideScoreText();
+
+function onSongStart():Void camGame.alpha = 1;
+
+function overrideScoreText():Void
 {
-	camGame.alpha = 1;
+	if (playHUD?.scoreTxt == null || ClientPrefs.hideHud) return;
+	
+	playHUD.scoreTxt.text = playHUD.scoreTxt.text.replace(
+		PsychHUD.formatScoreField(missString, songMisses),
+		PsychHUD.formatScoreField(missString, victoryMissString)
+	);
 }
 
-function onUpdate()
-{
-	game.health = 999;
-	victoryBS();
-}
-
-function victoryBS()
-{
-	if (playHUD == null || playHUD.scoreTxt == null) return;
-	
-	var currentText:String = playHUD.scoreTxt.text;
-	if (currentText == null || currentText.length == 0) return;
-	currentText = currentText.split('\n').join('');
-	
-	var missesLabel:String = Lang.str('misses', 'Misses');
-	var victoryLabel:String = Lang.str('victory0', 'Who cares? You already won!');
-	var parts:Array<String> = currentText.split(' | ');
-	if (parts.length < 2) return;
-	
-	if (Lang.hasSpecial('rightToLeft'))
-	{
-		var rtlNeedle:String = ' :' + missesLabel;
-		var rtlPos:Int = parts[1].indexOf(rtlNeedle);
-		if (rtlPos >= 0)
-		{
-			parts[1] = victoryLabel + parts[1].substring(rtlPos);
-		}
-	}
-	else
-	{
-		var ltrNeedle:String = missesLabel + ': ';
-		var ltrPos:Int = parts[1].indexOf(ltrNeedle);
-		if (ltrPos >= 0)
-		{
-			parts[1] = parts[1].substring(0, ltrPos + ltrNeedle.length) + victoryLabel;
-		}
-	}
-	
-	playHUD.scoreTxt.text = parts.join(' | ') + '\n';
-	
-	Lang.arabicTextFix(playHUD.scoreTxt);
-}
+function onGameOver():Void return Function_Stop;
 
 function moveCrew(crew, pos)
 {
@@ -227,8 +201,8 @@ function onEvent(n, v1, v2)
 			}
 		case 'Victory Darkness':
 			if (v1 == 'on') FlxG.sound.play(Paths.sound('stage/playerdisconnect'));
-			playHUD.scoreTxt.visible = v1 != 'on';
-			camGame.visible = v1 == 'on' ? false : true;
+			playHUD.scoreTxt.visible = (!ClientPrefs.hideHud && v1 != 'on');
+			camGame.visible = (v1 != 'on');
 	}
 }
 
@@ -237,8 +211,8 @@ function onCreatePost()
 	game.instakillOnMiss = false;
 	game.healthLoss = 0;
 	game.health = 2;
-	game.camHUD.alpha = 0;
-	camGame.alpha = 0;
+	game.camHUD.alpha = .001;
+	camGame.alpha = .001;
 	
 	moveCrew(0, -1);
 	moveCrew(1, -1);
@@ -262,17 +236,14 @@ function onCreatePost()
 	overlay.blend = BlendMode.ADD;
 	add(overlay);
 	
-	if (hasBfSkin && game.boyfriend.curCharacter == 'yellowplayable')
-	{
-		triggerEventNote('Change Character', 'boyfriend', 'yellow-ghost');
-	}
-	
 	refreshZ();
 	
 	// just incase
 	
 	if (boyfriend.gameoverLoopDeathSound == null) boyfriend.gameoverLoopDeathSound = 'Jorsawsee_Loop';
 	if (boyfriend.gameoverConfirmDeathSound == null) boyfriend.gameoverConfirmDeathSound = 'Jorsawsee_End';
+	
+	overrideScoreText();
 }
 
 function onEndSong()

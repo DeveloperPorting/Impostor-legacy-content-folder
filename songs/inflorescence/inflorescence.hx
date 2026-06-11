@@ -1,3 +1,5 @@
+import funkin.data.ClientPrefs;
+
 public function modchart(step:Int):Void
 {
 	switch (step)
@@ -24,7 +26,10 @@ public function modchart(step:Int):Void
 			camZoomingMult = 0;
 			camZoomingDecay *= .6;
 			defaultCamZoom *= 1.05;
-			camGame.zoom += 0.015;
-			camHUD.zoom += 0.015;
+			if (ClientPrefs.camZooms)
+			{
+				camGame.zoom += 0.015;
+				camHUD.zoom += 0.015;
+			}
 	}
 }

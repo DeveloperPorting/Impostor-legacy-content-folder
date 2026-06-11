@@ -1,6 +1,6 @@
 {
-    "song": {
-        "events": [
+	"song": {
+		"events": [
 			[
 				0,
 				[
@@ -310,13 +310,8 @@
 				49777.7777777778,
 				[
 					[
-						"Camera Follow Pos",
-						"",
-						""
-					],
-					[
 						"Legacy",
-						"powers",
+						"pico",
 						""
 					]
 				]
@@ -376,8 +371,13 @@
 				[
 					[
 						"Legacy",
-						"powers",
+						"nene",
 						""
+					],
+					[
+						"Play Animation",
+						"laughCutscene",
+						"GF"
 					]
 				]
 			],
@@ -386,7 +386,7 @@
 				[
 					[
 						"Legacy",
-						"nene",
+						"powers",
 						""
 					]
 				]
@@ -587,5 +587,5 @@
 				]
 			]
 		]
-    }
+	}
 }

@@ -1,4 +1,3 @@
-public var rimlightExcludedSkins:Array<String> = ['blackp']; // ig we need this now
 var cargoDarkFG:FlxSprite;
 var cargoDarken:Bool = false;
 var cargoAirship:FlxSprite;
@@ -19,7 +18,7 @@ function onCreatePost()
 	add(cargoAirsip);
 	
 	camHUD.visible = false;
-	cargoDarkFG = new FlxSprite(-640, -360).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+	cargoDarkFG = new FlxSprite(-640, -360).makeScaledGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 	cargoDarkFG.scrollFactor.set(0, 0);
 	
 	defeatDKoverlay = new FlxSprite(900, 350).loadGraphic(Paths.image('stages/void/iluminao omaga'));
@@ -55,6 +54,11 @@ function onUpdate(elapsed)
 	{
 		cargoAirsip.alpha = FlxMath.lerp(cargoAirsip.alpha, 0.45, FlxMath.bound(elapsed * 0.1, 0, 1));
 	}
+	/*if (FlxG.keys.justPressed.Q)
+		{
+			setSongTime(183 * 1000);
+			clearNotesBefore(Conductor.songPosition);
+	}*/
 }
 
 function onEvent(eventName, value1, value2)
@@ -95,34 +99,50 @@ function onEvent(eventName, value1, value2)
 					dad.alpha = 1;
 					gf.alpha = 1;
 					// pet.alpha = 1;
-					lightoverlayDK.alpha = 0.51;
-					mainoverlayDK.alpha = 0.6;
+					lightoverlayDK.alpha = 1;
+					mainoverlayDK.alpha = 1;
+				case 'gonnakill':
+					FlxTween.tween(game, {defaultCamZoom: 1}, Conductor.crotchet * .004, {ease: FlxEase.sineInOut});
+					FlxTween.tween(cargoDarkFG, {alpha: 1}, Conductor.crotchet * .004);
+					
+					for (obj in [playHUD.timeBar, playHUD.timeTxt, playHUD.healthBar, playHUD.iconP1, playHUD.iconP2])
+						FlxTween.tween(obj, {alpha: 0}, Conductor.crotchet * .004, {ease: FlxEase.circInOut});
+					
 				case 'readykill':
 					if (!hasBfSkin) triggerEventNote('Change Character', '0', 'bf-defeat-normal');
 					
+					FlxTween.tween(game, {defaultCamZoom: .8}, Conductor.crotchet * .004 * 4, {ease: FlxEase.expoOut});
+					
 					if (yellow != null) yellow.kill();
 					if (ClientPrefs.downScroll) playHUD.scoreTxt.y = FlxG.height * 0.06;
-					defeatDKoverlay.alpha = 1;
+					defeatDKoverlay.alpha = .1;
 					lightoverlayDK.alpha = 0;
-					mainoverlayDK.alpha = 0;
 					cargoDark.alpha = 1;
 					dad.alpha = 0;
-					playHUD.timeBar.alpha = 0;
-					playHUD.timeTxt.alpha = 0;
-					playHUD.healthBar.alpha = 0;
-					playHUD.iconP1.alpha = 0;
-					playHUD.iconP2.alpha = 0;
 					cargoDarkFG.alpha = 1;
 					FlxTween.tween(cargoDarkFG, {alpha: 0}, 2.75);
 					
+					mainoverlayDK.flipY = true;
+					mainoverlayDK.scale.y *= 3;
+					mainoverlayDK.y += 1200;
+					
 					defeatness();
+					
+				case 'ending':
+					FlxTween.tween(game, {defaultCamZoom: .6}, Conductor.crotchet * .004 * 16);
+					FlxTween.tween(defeatDKoverlay, {alpha: 1}, Conductor.crotchet * .004 * 20, {ease: FlxEase.sineInOut});
+					FlxTween.tween(mainoverlayDK.scale, {y: mainoverlayDK.scale.y * 2}, Conductor.crotchet * .004 * 24, {ease: FlxEase.sineInOut});
+				
+				case 'endingcam':
+					camSpecialThing([2220, 1050], [2220, 1050]);
+					
 				case 'kill':
 					camGame.flash(FlxColor.RED, 2.75);
 					gf.kill();
-					//pet.kill();
+					pet.kill();
 					boyfriend.kill();
+					defeatDKoverlay.kill();
 					camHUD.visible = false;
-					defeatDKoverlay.alpha = 0;
 			}
 	}
 }
@@ -131,34 +151,40 @@ function defeatness():Void
 {
 	if (!ClientPrefs.shaders) return;
 	
-	/*if (hasBfSkin && !rimlightExcludedSkins.contains(ClientPrefs.bfSkin))
+	var blackRimlightBase:ExtraDropShadowShader = new funkin.game.shaders.ExtraDropShadowShader();
+	
+	blackRimlightBase.threshold = .1;
+	blackRimlightBase.strength = .85;
+	blackRimlightBase.setColorMatrix([
+		  .3,  .5, -.2, 0, -50,
+		-.25,  .1, .05, 0,  10,
+		  .4, .25,  .6, 0, -92,
+		   0,   0,   0, 1,   0
+	]);
+	blackRimlightBase.addLayer([
+		.5, 0,   1, 0, 192,
+		.1, 1, -.5, 0,  64,
+		 0, 0, .35, 0,  64,
+		 0, 0,   0, 1,   0
+	], 10, 14, .01);
+	blackRimlightBase.addLayer(blackRimlightBase.addLayer([
+		 .9, .7, .4, 0,   4,
+		-.2, .3, .1, 0, -18,
+		 .2, .2, .4, 0, -28,
+		  0,  0,  0, 1,   0
+	], 12, 40, .01, .4).colorMatrix, 96, 24, .01, .4);
+	
+	if (hasBfSkin && boyfriend.getFlag('backlit') != true)
 	{
-		var bfRim:DropShadowShader = new funkin.game.shaders.DropShadowShader();
-		bfRim.setAdjustColor(-60, 25, -9, -9);
-		bfRim.color = 0xFFff2b2b;
-		bfRim.angle = 45;
-		bfRim.distance = 25;
-		bfRim.threshold = 0.07;
+		bfRim = blackRimlightBase;
 		bfRim.attachedSprite = boyfriend;
-		boyfriend.animation.onFrameChange.add(function() {
-			if (bfRim.attachedSprite != null) bfRim.updateFrameInfo(boyfriend.frame);
-		});
 		boyfriend.useRenderTexture = true;
-		boyfriend.shader = bfRim;
 	}
 	
 	if (hasPet)
 	{
-		var petRim:DropShadowShader = new funkin.game.shaders.DropShadowShader();
-		petRim.setAdjustColor(-60, 25, -9, 3);
-		petRim.color = 0xFFff2b2b;
-		petRim.angle = 45;
-		petRim.distance = 25;
-		petRim.threshold = 0.1;
+		petRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(blackRimlightBase);
 		petRim.attachedSprite = pet;
-		pet.animation.onFrameChange.add(function() {
-			if (petRim.attachedSprite != null) petRim.updateFrameInfo(pet.frame);
-		});
-		pet.shader = petRim;
-	}*/
+		pet.useRenderTexture = true;
+	}
 }

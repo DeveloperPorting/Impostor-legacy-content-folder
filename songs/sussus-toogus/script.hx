@@ -1,6 +1,6 @@
 import funkin.objects.stageobjects.AmongWalker;
 
-var walkers:Array<AmongWalker> = [];
+public var walkers:Array<AmongWalker> = [];
 
 function onLoad()
 {
@@ -34,6 +34,11 @@ function onCreatePost()
 	saxguy.scale.set(1.1, 1.1);
 	saxguy.alpha = 0.001;
 	add(saxguy);
+}
+
+function onBeatHit()
+{
+	for (walker in walkers) walker.onBeatHit(curBeat);
 }
 
 function onUpdate(elapsed)

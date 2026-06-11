@@ -1,8 +1,11 @@
+import funkin.objects.stageobjects.AmongWalker;
+
 var ext = 'stages/airship/chef/';
 var chefBluelight:FlxSprite;
-var gray:FlxSprite;
+public var gray:FlxSprite;
 var chefBlacklight:FlxSprite;
 var saster:FlxSprite;
+public var walker:AmongWalker;
 
 function onLoad()
 {
@@ -21,14 +24,6 @@ function onLoad()
 	oven.setGraphicSize(Std.int(oven.width * 0.8));
 	add(oven);
 	
-	switch (pet.curPet)
-	{
-		case 'fishus':
-			pet.loadPet('fishuscooked');
-		case 'minicrewmate':
-			pet.loadPet('fatogus');
-	}
-	
 	gray = new FlxSprite(1000, 525);
 	gray.frames = Paths.getSparrowAtlas(ext + 'Boppers');
 	gray.animation.addByPrefix('bop', 'grey', 24, false);
@@ -42,7 +37,18 @@ function onLoad()
 	saster.animation.play('bop');
 	saster.setGraphicSize(Std.int(saster.width * 1.2));
 	add(saster);
+
+	walker = new AmongWalker([0, 2500], 1080, 0.7, null);
+	walker.x = (FlxG.random.bool(50) ? walker.xRange[0] + 50 : walker.xRange[1] - 50);
+	walker.setCustom('tomato', ext + 'tomatungus');
+	walker.addOffset('idle', 0, 0);
+	walker.addOffset('walk', 0, 60);
 	
+	walker.onAction.add(function() walker.walkSpeed = FlxG.random.float(18, 21));
+	walker.hibernating = true;
+	walker.visible = true;
+	stage.add(walker);
+
 	var frontable:FlxSprite = new FlxSprite(800, 700).loadGraphic(Paths.image(ext + 'Kitchen Counter'));
 	add(frontable);
 	
@@ -67,6 +73,8 @@ function onBeatHit()
 		gray.animation.play('bop');
 		saster.animation.play('bop');
 	}
+	if (walker != null)
+		walker.onBeatHit(curBeat);
 }
 
 function onStartCountdown()
@@ -79,10 +87,14 @@ function onStartCountdown()
 		}
 	}, 5);
 }
-
+function onUpdate(elapsed)
+{
+	if (walker.x > 2500) walker.right = false;
+	if (walker.x < 500) walker.right = true;
+}
 function onCreatePost()
 {
-	snapCamToPos(1200, 800);
+	snapCamToPos(1150, 800);
 	camSpecialThing([1200, 800], [1400, 800]);
 	add(chefBluelight);
 	add(chefBlacklight);

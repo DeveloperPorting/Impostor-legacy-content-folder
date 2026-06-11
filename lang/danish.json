@@ -7,13 +7,14 @@
         "rank": "Rang",
         "accuracy": "Nøjagtighed",
         "storymode": "Hovedhistorien", //changed to say "Main Story" without "Mode" as it sounds better
-        "freeplay": "Fri Spil",
+        "freeplay": "Frit Spil",
         "cosmi": "Kosmikube",
         "awards": "Priser",
         "options": "Indstillinger",
         "innersloth": "Innersloth",
         "motorfrog": "MOTORFROG",
         "resumesong": "Fortsæt Sang",
+        "leavechartingmode": "Forlad Charting Tilstand",
         "restartsong": "Genstart Sang",
         "backtomenu": "Gå Tilbage Til Menuen",
         "awards_counter": "Antal priser: @", //changed to "amount of prizes"
@@ -21,7 +22,7 @@
         "miss_defeat": "@ FEJL", //"mistakes" again rather than "misses"
         "highscore": "HØJESTE SCORE",
         "game_completion": "Færdiggørelse",
-        "game_totalplaytime": "Totalle Spilletid",
+        "game_totalplaytime": "Totale Spilletid",
         "dialogue_bf": "Boyfriend",
         "dialogue_gf": "Girlfriend",
         "dialogue_red": "Rød",
@@ -32,6 +33,15 @@
         "dialogue_grey": "Grå",
         "dialogue_pink": "Pink",
         "video_skip": "Tryk på TILBAGE for at springe over",
+        // @ is the song name
+		"reset_score_question": "Nulstil din højeste score for @?",
+        "skins_disclaimer":"Kostumer of kæledyr virker kun i Frit Spil.",
+        "freeplay_highscore": "Højeste Score", // used in freeplay menu as a replacement for "Score"
+        
+        // the AWARDS SECTION
+		// now properly split off for better organization
+		// HINTS are shown if you don't have the achievement, the BIO is the actual method of unlock
+		// not all awards have hints!
         "AWARDNAME_week1": "Problem Løst",
         "AWARDBIO_week1": "Færdiggør Uge 1.",
         "AWARDNAME_week2": "MIRA Manisk",
@@ -50,7 +60,7 @@
         "AWARDBIO_week8": "Færdiggør Jorsawsee's Jams.",
         "AWARDNAME_week9": "Den Perfekte Plan",
         "AWARDBIO_week9": "Færdiggør Battling the Boyfriend.",
-        "AWARDHINT_week9": "Find det gemte teleporterings apperat!",
+        "AWARDHINT_week9": "Find det gemte teleporteringsapperat!",
         "AWARDNAME_week10": "Nårrhhh...",
         "AWARDBIO_week10": "Færdiggør Rosy Rival.",
         "AWARDNAME_week11": "Ring Racer",
@@ -58,7 +68,7 @@
         "AWARDNAME_finale": "Slutningen.",
         "AWARDBIO_finale": "Færdiggør Hovedhistorien.",
         "AWARDNAME_all_four": "Firedobbelt Duel",
-        "AWARDBIO_all_four": "Færdiggør Monotone Attack som vær karakter mindst en gang.",
+        "AWARDBIO_all_four": "Færdiggør Monotone Attack som hver karakter mindst en gang.",
         "AWARDNAME_oh_hey_there": "Oh Hej Med Dig",
         "AWARDBIO_oh_hey_there": "Find Hvid's gemmested.",
         "AWARDNAME_double_trouble": "Dobbelt Duel", //I previously left this one untranslated, but since it isn't directly supposed to be for the song Double Trouble I decided to translate it anyways
@@ -73,12 +83,12 @@
         "AWARDHINT_impostor_trouble": "Klar sangen der længe har været tabt til fortiden", //translated as "beat the song that's long been lost to the past"
         "AWARDNAME_you_suck": "Du er forfærdelig",
         "AWARDBIO_you_suck": "Få en 0%'s Nøjagtighed i Victory.",
-        "AWARDHINT_you_suck": "Har du prøvet at lade vær med at trykke på nogle noter overhovedet.",
+        "AWARDHINT_you_suck": "Har du prøvet at lade være med at trykke på nogle noter overhovedet.",
         "AWARDNAME_tuesday_morning": "Tirsdag Morgen",
         "AWARDBIO_tuesday_morning": "Spil Tomongus Tuesday på en Tirsdag.",
-        "AWARDHINT_tuesday_morning": "Er det den dag om ugen endnu.",
+        "AWARDHINT_tuesday_morning": "Er det den dag om ugen endnu?",
         "AWARDNAME_red_handed": "Du Rødmer", //changed from "red handed" to something akin to "you're blushing", which might not fit as well, but since "red" is "rød" in danish it's still kind of a pun, which I thought was better than a direct translation
-        "AWARDBIO_red_handed": "Spil som Rød, imod Rød, med et Rød kæledyr.",
+        "AWARDBIO_red_handed": "Spil som Rød, imod Rød, med et rødt kæledyr.",
         "AWARDHINT_red_handed": "Ups! Det er rødt over det hele.",
         "AWARDNAME_five_s_ranks": "Storslået Spiller", //Translated to mean smth like "Amazing Player"
         "AWARDBIO_five_s_ranks": "Få en S rang eller højere i 5 forskellige sange.",
@@ -92,7 +102,7 @@
         "AWARDBIO_no_miss_finale": "Færdiggør Finale uden nogle fejl.",
         "AWARDNAME_im_hungry": "Jeg Er Sulten!",
         "AWARDBIO_im_hungry": "Tag Mini Besætningsmedlemmet med ind i Kokken's køkken.",
-        "AWARDHINT_im_hungry": "Jeg tror at din Mini Besætningsmedlem er sulten...",
+        "AWARDHINT_im_hungry": "Jeg tror at dit Mini Besætningsmedlem er sulten...",
         "AWARDNAME_the_hundred": "100%",
         "AWARDBIO_the_hundred": "Få hver pris, lås op for alle kostumer og kæledyr, og færdiggør hver sang.",
         "shop_equip": "ANVEND",
@@ -123,7 +133,7 @@
         "bfsauce_hint": "Låses op for ved at få en A rang eller højere i Sauces Moogus.",
         "bfsauce_desc": "Maden er lige på trapperne!",
         "bf-stick_name": "Stickmin BF",
-        "bf-stick_hint": "Find det gemte teleporterings apperat!",
+        "bf-stick_hint": "Find det gemte teleporteringsapperat!",
         "bf-stick_desc": "Du har tabt noget linje vægt...",
         "bfsusreal_name": "Mistænkelig BF",
         "bfsusreal_hint": "Låses op for ved at få en A rang eller højere i Tomongus Tuesday.",
@@ -138,8 +148,8 @@
         "dripbf_hint": "Låses op for ved at få en A rang eller højere i Drippypop.",
         "dripbf_desc": "Han er lilla.",
         "elliepet_name": "E. Rose",
-        "elliepet_hint": "Find det gemte teleporterings apperat!",
-        "elliepet_desc": "Henry og Jeg former et ret godt hold!",
+        "elliepet_hint": "Find det gemte teleporteringsapperat!",
+        "elliepet_desc": "Henry og jeg former et ret godt hold!",
         "fall-guy_name": "Fall Guy", //not translated as i feel doing so would lose the original intent
         "fall-guy_hint": "Låses op for ved at få en 100%'s færdiggørelse.",
         "fall-guy_desc": "...Er den okay?",
@@ -159,7 +169,7 @@
         "gfpolus_hint": "Låses op for ved at klare Magmatic Monstrosity.",
         "gfpolus_desc": "Kan du lide det?", //translation loses original joke :((
         "gf-stick_name": "Stickmin GF",
-        "gf-stick_hint": "Find det gemte teleporterings apperat!",
+        "gf-stick_hint": "Find det gemte teleporteringsapperat!",
         "gf-stick_desc": "Seje støvler...",
         "gf-tuesday_name": "Tirsdags GF",
         "gf-tuesday_hint": "Låses op for ved at få en A rang eller højere i Tomongus Tuesday.",
@@ -171,10 +181,10 @@
         "hampton_hint": "Låses op for ved at få en A rang eller højere i Chewmate.",
         "hampton_desc": "3 hamptonner kan give kraft til en Tomongus!",
         "helicopter_name": "Charles' Helikopter",
-        "helicopter_hint": "Find det gemte teleporterings apperat!",
+        "helicopter_hint": "Find det gemte teleporteringsapperat!",
         "helicopter_desc": "Det her er det perfekte kæledyr.",
         "minicrewmate_name": "Mini Besætningsmedlem",
-        "minicrewmate_hint": "Hvorfor adoptere du det ikke?",
+        "minicrewmate_hint": "Hvorfor adopterer du det ikke?",
         "minicrewmate_desc": "Dit helt eget barn.",
         "redp_name": "Rød",
         "redp_hint": "Låses op for ved at klare Polus Problems.",
@@ -202,7 +212,7 @@
         "maroonplayable_desc": "Brænd dig ikke!", // changed to say "don't get burnt"
         "slugmate_name": "Sneglemedlem",
         "slugmate_hint": "Lavet med kærlighed.",
-        "slugmate_desc": "Den er i live. Tror Jeg..?",
+        "slugmate_desc": "Den er i live. Tror jeg..?",
         "slug_name": "Hovedesnegl",
         "slug_hint": "Slimet.",
         "slug_desc": "Lad den ikke komme i nærheden af dit hovede.",
@@ -213,7 +223,7 @@
         "snowmate_hint": "Ikke i live.",
         "snowmate_desc": "Ikke i live?",
         "stickmin_name": "H. Stickmin",
-        "stickmin_hint": "Find det gemte teleporterings apperat!",
+        "stickmin_hint": "Find det gemte teleporteringsapperat!",
         "stickmin_desc": "Den titulære protagonist.",
         "tomong_name": "Mini Tomongus",
         "tomong_hint": "Låses op for ved at klare Rosy Rival.",
@@ -262,10 +272,88 @@
         "attack0": "Allesammen, hold mund!",
         "attack1": "Øh, pande.",
         "torture0": "Hv--hv--hvem?",
-        "torture1": "Hvo-hv--hvor er Jeg?",
+        "torture1": "Hvo-hv--hvor er jeg?",
         "torture2": "Hvorfor begynder vi ikke?",
         "torture3": "Hey, kan jeg hjælpe?",
         "torture4": "(skænderi)",
+        "o20":"HVA'",
+        "o21":"HVA' F-",
+        "o22":"HVA' F-", //duplicate because it is a two word sentence "hvad fuck"
+
+		// cutscene
+		"cutscene_moogus0": "*splat*",
+		
+		"cutscene_polusending0": "DØD",
+		"cutscene_polusending1": "hvor",
+		"cutscene_polusending2": "kan i lide min hat?",
+		"cutscene_polusending3": "hvem",
+		"cutscene_polusending4": "hold din mund orange",
+		"cutscene_polusending5": "dræb dig selv orange",
+		"cutscene_polusending6": "Fuck af mand",
+		"cutscene_polusending7": "Der er ingen der kan fucking lide dig Orange fuck af hold da fucking kæft",
+		"cutscene_polusending8": "hvorfor",
+		"cutscene_polusending9": "i er allesammen fucking forfærdelige",
+		"cutscene_polusending10": "Vi er ligeglade",
+		"cutscene_polusending11": "hvad",
+		"cutscene_polusending12": "akaaaveeeet!",
+		"cutscene_polusending13": "hv",
+		"cutscene_polusending14": "har nogen af jer spillet Friday Night Funkin",
+		"cutscene_polusending15": "nej",
+		"cutscene_polusending16": "i burde at spille det der er et virkelig godt mod som hedder Vs. Impostor jeg har hørt at det får en fjerde opdatering snart!",
+		"cutscene_polusending17": "det mod er fucking forfærdelig brormand hold din mund",
+		"cutscene_polusending18": "nej det er ej",
+		"cutscene_polusending19": "Ærmm der er for meget drama i FNF Fællesskabet",
+		"cutscene_polusending20": "hold mund pink",
+		"cutscene_polusending21": "allesammen jeg tror at det er lyserød",
+		"cutscene_polusending22": "få mig til det dumme idiot",
+		"cutscene_polusending23": "DET ER IKKE MIG",
+		"cutscene_polusending24": "jeg elsker Friday Night Funkin'!",
+		"cutscene_polusending25": "JEG TROR FAKTISK AT DER ER GRØN",
+		"cutscene_polusending26": "Slay",
+		"cutscene_polusending27": "det er ikke mig idiot",
+		"cutscene_polusending28": "Hvem",
+		"cutscene_polusending29": "Det er Rød",
+		"cutscene_polusending30": "hey mand! det er ikke mig! ta' det med ro!",
+		"cutscene_polusending31": "jeg var afk!",
+		"cutscene_polusending32": "det virker ret troværdigt",
+		
+		"cutscene_mando0": "Boyfriend: BIP!",
+		
+		"cutscene_votingtime0": "Hvorfor dræbte du den der person lige foran mig",
+		"cutscene_votingtime1": "ligesom, hva' i alverden",
+		"cutscene_votingtime2": "HOLD DIN KÆFT NARRØV",
+		"cutscene_votingtime3": "*Warchief gisper*",
+		"cutscene_votingtime4": "Åh nej, det kan ikke være godt.",
+		
+		"cutscene_turbulence0": "Vi får Red Mungus til at flyve.",
+		"cutscene_turbulence1": "*Boyfriend skriger*",
+		"cutscene_turbulence2": "Fuck.",
+		"cutscene_turbulence3": "*TAH-DAH!*",
+		
+		"cutscene_henry0": "IMENS",
+		"cutscene_henry1": "I EN JUNGLE BASE",
+		"cutscene_henry2": "LANGT, LANGT VÆK",
+		"cutscene_henryfail0": "Af egen vilje!", //translated as "Of own will"
+		"cutscene_henryfail1": "Så øh... Hvordan går det?",
+		"cutscene_henryending0": "MISSION FÆRDIG",
+		"cutscene_henryending1": "PINDIFIKATOR\nGiv dig selv den krop som du altid har villet have!\n\"Ikke spor pinde-ligt!\" -Gadget Gabe", //did my best at coming up with a stick related pun for gadget gabe here, my best work yet even
+		
+		"cutscene_boilingpoint0": "Jeg ved nu ikke allesammen, der her føltes altsammen som et planlagt setup.",
+		"cutscene_boilingpoint1": "Jeg tror at det er Lilla.",
+		
+		"cutscene_delusion0": "NUTIDEN",
+		"cutscene_delusion1": "FLYVEMASKINEN",
+		
+		"cutscene_finale0": "DU VIL BARE HAVE DIN VILJE, IKKE.",
+		"cutscene_finalegibberish": "&%!$@%$&/@|$!\"&%_-%$-&_&%@!-<o>-!?",
+		"cutscene_finalegibberish2": "!!-_%.?!\"?.-<@>-.!_?$=)(.@_.%&",
+		"cutscene_finale1": "HVIS DE IKKE KAN KLARE DET \"HÅRDE ARBEJDE\" AF AT STOPPE DIG...",
+		"cutscene_finale2": "BLIVER JEG NØDT TIL AT TAGE SITUATIONEN I MINE EGNE HÆNDER",
+		"cutscene_finale3": "IGENNEM",
+		"cutscene_finale4": "EN.",
+		"cutscene_finale5": "SIDSTE.",
+		"cutscene_finale6": "RUNDE.",
+
         "dialogue_moogus0": "Det gjorde virkelig ondt :(",
         "dialogue_moogus1": "Oh det må du undskylde",
         "dialogue_moogus2": "Boyfriend vær forsigtig!!",
@@ -273,13 +361,13 @@
         "dialogue_moogus4": "..mistroisk......",
         "dialogue_moogus5": "Hmm nu hvor du nævner det... Så virker han egentlig ret",
         "dialogue_moogus6": "mistænkelig..",
-        "dialogue_moogus7": "Hey hvad har Jeg gjort :(( Jeg er en besætningsmedlem :( kom nuuuu :((((",
+        "dialogue_moogus7": "Hey hvad har jeg gjort :(( Jeg er et besætningsmedlem :( kom nuuuu :((((",
         "dialogue_moogus8": " Øhmmm.. Den her fyr",
         "dialogue_moogus9": "Du har en pistol!!!! Og også en kniv !! Men kun i din op animation!!!!",
         "dialogue_moogus10": "Wow :( Du behøver ikke at være et fucking røvhul :(", //changed to say asshole instead
         "dialogue_moogus11": "Agh det er ligegyldigt! Lad os nu bare holde en rap konkurrence!", //changed "whatever man" to mean "agh it doesn't matter" as I felt it fit better in this context
         "dialogue_moogus12": "okay !",
-        "dialogue_moogus13": "(Heh.... De ved slet ikke at Jeg er BEDRAGEREN...)",
+        "dialogue_moogus13": "(Heh.... De ved slet ikke at jeg er BEDRAGEREN...)",
         "dialogue_moogus14": "Du taler højt lige nu",
         "dialogue_sabotage0": "Lol!!! Din idiot!!!!!",
         "dialogue_sabotage1": "I faldte for det!! Jeg var faktisk bedrageren hele tiden!!!! ", //made red refer to them both, as I was not sure if the "you" was referring to either bf, gf or them both
@@ -294,7 +382,7 @@
         "dialogue_sabotage10": "Snøft..... Jeg kommer til at hævne dig, skat.....",
         "dialogue_sabotage11": "Er du færdig?",
         "dialogue_sabotage12": "Ja",
-        "dialogue_meltdown0": "oooOOoOoh Jeg er et spøgelseeeee",
+        "dialogue_meltdown0": "oooOOoOoh jeg er et spøgelseeeee",
         "dialogue_meltdown1": "Også mig ooOOOooh oOohoh",
         "dialogue_meltdown2": "HVAD FANDEN, I ER SKRÆMMENDE ",
         "dialogue_meltdown3": "Ja... >:)",
@@ -309,28 +397,28 @@
         "dialogue_toogus1": "Det gjorde vi bogstaveligtalt ikke",
         "dialogue_toogus2": "Halløjsa andre besætningsmedlemmer!",
         "dialogue_toogus3": "... Hvem er du?",
-        "dialogue_toogus4": "Jeg er bare en uskyldig lille besætningsmedlem der prøver at få hans små opgaver gennemført!",
-        "dialogue_toogus5": "Hmmmm Jeg stoler ikke på den her fyr, Bf...",
+        "dialogue_toogus4": "Jeg er bare et uskyldig lille besætningsmedlem der prøver at få hans små opgaver gennemført!",
+        "dialogue_toogus5": "Hmmmm jeg stoler ikke på den her fyr, Bf...",
         "dialogue_toogus6": "Aww kom nu allesammen! Heyy kom nuuu, kom nuuuu heyy vær nu sød",
         "dialogue_toogus7": "Vær nu sød.",
-        "dialogue_toogus8": "Kan i ikke høre hvordan det er at i lyder? I er gået fuldstændig fra FORSTANDEN.",
+        "dialogue_toogus8": "Kan I ikke høre hvordan det er at I lyder? I er gået fuldstændig fra FORSTANDEN.",
         "dialogue_toogus9": "Helt klart, mand",
         "dialogue_toogus10": "Fedt, lad os synge nu, kammerat :)",
         "dialogue_lights0": "WOW okay FINT... Jeg er bedrageren.",
         "dialogue_lights1": "Det vidste vi godt",
         "dialogue_lights2": "I elsker bare at spolere mine planer hm..",
         "dialogue_lights3": "Ja lol, fucking taber?",
-        "dialogue_lights4": "Okay men i kan ikke komme af med mig hvis i ikke kalder til et møde",
-        "dialogue_lights5": "Og det eneste i idioter vil lave er at synge jeres små bip bip bup sange, i stedet for noget der rent faktisk er brugbart",
+        "dialogue_lights4": "Okay men I kan ikke komme af med mig hvis I ikke kalder til et møde",
+        "dialogue_lights5": "Og det eneste I idioter vil lave er at synge jeres små bip bip bup sange, i stedet for noget der rent faktisk er brugbart",
         "dialogue_lights6": "Hvilket gør det ret nemt for mig",
-        "dialogue_lights7": "Jeg kan synge bedere end dig",
+        "dialogue_lights7": "Jeg kan synge bedre end dig",
         "dialogue_lights8": "NEJ DU KAN EJ, FUCKING NARRØV", //"bitch" has again been replaced
         "dialogue_mando0": "Omg hej venner!!",
         "dialogue_mando1": "Øh hej..?",
         "dialogue_mando2": "Hej??",
         "dialogue_mando3": "Jeg har det bare så sjovt når jeg spiller Among Us!",
         "dialogue_mando4": "Øhhh.. Okay?",
-        "dialogue_mando5": "Hey hvorfor opfører i jer sådan der :(",
+        "dialogue_mando5": "Hey hvorfor opfører I jer sådan der :(",
         "dialogue_mando6": "Øhh fordi at hver person vi har mødt indtil videre har været en bedrager og dræbt os....",
         "dialogue_mando7": "oh. ",
         "dialogue_mando8": "Det er racistisk føler jeg lidt ",
@@ -355,7 +443,7 @@
         "dialogue_white1": "Det var virkelig ondt af dig",
         "dialogue_white2": "Jeg kunne skide på om du syntes at det var ondt",
         "dialogue_white3": "Jamen i guder, hvorfor kan vi ikke bare opføre os ordenligt over for hinanden for en gangs skyld",
-        "dialogue_white4": "Ja Jeg er enig, vil du være venner, Hvid?",
+        "dialogue_white4": "Ja jeg er enig, vil du være venner, Hvid?",
         "dialogue_white5": "Vent virkelig?",
         "dialogue_white6": "Nej fuck dig lol",
         "dialogue_white7": "Wow okay så.",
@@ -365,7 +453,7 @@
         "dialogue_ash3": "Vær sød ved min kæreste tak.",
         "dialogue_ash4": "Vær sød min RØV!!!!", //"BALLS" has been replaced with "ASS" as that is a more common word to use in contexts like this
         "dialogue_ash5": "Wow du er allerede virkelig irriterende",
-        "dialogue_ash6": "Vil i høre noget VARMT?!?!?!",
+        "dialogue_ash6": "Vil I høre noget VARMT?!?!?!",
         "dialogue_ash7": "Ville det få dig til at lade os være i fred",
         "dialogue_ash8": "nej",
         "dialogue_magma0": "Jeg havde ret du ER en narrøv", //"bitch" has again been replaced
@@ -382,7 +470,7 @@
         "dialogue_heartbeat3": "OMGG!!!! Heeeeej!! Vinker til dig",
         "dialogue_heartbeat4": "Oh øh, han talte ikke til dig",
         "dialogue_heartbeat5": "Vent.. Hvem er du, jeg har ikke set dig før",
-        "dialogue_heartbeat6": "heeej vil i være mine venner, vær søøødddd vær nu søøøddee",
+        "dialogue_heartbeat6": "heeej vil I være mine venner, vær søøødddd vær nu søøøddee",
         "dialogue_heartbeat7": "Øhmmm",
         "dialogue_heartbeat8": ":)",
         "dialogue_heartbeat9": "Øhmm øhh",
@@ -391,14 +479,14 @@
         "dialogue_heartbeat12": "HURAAAAHHHH!!!",
         "dialogue_pinkwave0": "Igen igen igen igen! Jeg kunne virkelig godt lide den der sang, kan vi gøre det igen!",
         "dialogue_pinkwave1": "Det er meningen at vi skal gå videre til den næste sang, det er sådan det virker, girl", //"girl" isn't translated as it typically isn't translated when used like this
-        "dialogue_pinkwave2": "Awww! Måske kommer den til at være lide så god :)",
+        "dialogue_pinkwave2": "Awww! Måske kommer den til at være lige så god :)",
         "dialogue_pinkwave3": "Allesammen, jeg har lige indset.. Vi har været her i omkring 10 minutter, og der er ikke en eneste der er bleven dræbt",
         "dialogue_pinkwave4": "Du har ret.. Hun virker heller ikke som en bedrager",
         "dialogue_pinkwave5": "Måske er der ikke en bedrager iblandt os alligevel",
         "dialogue_pinkwave6": "Det.... Det er vel ikke! Haha",
         "dialogue_pinkwave7": "...",
         "doubletrouble0": "Du kan nu spille Double Trouble.",
-        "doubletrouble1": "(I Fri Spil menuen! Under bonus sange!)",
+        "doubletrouble1": "(I Frit Spil menuen! Under bonus sange!)",
         "victory0":"Kan det ikke være ligegyldigt? Du har allerede vundet!",
 
         // Halløjsovs
@@ -415,6 +503,8 @@
         "opt_controllermode_desc": "Tillader støtte til controllere.",
         "opt_downscroll": "Nedscroll",
         "opt_downscroll_desc": "Tænder for nedscroll.\n (Noterne kommer fra toppen i stedet for bunden.)",
+        "opt_middlescroll": "Middelscroll",
+        "opt_middlescroll_desc": "Tænder for middelscroll.\n (Centrer spillerens noter og gemmer for modstanderens noter.)",
         "opt_ghosttapping": "Lempelige Tryk", //translated to mean something like "lenient presses/taps"
         "opt_ghosttapping_desc": "Tænder for Lempelige Tryk.\n(At trykke på tasterne når der ikke er nogle noter tilstede tælder ikke som en fejl.)",
         "opt_sustainsasonenote": "Lange Noter som En Note", //"sustain notes" are referred to as "long notes"
@@ -423,18 +513,22 @@
         "opt_disableresetbutton_desc": "Gør sådan at man ikke kan genstarte midt i en sang.",
         "opt_laneunderlay": "Bane Underlæg",
         "opt_laneunderlay_desc": "Putter en gennemsigtig baggrund bag noterne.",
+		"opt_laneUnderlayStyle": "Bane Underlæg Stil",
+		"opt_laneUnderlayStyle_desc": "Ændrer på udseendet eller lagringen af bane underlægget.",
+		"opt_opponentLaneUnderlay": "Modstander Bane Underlæg",
+		"opt_opponentLaneUnderlay_desc": "Viser bane underlægget bag ved modstanderens.",
         "opt_hitsoundvolume": "Note Lyd", //translated as "note sound"
         "opt_hitsoundvolume_desc": "Putter en lyd på vær note som bliver ramt.",
         "opt_gpucaching": "GPU Cachering",
         "opt_gpucaching_desc": "Tænder for GPU cachering.",
         "opt_lowquality": "Lav Kvalitet",
-        "opt_lowquality_desc": "Fjerner nogle baggrunds detaljer,\nsørger for hurtigere indlæsnings tider og bedere ydeevne.",
+        "opt_lowquality_desc": "Fjerner nogle baggrundsdetaljer,\nsørger for hurtigere indlæsningstider og bedre ydeevne.",
         "opt_shaders": "Shaders", //there is no danish word for "shaders", meaning in this case it has to be borrowed from english
         "opt_shaders_desc": "Tænder for shaders i mod'et.",
         "opt_antialiasing": "Anti-Aliasing", //same case as shaders
         "opt_antialiasing_desc": "Tænder for anti-aliasing.",
         "opt_debugdisplaytype": "Udvikler Brugeroverflade Type", //translated as "Developer Interface Type"
-        "opt_debugdisplaytype_desc": "Håndtere den information der bliver vist oppe i venstre hjørne af skærmen.\nSimple viser Billedhastighed & Hukommelse, og advanced viser udvikler information sammen med resten.\nDisabled slukker for udvikler overfladen helt.",
+        "opt_debugdisplaytype_desc": "Håndtere den information der bliver vist oppe i venstre hjørne af skærmen.\nSimpel viser Billedhastighed & Hukommelse, og advanceret viser udvikler information sammen med resten.\nSlået fra slukker for udvikler overfladen helt.",
         "opt_framerate": "Billedhastighed",
         "opt_framerate_desc": "Ændre på hvad den højeste billedhastighed kan være.",
         "opt_hidehud": "Skjul Brugeroverflade", //Translated as "Hide User Interface"
@@ -453,11 +547,11 @@
         "opt_scoretextzoom_desc": "Gør sådan at Score teksten zoomer ind når du rammer en note.",
         "opt_afterimages": "Efter Billeder",
         "opt_afterimages_desc": "Karaktere har et halv-gennemsigtig efter billede når dobbel noter bliver ramt. Markér ikke for at slå det fra.",
-        "opt_splashscreen": "NMV Start Skærm",
-        "opt_splashscreen_desc": "Hvis den ikke er slået til, bliver start skærmen sprunget over.", //"splash screen gets skipped" without mentioning after engine boot up.
+        "opt_splashscreen": "NMV Startskærm",
+        "opt_splashscreen_desc": "Hvis den ikke er slået til, bliver startskærmen sprunget over.", //"splash screen gets skipped" without mentioning after engine boot up.
         "opt_devmode": "Udvikler Tilstand",
         "opt_devmode_desc": "Hvis den er slået til, bliver udvikler tilstande og knapper tilgængelige.",
-        "opt_streamedsongfiles": "Streamede Sang filer",
+        "opt_streamedsongfiles": "Streamede Sangfiler",
         "opt_streamedsongfiles_desc": "De sange som kan spilles bliver streamet vha. bytes i stedet for at alle blive indlæst på en gang. Dette gør indlæsnings tider meget hurtigere, men det er dog EKSTREMT EKSPERIMENTAL og kan derfor resultere i problemer.",
         "opt_autopause": "Automatisk Pause på Spillet",
         "opt_autopause_desc": "Spillet fryser automatisk når der ikke længere er fokus på vinduet. Hvis det er slået fra fortsætter spillet som normalt uanset fokus.",
@@ -470,9 +564,46 @@
         "opt_language": "Sprog",
         "opt_language_desc": "Vælg dit sprog! P.s. Alle sprog udover English (United States) er oversat af fællesskabet!",
         "opt_category_credits": "Sluttekster", //means end texts
+		"opt_subtitles": "Undertekster",
+		"opt_subtitles_desc": "Der bliver vidst undertekster på skærmen imens der spilles videoer eller sang animationer.",
+		"opt_unlockedFramerate": "Billedhastighed Uden Grænser",
+		"opt_unlockedFramerate_desc": "Gør sådan at billedhastigheden kan være så højt som muligt. Bruger mere CPU kraft men kan hjælpe med input forsinkelse.",
+		"opt_vsyncMode": "VSync",
+		"opt_vsyncMode_desc": "Synkronisere spillets billedhastighed med din skærm's opdateringshastighed for at forhindre screen tearing.",
+		"opt_backgroundStrumlines": "Baggrunds Noter", //translated as "background notes"
+		"opt_backgroundStrumlines_desc": "Hvis det er slået til, vil ekstra karakteres noter blive vist på skærmen når det er muligt.",
+		"opt_discord": "Discord Rich Presence",
+		"opt_discord_desc": "Hvis det er slået til, vil spillet blive vist som din aktivitets status på Discord når du spiller.",
+
+		// options choices
+		
+		"choice_generic_yes": "Ja",
+		"choice_generic_no": "Nej",
+		"choice_generic_disabled": "Slået til",
+		"choice_generic_enabled": "Slået fra",
+		
+		"choice_debug_simple": "Simpel",
+		"choice_debug_advanced": "Advanceret",
+		
+		"choice_vsync_adaptive": "Adaptiv",
+		
+		"choice_timebar_songname": "Sange Navne",
+		"choice_timebar_timeleft": "Tid Tilbage",
+		"choice_timebar_timeelapsed": "Tid Forløbet",
+		
+		"choice_scoredisplay_rank": "Rang",
+		"choice_scoredisplay_accuracy": "Nøjagtighed",
+		"choice_scoredisplay_both": "Begge", // both rank and accuracy
+
+		"choice_laneUnderlayStyle_a": "Over Score Teksten",
+		"choice_laneUnderlayStyle_b": "Under Score Teksten",
+		"choice_laneUnderlayStyle_c": "Under Livsbaren",
+		"choice_laneUnderlayStyle_d": "Fade",
+
         // some new misc menu stuff
         "rand": "Tilfældig",
-        "reset":"Standarder",
+        "reset":"Nulstil",
+        "reset_score":"Nulstil Højeste Score",
         "select":"Vælg",
         "back":"Tilbage",
         "conf":"Bekræft",
@@ -482,10 +613,10 @@
         // he walks into a dark room...
         "weirdroute0": "Skeld'ets overvågnings lokale, hm?.",
         "weirdroute1": "Besætningen har meldt at der er noget \"mystisk\" ved det her rum... Noget med at computeren tænder og slukker af sig selv...",
-        "weirdroute2": "Nå men, det ikke fordi at der er nogen andre der har tænkt sig at gøre det, ikke sandt? Lad os få set hvad der foregår.",
-        "weirdroute3": "Fandens, Jeg kan godt forstå hvorfor de ikke har lyst til at gå herind. Belysningen er ikke specielt velkommende...",
-        "weirdroute4": "Tid til at gøre hvad Jeg gør bedst.",
-        "weirdroute5": "Rød. Jeg har altid vidst at der var noget mystisk ved den fyr, men Jeg kunne ikke stoppe ham i tide... Ingen nogen grund til at tænke over det nu dog, han brænder alligevel i lava.",
+        "weirdroute2": "Nå men, det ik' fordi at der er nogen andre der har tænkt sig at gøre det, ikke sandt? Lad os få set hvad der foregår.",
+        "weirdroute3": "Fandens, jeg kan godt forstå hvorfor De ikke har lyst til at gå herind. Belysningen er ikke specielt velkommende...",
+        "weirdroute4": "Tid til at gøre hvad jeg gør bedst.",
+        "weirdroute5": "Rød. Jeg har altid vidst at der var noget mystisk ved den fyr, men jeg kunne ikke stoppe ham i tide... Ingen nogen grund til at tænke over det nu dog, han brænder alligevel i lava.",
         "weirdroute6": "Kaptajnen...",
         "weirdroute7": "INDSÆT KODE"
     }

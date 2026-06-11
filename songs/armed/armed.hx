@@ -13,7 +13,7 @@ function onLoad()
 	{
 		songStartCallback = armedIntro;
 		
-		armedDark = new FlxSprite(-300, -300).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		armedDark = new FlxSprite(-300, -300).makeScaledGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		armedDark.visible = false;
 		armedDark.zIndex = 0;
 		stage.add(armedDark);
@@ -45,7 +45,6 @@ function onLoad()
 	startCharacterPos(mom);
 	stage.add(mom);
 	mom.zIndex = 3;
-	we_have_mom_boy = true;
 	
 	dadGroup.zIndex = 2;
 }

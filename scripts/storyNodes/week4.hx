@@ -50,17 +50,15 @@ function onUpdate(elapsed:Float):Void {
 }
 
 function onSelect():Void {
-	if (finale) {
-		weekTitle.color = FlxColor.RED;
-		weekPlaylist.visible = false;
-	}
+	if (finale) weekTitle.color = FlxColor.RED;
+	
+	weekPlaylist.visible = false;
 }
 
 function onDeselect():Void {
-	if (finale) {
-		weekTitle.color = FlxColor.WHITE;
-		weekPlaylist.visible = true;
-	}
+	if (finale) weekTitle.color = FlxColor.WHITE;
+	
+	weekPlaylist.visible = true;
 }
 
 function onAccept():Void {

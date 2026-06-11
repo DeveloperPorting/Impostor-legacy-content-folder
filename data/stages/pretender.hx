@@ -1,11 +1,12 @@
 var ext = 'stages/mira/greenhouse/pretender/';
-var gfDeadPretender:FlxSprite;
 var cloud1:FlxSprite;
 var cloud2:FlxSprite;
 var cloud3:FlxSprite;
 var cloud4:FlxSprite;
 var cloudbig:FlxSprite;
 var blueMira:FlxSprite;
+var super2:FlxSprite;
+var super2Tween:FlxTween;
 
 function onLoad()
 {
@@ -13,40 +14,45 @@ function onLoad()
 	sky.antialiasing = ClientPrefs.globalAntialiasing;
 	add(sky);
 	
-	var cloudfar:FlxSprite = new FlxSprite(-1300, -100).loadGraphic(Paths.image(ext + 'cloud fathest'));
+	var sun:FlxSprite = new FlxSprite(0, -140).loadGraphic(Paths.image(ext + 'the sun'));
+	sun.scrollFactor.set(0.8, 0.8);
+	sun.blend = BlendMode.ADD;
+	add(sun);
+	
+	var cloudfar:FlxSprite = new FlxSprite(-1300, -300).loadGraphic(Paths.image(ext + 'cloud fathest'));
 	cloudfar.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloudfar);
 	
-	var cloudfront:FlxSprite = new FlxSprite(-1300, 0).loadGraphic(Paths.image(ext + 'cloud front'));
+	var cloudfront:FlxSprite = new FlxSprite(-1300, -100).loadGraphic(Paths.image(ext + 'cloud front'));
 	cloudfront.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloudfront);
 	
 	cloud1 = new FlxBackdrop(Paths.image(ext + 'cloud 1'));
-	cloud1.setPosition(0, -1000);
+	cloud1.setPosition(0, -1200);
 	cloud1.updateHitbox();
 	cloud1.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloud1);
 	
 	cloud2 = new FlxBackdrop(Paths.image(ext + 'cloud 2'));
-	cloud2.setPosition(0, -1200);
+	cloud2.setPosition(0, -1300);
 	cloud2.updateHitbox();
 	cloud2.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloud2);
 	
 	cloud3 = new FlxBackdrop(Paths.image(ext + 'cloud 3'));
-	cloud3.setPosition(0, -1400);
+	cloud3.setPosition(0, -1500);
 	cloud3.updateHitbox();
 	cloud3.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloud3);
 	
 	cloud4 = new FlxBackdrop(Paths.image(ext + 'cloud 4'));
-	cloud4.setPosition(0, -1600);
+	cloud4.setPosition(0, -1800);
 	cloud4.updateHitbox();
 	cloud4.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloud4);
 	
 	cloudbig = new FlxBackdrop(Paths.image(ext + 'bigcloud'));
-	cloudbig.setPosition(0, -1200);
+	cloudbig.setPosition(0, -1300);
 	cloudbig.updateHitbox();
 	cloudbig.antialiasing = ClientPrefs.globalAntialiasing;
 	add(cloudbig);
@@ -70,14 +76,6 @@ function onLoad()
 	var deadmungus:FlxSprite = new FlxSprite(950, 250).loadGraphic(Paths.image(ext + 'tomatodead'));
 	deadmungus.antialiasing = ClientPrefs.globalAntialiasing;
 	add(deadmungus);
-	
-	gfDeadPretender = new FlxSprite(-1, 188);
-	gfDeadPretender.frames = Paths.getSparrowAtlas(ext + 'gf_dead_p');
-	gfDeadPretender.animation.addByPrefix('bop', 'GF Dancing Beat', 24, false);
-	gfDeadPretender.animation.play('bop');
-	// gfDeadPretender.setGraphicSize(Std.int(gfDeadPretender.width * 1.1)); WHY???????????????
-	gfDeadPretender.antialiasing = ClientPrefs.globalAntialiasing;
-	add(gfDeadPretender);
 	
 	var ripbozo:FlxSprite = new FlxSprite(900, 500).loadGraphic(Paths.image(ext + 'ripbozo'));
 	ripbozo.scale.set(0.6, 0.6); // accurate to his size
@@ -109,56 +107,125 @@ function onUpdate(elapsed)
 
 function onBeatHit()
 {
-	if (curBeat % 4 == 0) bluemira.animation.play('bop');
-	if (curBeat % 1 == 0) gfDeadPretender.animation.play('bop');
+	if (curBeat % 4 == 0)
+	{
+		bluemira.animation.play('bop');
+		
+		if (super2Tween != null) super2Tween.cancel();
+		super2Tween = FlxTween.tween(super2, {alpha: 0.62}, 0.4, {ease: FlxEase.linear});
+	}
+	else if (curBeat % 4 == 2)
+	{
+		if (super2Tween != null) super2Tween.cancel();
+		super2Tween = FlxTween.tween(super2, {alpha: 0.68}, 0.4, {ease: FlxEase.linear});
+	}
 }
 
 function onStartCountdown()
 {
 	var fakeStartTimer = new FlxTimer().start((Conductor.crotchet / 1000) / playbackRate, function(tmr:FlxTimer) {
 		if (tmr.loopsLeft % 2 == 0) bluemira.animation.play('bop');
-		if (tmr.loopsLeft % 1 == 0) gfDeadPretender.animation.play('bop');
 	}, 5);
 }
 
 function onCreatePost()
 {
+	if (ClientPrefs.bfSkin == 'pinkplayable')
+	{
+		triggerEventNote('Change Character', 'dad', 'minigreyopscary');
+		triggerEventNote('Change Character', 'boyfriend', 'pinkplayable');
+		game.dad.x = -300;
+		game.dad.y = 350;
+	}
+	if (ClientPrefs.gfSkin == 'blackspeaker')
+	{
+		triggerEventNote('Change Character', 'gf', 'blackspeaker');
+		gf.flipX = true;
+	}
+	if (ClientPrefs.shaders)
+	{
+		var rimlightBase:ExtraDropShadowShader = new funkin.game.shaders.ExtraDropShadowShader();
+		
+		rimlightBase.setColorMatrix([
+			 0.3,  0.2,    0, 0,  9,
+			-0.5, 0.77,  0.2, 0, 13,
+			   0, -0.1, 0.69, 0, 20,
+			   0,    0,    0, 1,  0
+		]);
+		rimlightBase.threshold = .02;
+		rimlightBase.strength = .7;
+		rimlightBase.addLayer(rimlightBase.addLayer([
+			1.5,  0,  0, 0, -8,
+			  0, .8, .1, 0, 59,
+			 .1,  0, .8, 0, 57,
+			  0,  0,  0, 1,  0
+		], 20, 25, .01).colorMatrix, 90, 15, .01);
+		
+		if (gf.getFlag('backlit') != true)
+		{
+			gfRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(rimlightBase);
+			gfRim.layers[0].distance = gfRim.layers[1].distance = 20;
+			gfRim.layers[0].angle = 60;
+			gfRim.layers[1].angle = 120;
+			gfRim.attachedSprite = gf;
+			gf.useRenderTexture = true;
+		}
+		
+		if (ClientPrefs.bfSkin == 'pinkplayable')
+		{
+			bfRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(rimlightBase);
+			bfRim.layers[0].angle = 120;
+			bfRim.layers[1].angle = 120;
+			bfRim.attachedSprite = boyfriend;
+			boyfriend.useRenderTexture = true;
+		}
+		if (dad.curCharacter == 'minigreyop')
+		{
+			dadRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(rimlightBase);
+			dadRim.layers[0].angle = 120;
+			dadRim.layers[1].angle = 120;
+			dadRim.attachedSprite = dad;
+			dad.useRenderTexture = true;
+		}
+	}
 	var pot = new FlxSprite(-1550, 650).loadGraphic(Paths.image(ext + 'front pot'));
 	pot.scrollFactor.set(1.2, 1);
 	pot.antialiasing = ClientPrefs.globalAntialiasing;
 	
-	var vines = new FlxSprite(-1450, -550).loadGraphic(Paths.image(ext + 'green'));
+	var vines = new FlxSprite(-1450, -700).loadGraphic(Paths.image(ext + 'green'));
 	vines.scrollFactor.set(1.2, 1);
 	vines.antialiasing = ClientPrefs.globalAntialiasing;
 	
+	var super1:FlxSprite = new FlxSprite(-1270, -700).loadGraphic(Paths.image(ext + 'overlay1'));
+	super1.antialiasing = ClientPrefs.globalAntialiasing;
+	super1.blend = BlendMode.ADD;
+	super1.alpha = 0.6;
+	
+	super2 = new FlxSprite(-1270, -700).loadGraphic(Paths.image(ext + 'overlay2'));
+	super2.antialiasing = ClientPrefs.globalAntialiasing;
+	super2.blend = BlendMode.SUBTRACT;
+	super2.alpha = 0.8;
+	
 	var pretenderLighting:FlxSprite = new FlxSprite(-1670, -700).loadGraphic(Paths.image(ext + 'lightingpretender'));
+	pretenderLighting.alpha = 0.35;
 	pretenderLighting.antialiasing = ClientPrefs.globalAntialiasing;
 	
 	add(bluemira);
 	add(pot);
 	add(vines);
+	add(super2);
+	add(super1);
 	add(pretenderLighting);
 	
 	// I think we should just make it so the song in the json doesn't allow skins
 	// but if it detects the skin in clientprefs is pink playable then it changes to her
-	
-	if (hasBfSkin && game.boyfriend.curCharacter != 'pinkplayable')
-	{
-		triggerEventNote('Change Character', 'boyfriend', 'pretender');
-	}
-	else if (hasBfSkin && game.boyfriend.curCharacter == 'pinkplayable')
-	{
-		triggerEventNote('Change Character', 'dad', 'minigreyop');
-		game.dad.x = -300;
-		game.dad.y = 350;
-	}
 	snapCamToPos(450, 300);
 	camSpecialThing([160, 200], [380, 200], 0.5);
 }
 
 function onSongStart()
 {
-	if (hasBfSkin && game.boyfriend.curCharacter == 'pinkplayable')
+	if (ClientPrefs.bfSkin == 'pinkplayable')
 	{
 		game.unlockAchievementPopup('lets_be_friends');
 	}

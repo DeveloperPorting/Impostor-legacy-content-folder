@@ -1,9 +1,15 @@
-function onUpdate(elapsed:Float):Void
+function onCreatePost()
 {
-	if (FlxG.keys.justPressed.SPACE && boyfriend.curCharacter == 'minigrey' && boyfriend.getAnimName() == 'idle')
+	if (curSong == 'Pinkwave' || curSong == 'Heartbeat')
 	{
-		boyfriend.playAnim('hey');
-		boyfriend.specialAnim = true;
-		boyfriend.holding = true;
+		greymira.alpha = 0.001;
+	}
+	if (curSong == 'Sauces Moogus')
+	{
+		gray.alpha = 0.001;
+	}
+	if (curSong == 'Delusion' || curSong == 'Blackout' || curSong == 'Neurotic')
+	{
+		triggerEventNote('Change Character', '0', 'minigreyscary');
 	}
 }

@@ -1,6 +1,7 @@
-import funkin.game.shaders.DropShadowShader;
 import funkin.states.substates.GameOverSubstate;
 import funkin.states.substates.PauseSubState;
+
+using StringTools;
 
 var lightoverlay:FlxSprite;
 var bodies2:FlxSprite;
@@ -13,19 +14,14 @@ var edgeglow1:FlxSprite;
 var edgeglow2:FlxSprite;
 var glowTween1:FlxTween;
 var glowTween2:FlxTween;
+var defeatBopTween:FlxTween;
+var defeatScaleTween:Dynamic = null;
 var ext:String = 'stages/void/';
-var bfSwapChar:String = '';
+var defeatRetro:String = '';
 public var redscreen:FlxSprite;
 
-public var nonDeathSkins:Array<String> = ['redp', 'greenp', 'yellowplayable', 'whitep', 'blackp', 'maroonplayable', 'minigrey', 'pinkplayable',
-	'fall-guy', 'amongbf', 'dripbf', 'upboy', 'bf-ghost', 'bf-stick'];
-	
-public var rimlightExcludedSkins:Array<String> = ['blackp']; // ig we need this now
 var bfRim:DropShadowShader;
 var petRim:DropShadowShader;
-
-// BF AIRSHIP HAS HIS OWN GAMEOVER APPARENTLY #FUCK
-// it dont even matter lowkey
 
 var isRetro:Bool = false;
 
@@ -33,13 +29,12 @@ function onLoad()
 {
 	healthLoss = 0;
 	
-	defeatthing = new FlxSprite(-400, -150);
-	defeatthing.frames = Paths.getSparrowAtlas(ext + 'defeat');
-	defeatthing.animation.addByPrefix('bop', 'defeat', 24, false);
-	defeatthing.animation.play('bop');
-	defeatthing.setGraphicSize(Std.int(defeatthing.width * 1.3));
+	defeatthing = new FlxSprite(225, 380);
+	defeatthing.loadGraphic(Paths.image(ext + 'defeatpulse'));
+	defeatthing.setGraphicSize(Std.int(defeatthing.width * 4));
 	defeatthing.antialiasing = ClientPrefs.globalAntialiasing;
 	defeatthing.scrollFactor.set(0.8, 0.8);
+	defeatthing.alpha = .4;
 	add(defeatthing);
 	
 	old_defeat = new FlxSprite(250, 125).loadGraphic(Paths.image(ext + 'defeatfnf'));
@@ -94,7 +89,7 @@ function onLoad()
 	subtract.alpha = 0.001;
 	add(subtract);
 	
-	redscreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFFA90000);
+	redscreen = new FlxSprite().makeScaledGraphic(FlxG.width, FlxG.height, 0xFFA90000);
 	redscreen.scrollFactor.set();
 	redscreen.alpha = 0.001;
 	redscreen.cameras = [camHUD];
@@ -103,8 +98,8 @@ function onLoad()
 
 function turnShader(?should = false)
 {
-	boyfriend.shader = (should && hasBfSkin && !rimlightExcludedSkins.contains(ClientPrefs.bfSkin) ? bfRim : null);
-	//pet.shader = (should ? petRim : null);
+	boyfriend.shader = (should && hasBfSkin && boyfriend.getFlag('backlit') != true ? bfRim : null);
+	pet.shader = (should ? petRim : null);
 }
 
 function onCreatePost()
@@ -120,18 +115,13 @@ function onCreatePost()
 	iconP2.visible = false;
 	// wait. I'm white!
 	
-	switch (boyfriend.curCharacter)
+	if (boyfriend.hasFlag('defeatRetro'))
 	{
-		case 'bf-defeat-normal':
-			addCharacterToList('bf-defeat-scared', 0);
-			bfSwapChar = 'bf';
-		case 'bf-ghost':
-			bfSwapChar = 'bf-ghost-retro';
+		defeatRetro = boyfriend.getFlag('defeatRetro');
+		addCharacterToList(defeatRetro, 0);
 	}
-	if (bfSwapChar != '') addCharacterToList(bfSwapChar, 0);
 	addCharacterToList('blackold', 1);
 	
-	comboX = 440;
 	snapCamToPos(750, 500);
 	dadGroup.zIndex = 1;
 	boyfriendGroup.zIndex = 0;
@@ -159,34 +149,44 @@ function onCreatePost()
 	
 	if (ClientPrefs.shaders)
 	{
-		/*if (hasBfSkin && !rimlightExcludedSkins.contains(ClientPrefs.bfSkin))
+		var blackRimlightBase:ExtraDropShadowShader = new funkin.game.shaders.ExtraDropShadowShader();
+		
+		blackRimlightBase.threshold = .1;
+		blackRimlightBase.strength = .85;
+		blackRimlightBase.setColorMatrix([
+			.3, .5, -.2, 0, -50,
+			-.25, .1, .05, 0, 10,
+			.4, .25, .6, 0, -92,
+			0, 0, 0, 1, 0
+		]);
+		blackRimlightBase.addLayer([
+			.5, 0, 1, 0, 192,
+			.1, 1, -.5, 0, 64,
+			0, 0, .35, 0, 64,
+			0, 0, 0, 1, 0
+		], 10, 14, .01);
+		blackRimlightBase.addLayer(
+			blackRimlightBase.addLayer([
+				.9, .7, .4, 0, 4,
+				-.2, .3, .1, 0, -18,
+				.2, .2, .4, 0, -28,
+				0, 0, 0, 1, 0
+			], 12, 40, .01, .4)
+		.colorMatrix, 96, 24, .01, .4);
+		
+		if (hasBfSkin && boyfriend.getFlag('backlit') != true)
 		{
-			bfRim = new DropShadowShader();
-			bfRim.setAdjustColor(-60, 25, -9, -9);
-			bfRim.color = 0xFFff2b2b;
-			bfRim.angle = 45;
-			bfRim.distance = 25;
-			bfRim.threshold = 0.07;
+			bfRim = blackRimlightBase;
 			bfRim.attachedSprite = boyfriend;
-			boyfriend.animation.onFrameChange.add(function() {
-				if (bfRim.attachedSprite != null) bfRim.updateFrameInfo(boyfriend.frame);
-			});
 			boyfriend.useRenderTexture = true;
 		}
 		
 		if (hasPet)
 		{
-			petRim = new DropShadowShader();
-			petRim.setAdjustColor(-60, 25, -9, 3);
-			petRim.color = 0xFFff2b2b;
-			petRim.angle = 45;
-			petRim.distance = 25;
-			petRim.threshold = 0.1;
+			petRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(blackRimlightBase);
 			petRim.attachedSprite = pet;
-			pet.animation.onFrameChange.add(function() {
-				if (petRim.attachedSprite != null) petRim.updateFrameInfo(pet.frame);
-			});
-		}*/
+			pet.useRenderTexture = true;
+		}
 		
 		turnShader(true);
 	}
@@ -200,14 +200,23 @@ function onBeatHit()
 {
 	if (curBeat % 4 == 0)
 	{
-		defeatthing.animation.play('bop', true);
+		if (defeatBopTween != null) defeatBopTween.cancel();
+		defeatthing.alpha = (ClientPrefs.flashing ? .5 : .45);
+		defeatBopTween = FlxTween.tween(defeatthing, {alpha: .4}, ClientPrefs.flashing ? .8 : .4, {ease: FlxEase.bounceOut});
+		
+		if (ClientPrefs.flashing)
+		{
+			if (defeatScaleTween != null) defeatScaleTween.cancel();
+			defeatthing.scale.set(5.5, 5); 
+			defeatScaleTween = FlxTween.tween(defeatthing.scale, {x: 4, y: 4}, .8, {ease: FlxEase.sineOut});
+		}
+
 		if (edgeglow1.alpha > 0.01)
 		{
 			if (glowTween1 != null) glowTween1.cancel();
 			if (glowTween2 != null) glowTween2.cancel();
 			
-			edgeglow1.alpha = 1;
-			edgeglow2.alpha = 1;
+			edgeglow1.alpha = edgeglow2.alpha = (ClientPrefs.flashing ? 1 : .7);
 			
 			glowTween1 = FlxTween.tween(edgeglow1, {alpha: 0.6}, 0.35, {ease: FlxEase.bounceOut});
 			glowTween2 = FlxTween.tween(edgeglow2, {alpha: 0.6}, 0.35, {ease: FlxEase.bounceOut});
@@ -229,19 +238,19 @@ function onGameOver()
 	
 	// Checking for If you don't have a skin or a compatible one
 	
-	if (!hasBfSkin || hasBfSkin && !nonDeathSkins.contains(ClientPrefs.bfSkin))
+	if (boyfriend.gameoverCharacter == 'bf-dead' || boyfriend.gameoverCharacter == 'bf-defeat-dead')
 	{
-		var retroSuffix:String = isRetro ? '-retro' : ''; // If you're on the flashback section use the v3 gameover
-		// Random chance for alternate game over
+		var suffix:String = (isRetro ? '-retro' : ''); // If you're on the flashback section use the v3 gameover
+		
 		if (FlxG.random.bool(10))
 		{
-			boyfriend.gameoverCharacter = 'bf-defeat-dead-balls' + retroSuffix;
-			boyfriend.gameoverInitialDeathSound = 'stage/defeat_kill_ballz_sfx' + retroSuffix;
+			boyfriend.gameoverCharacter = 'bf-defeat-dead-balls$suffix';
+			boyfriend.gameoverInitialDeathSound = 'stage/defeat_kill_ballz_sfx$suffix';
 		}
 		else if (boyfriend.gameoverCharacter != 'bf-defeat-dead')
 		{
-			boyfriend.gameoverCharacter = 'bf-defeat-dead' + retroSuffix;
-			boyfriend.gameoverInitialDeathSound = 'stage/defeat_kill_sfx' + retroSuffix;
+			boyfriend.gameoverCharacter = 'bf-defeat-dead$suffix';
+			boyfriend.gameoverInitialDeathSound = 'stage/defeat_kill_sfx$suffix';
 		}
 		
 		if (!isRetro) blackGameOver();
@@ -252,7 +261,14 @@ function onGameOver()
 	}
 }
 
-function onGameOverStart() if (isRetro) FlxG.camera.bgColor = 0xFF1A182E;
+function onGameOverPost()
+{
+	if (boyfriend.gameoverCharacter?.endsWith('-retro'))
+	{
+		FlxG.camera.bgColor = 0xFF1A182E;
+		FlxG.camera.snapToTarget();
+	}
+}
 
 function blackGameOver()
 {
@@ -357,7 +373,7 @@ function onEvent(eventName, value1, value2)
 					prevAfterimages = boyfriend.ghostsEnabled;
 					prevScoreColor = scoreTxt.color;
 					
-					if (bfSwapChar != '') changeCharacter(bfSwapChar, 0);
+					if (defeatRetro != '') changeCharacter(defeatRetro, 0);
 					
 					boyfriend.ghostsEnabled = false;
 					
@@ -399,7 +415,7 @@ function onEvent(eventName, value1, value2)
 			switch (charType)
 			{
 				case 0:
-					if (boyfriend.curCharacter == 'bf-defeat-normal') triggerEventNote('Change Character', '0', 'bf-defeat-scared');
+					if (boyfriend.curCharacter == 'bf-defeat-normal') changeCharacter('bf-defeat-scared', 0);
 					FlxTween.tween(bodies, {alpha: 1}, 0.7, {ease: FlxEase.quadInOut});
 					FlxTween.tween(bodies2, {alpha: 1}, 0.7, {ease: FlxEase.quadInOut});
 					FlxTween.tween(bodiesfront, {alpha: 1}, 0.7, {ease: FlxEase.quadInOut});

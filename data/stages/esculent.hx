@@ -11,7 +11,7 @@ function onLoad()
 
 function onCreatePost()
 {
-	game.isCameraOnForcedPos = true;
+	camSpecialThing([1200, 700], [1200, 700]);
 	game.snapCamToPos(1200, 700);
 	
 	// We don't need these

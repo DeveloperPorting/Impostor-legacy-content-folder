@@ -177,6 +177,7 @@
 	"gameover_character": "amongbf-dead",
 	"vslice_sustains": false,
 	"flip_x": true,
+    "flags": {},
 	"healthbar_colour": -13520687,
 	"camera_position": [
 		0,

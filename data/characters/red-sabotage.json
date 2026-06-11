@@ -1,37 +1,37 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				102,
 				-257
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "animations/impostor idle"
+			"fps": 24,
+			"name": "animations/impostor idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				80,
 				-225
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "animations/impostor down"
+			"fps": 24,
+			"name": "animations/impostor down",
+			"indices": []
 		},
 		{
+			"loop": false,
+			"flipY": false,
 			"offsets": [
 				106,
 				-257
 			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
 			"anim": "ayo",
-			"flipX": false,
+			"fps": 24,
+			"name": "animations/red look",
 			"indices": [
 				0,
 				1,
@@ -76,46 +76,46 @@
 				18,
 				18
 			],
-			"name": "animations/red look"
+			"flipX": false
 		},
 		{
-			"loop": false,
-			"flipY": false,
 			"offsets": [
 				219,
 				-289
 			],
-			"anim": "singLEFT",
+			"flipY": false,
+			"loop": false,
 			"fps": 24,
-			"name": "animations/swag impostor left",
+			"anim": "singLEFT",
+			"flipX": false,
 			"indices": [],
-			"flipX": false
+			"name": "animations/swag impostor left"
 		},
 		{
-			"loop": false,
-			"flipY": false,
 			"offsets": [
 				43,
 				-290
 			],
-			"anim": "singRIGHT",
+			"flipY": false,
+			"loop": false,
 			"fps": 24,
-			"name": "animations/swag impostor right",
+			"anim": "singRIGHT",
+			"flipX": false,
 			"indices": [],
-			"flipX": false
+			"name": "animations/swag impostor right"
 		},
 		{
-			"loop": false,
-			"flipY": false,
 			"offsets": [
 				-3,
 				-234
 			],
-			"anim": "singUP",
+			"flipY": false,
+			"loop": false,
 			"fps": 24,
-			"name": "animations/impostor up2",
+			"anim": "singUP",
+			"flipX": false,
 			"indices": [],
-			"flipX": false
+			"name": "animations/impostor up2"
 		}
 	],
 	"no_antialiasing": false,
@@ -126,9 +126,11 @@
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
+	"flags": {},
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
 	"healthicon": "red",
+	"afterimages": true,
 	"gameover_character": null,
 	"vslice_sustains": true,
 	"flip_x": false,
@@ -138,7 +140,7 @@
 		290
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": false
 }

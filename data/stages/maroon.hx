@@ -1,7 +1,7 @@
-//import funkin.objects.SnowEmitter;
+import funkin.objects.SnowEmitter;
 
 var snowAlpha = 0.8;
-//var snowEmitter:SnowEmitter;
+var snowEmitter:SnowEmitter;
 var ext:String = 'stages/polus/maroon/'; // Edit polus to your stage name.
 
 function onLoad()
@@ -21,7 +21,7 @@ function onLoad()
 	backwall.scrollFactor.x = 0.9;
 	var ground:FlxSprite = new FlxSprite().loadGraphic(Paths.image(ext + "newstage"));
 	
-	/*snowEmitter = new SnowEmitter(1000, 800, 2700);
+	snowEmitter = new SnowEmitter(1000, 800, 2700);
 	snowEmitter.start(false, ClientPrefs.lowQuality ? 0.1 : 0.04);
 	snowEmitter.scrollFactor.x.set(1, 1.5);
 	snowEmitter.scrollFactor.y.set(1, 1.5);
@@ -29,7 +29,7 @@ function onLoad()
 	snowEmitter.alpha.active = false;
 	snowEmitter.onEmit.add((particle) -> particle.alpha = snowAlpha);
 	snowEmitter.zIndex = 13;
-	snowEmitter.speed.set(1000, 1500);*/
+	snowEmitter.speed.set(1000, 1500);
 	
 	var lava:FlxSprite = new FlxSprite().loadGraphic(Paths.image(ext + "newlava"));
 	lava.blend = BlendMode.ADD;
@@ -52,6 +52,10 @@ function goodNoteHit(note)
 
 function onCreatePost()
 {
+	if (hasBfSkin && game.boyfriend.curCharacter == 'bfpolus')
+	{
+		triggerEventNote('Change Character', 'boyfriend', 'bfpolusblow');
+	}
 	camSpecialThing([1600, 1300], [1800, 1300]);
 	var mainoverlay:FlxSprite = new FlxSprite(0, 0);
 	mainoverlay.loadGraphic(Paths.image(ext + "newoverlay"));

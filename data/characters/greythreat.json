@@ -1,87 +1,76 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				1502,
 				83
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "right",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				1516,
 				84
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "down",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				1515,
 				88
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "left",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				1512,
 				84
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "up",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
 		},
 		{
+			"loop": false,
+			"flipY": false,
 			"offsets": [
 				1514,
 				115
 			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"flipX": false,
-			"indices": [],
-			"name": "idle"
-		},
-		{
-			"offsets": [
-				1533,
-				120
-			],
-			"indices": [],
 			"fps": 24,
-			"flipX": false,
-			"flipY": false,
-			"anim": "walk",
-			"loop": false,
-			"name": "walk"
+			"name": "idle",
+			"indices": [],
+			"flipX": false
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/dlc/greythreat",
+	"image": "characters/triple/greythreat",
 	"position": [
-		0,
+		1410,
 		220
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
+	"flags": {},
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
 	"healthicon": "gray",
+	"afterimages": true,
 	"gameover_character": null,
 	"vslice_sustains": false,
 	"flip_x": false,
@@ -91,7 +80,7 @@
 		0
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 9,
+	"sing_duration": 6,
 	"scale": 0.9,
 	"_editor_isPlayer": false
 }

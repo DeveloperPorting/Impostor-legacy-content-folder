@@ -17,6 +17,8 @@
         "resumesong": "Συνέχιση Τραγουδιού",
         "restartsong": "Επανεκκίνιση",
         "backtomenu": "Επιστροφή στο Μενου",
+        "leavechartingmode": "Έξοδος από Charting Mode",
+        "skiptotime": "Μετάβαση σε Χρόνο",
         "awards_counter": "Ξεκλειδώθηκαν: @",
         "cosmicube_completed": "@% Ολοκληρώση",
         "miss_defeat": "@ ΑΣΤΟΧΙΕΣ",
@@ -33,6 +35,10 @@
         "dialogue_grey": "Γκρι",
         "dialogue_pink": "Ροζ",
         "video_skip": "Πατα ΠΙΣΩ για παράλειψη",
+        // @ is the song name
+	"reset_score_question": "Διαγραφή highscore για το @;",
+        "skins_disclaimer":"Τα skins και τα pets λειτουργούν μόνο στο Freeplay mode.",
+        "freeplay_highscore": "Υψηλό Σκορ", // used in freeplay menu as a replacement for "Score"
         "AWARDNAME_week1": "Το Πρόβλημα Λύθηκε.",
         "AWARDBIO_week1": "Ολοκλήρωσε το Week 1.",
         "AWARDNAME_week2": "Μανιακός του MIRA",
@@ -267,6 +273,84 @@
         "torture2": "Γιατί δεν ξεκινάμε;",
         "torture3": "Ε, να βοηθήσω;",
         "torture4": "(καβγάς)",
+        "o20":"WHAT",
+        "o21":"WHAT THE",
+        "o22":"WHAT THE F-",
+
+	// cutscene
+	"cutscene_moogus0": "*πλατς*",
+		
+	"cutscene_polusending0": "ΝΕΚΡΟΣ",
+	"cutscene_polusending1": "που",
+	"cutscene_polusending2": "σας αρεσει το καπελο μου",
+	"cutscene_polusending3": "ποιος",
+	"cutscene_polusending4": "σκασε πορτοκαλι",
+	"cutscene_polusending5": "αυτοκτωνα πορτοκαλι",
+	"cutscene_polusending6": "αντε γαμισου μπρο",
+	"cutscene_polusending7": "κανεις δε σε αγαπαει πορτοκαλι αντε γαμισου βλακα",
+	"cutscene_polusending8": "γιατι",
+	"cutscene_polusending9": "ολοι εδω γαμιεστε ασχημα",
+	"cutscene_polusending10": "δεν μας νοιαζει",
+	"cutscene_polusending11": "τι",
+	"cutscene_polusending12": "αμηηηχανοοο!",
+	"cutscene_polusending13": "ε",
+	"cutscene_polusending14": "εχετε παιξει ποτε Friday Night Funkin",
+	"cutscene_polusending15": "οχι",
+	"cutscene_polusending16": "πρέπει να το παίξετε έχει ένα τέλειο mod που λέγεται Vs. Impostor και άκουσα ότι σύντομα βγαίνει 4ο update!!",
+	"cutscene_polusending17": "εκεινο το mod ειναι για το πουτσο σκασε",
+	"cutscene_polusending18": "οχι δεν ειναι",
+	"cutscene_polusending19": "εμμ υπαρχει πολυ drama στο FNF Community",
+	"cutscene_polusending20": "σκασε ροζ",
+	"cutscene_polusending21": "νομιζω ειναι η rose",
+	"cutscene_polusending22": "κανε με βλακα",
+	"cutscene_polusending23": "ΔΕΝ ΕΙΜΑΙ ΕΓΩ",
+	"cutscene_polusending24": "Αγαπω το Friday Night Funkin'!",
+	"cutscene_polusending25": "ΒΑΣΙΚΑ ΝΟΜΙΖΩ ΠΩΣ ΕΙΝΑΙ Ο ΠΡΑΣΙΝΟΣ",
+	"cutscene_polusending26": "slay",
+	"cutscene_polusending27": "δεν ειμαι εγω βλακα",
+	"cutscene_polusending28": "ποιος",
+	"cutscene_polusending29": "Ο Κόκκινος είναι.",
+	"cutscene_polusending30": "hey φίλε! δεν είμαι εγώ! ηρέμησε!",
+	"cutscene_polusending31": "ήμουν afk!",
+	"cutscene_polusending32": "ακούγεται αρκετά πιστευτό-",
+		
+	"cutscene_mando0": "Boyfriend: ΜΠΙΠ!",
+		
+	"cutscene_votingtime0": "Γιατί να σκοτώσεις κάποιον μπροστά μου",
+	"cutscene_votingtime1": "δηλαδή τι στο διάολο",
+	"cutscene_votingtime2": "ΒΟΥΛΩΣΕ ΤΟ ΛΕΓΚΕΝΗ",
+	"cutscene_votingtime3": "*Ο Warchief λαχανιάζει*",
+	"cutscene_votingtime4": "Ωχ, αυτό δεν ακούγεται καλό.",
+		
+	"cutscene_turbulence0": "Θα κάνουμε τον Red Mungus να πετάξει.",
+	"cutscene_turbulence1": "*Ο Boyfriend ουρλιάζει*",
+	"cutscene_turbulence2": "Γαμώ.",
+	"cutscene_turbulence3": "*ΤΑ-ΝΤΑ!*",
+		
+	"cutscene_henry0": "ΕΝ ΤΩ ΜΕΤΑΞΥ",
+	"cutscene_henry1": "ΣΕ ΜΙΑ ΒΑΣΗ ΣΤΗ ΖΟΥΓΚΛΑ",
+	"cutscene_henry2": "ΠΟΛΥ, ΠΟΛΥ ΜΑΚΡΙΑ",
+	"cutscene_henryfail0": "Χωρίς δεσμεύσεις!",
+	"cutscene_henryfail1": "Λοιπόν εε... πώς πάει η ζωή;",
+	"cutscene_henryending0": "ΑΠΟΣΤΟΛΗ ΟΛΟΚΛΗΡΩΘΗΚΕ",
+	"cutscene_henryending1": "STICKIFICATOR\nΜεταμορφώσου στο σώμα που πάντα ήθελες!\n«Κολλάει πάνω σου!» -Gadget Gabe",
+		
+	"cutscene_boilingpoint0": "Δεν ξέρω παιδιά, αυτό μοιάζει με πολύ στημένη παγίδα.",
+	"cutscene_boilingpoint1": "Νομίζω πως είναι ο Μώβ.",
+		
+	"cutscene_delusion0": "ΣΗΜΕΡΑ",
+	"cutscene_delusion1": "ΤΟ AIRSHIP",
+		
+	"cutscene_finale0": "ΕΙΣΑΙ ΠΟΛΥ ΕΠΙΜΟΝΟΣ, ΕΤΣΙ ΔΕΝ ΕΙΝΑΙ;",
+	"cutscene_finalegibberish": "&%!$@%$&/@|$!\"&%_-%$-&_&%@!-<o>-!?",
+	"cutscene_finalegibberish2": "!!-_%.?!\"?.-<@>-.!_?$=)(.@_.%&",
+	"cutscene_finale1": "ΟΠΟΤΕ ΑΝ ΔΕΝ ΜΠΟΡΟΥΝ ΑΥΤΟΙ ΝΑ ΚΑΝΟΥΝ ΤΗ «ΒΡΩΜΙΚΗ ΔΟΥΛΕΙΑ» ΚΑΙ ΝΑ ΣΕ ΣΤΑΜΑΤΗΣΟΥΝ...",
+	"cutscene_finale2": "ΘΑ ΠΑΡΩ ΤΗΝ ΚΑΤΑΣΤΑΣΗ ΣΤΑ ΔΙΚΑ ΜΟΥ ΧΕΡΙΑ",
+	"cutscene_finale3": "ΜΕΣΑ ΑΠΟ",
+	"cutscene_finale4": "ΕΝΑ.",
+	"cutscene_finale5": "ΤΕΛΕΥΤΑΙΟ.",
+	"cutscene_finale6": "ROUND.",
+		
         "dialogue_moogus0": "αυτό πόνεσε πολύ :(",
         "dialogue_moogus1": "α συγνώμη",
         "dialogue_moogus2": "boyfriend πρόσεχε!!",
@@ -370,9 +454,9 @@
         "dialogue_ash7": "θα μας αφήσεις ήσυχους έτσι;",
         "dialogue_ash8": "όχι",
         "dialogue_magma0": "πω είχα δίκιο ΠΡΕΠΕΙ ΝΑ ΣΚΑΣΕΙΣ",
-        "dialogue_magma1": "ΣΚΑΣΕ ΕΣΥ ΡΕ ΒΛΑΛΚΑ",
+        "dialogue_magma1": "ΣΚΑΣΕ ΕΣΥ ΡΕ ΒΛΑΚΑ",
         "dialogue_magma2": "θα πηδήξω από τον πέμπτο αν ξανά δω κι άλλον impostor",
-        "dialogue_magma3": "γιατί δεν σε σκοτώνω εγώ καλήτερα;",
+        "dialogue_magma3": "γιατί δεν σε σκοτώνω εγώ καλύτερα;",
         "dialogue_magma4": "μπα δεν θα σου δώσω καν την ευκαιρία να το κανείς",
         "dialogue_magma5": "ναι ναι ναι",
         "dialogue_gray0": " ",
@@ -470,9 +554,46 @@
         "opt_opponentnotes_desc": "Εμφανίζει τα βελάκια του αντιπάλου.",
         "opt_language": "Γλώσσα",
         "opt_language_desc": "Διάλεξε γλώσσα! Σημείωση: Όλες οι γλώσσες εκτός από τα Αγγλικά (ΗΠΑ) είναι μεταφράσεις από το community!",
+        "opt_subtitles": "Υπότιτλοι",
+	"opt_subtitles_desc": "Οι υπότιτλοι θα εμφανίζονται στην οθόνη κατά τη διάρκεια των cutscenes και των κινουμένων σχεδίων των τραγουδιών.",
+	"opt_unlockedFramerate": "Ξεκλείδωτο Framerate",
+	"opt_unlockedFramerate_desc": "Ξεκλειδώνει το framerate του παιχνιδιού. Καταναλώνει περισσότερη ισχύ CPU, αλλά μπορεί να βοηθήσει με την καθυστέρηση εισόδου (input latency).",
+	"opt_vsyncMode": "VSync",
+	"opt_vsyncMode_desc": "Συγχρονίζει το framerate του παιχνιδιού με τον ρυθμό ανανέωσης της οθόνης σας για την αποφυγή σκισίματος της εικόνας.",
+	"opt_backgroundStrumlines": "Background Strumlines",
+	"opt_backgroundStrumlines_desc": "Αν ενεργοποιηθεί, οι επιπλέον γραμμές νότων των χαρακτήρων θα εμφανίζονται στην οθόνη όποτε είναι απαραίτητο.",
+	"opt_discord": "Discord Rich Presence",
+	"opt_discord_desc": "Αν ενεργοποιηθεί, το παιχνίδι θα εμφανίζεται στην Κατάσταση Δραστηριότητάς σας στο Discord κατά τη διάρκεια του παιχνιδιού.",
+		
+	// options choices
+		
+	"choice_generic_yes": "Ναι",
+	"choice_generic_no": "Όχι",
+	"choice_generic_disabled": "Απενεργοποιημένο",
+	"choice_generic_enabled": "Ενεργοποιημένο",
+		
+	"choice_debug_simple": "Απλό",
+	"choice_debug_advanced": "Προχωρημένο",
+		
+	"choice_vsync_adaptive": "Adaptive",
+		
+	"choice_timebar_songname": "Όνομα Τραγουδιού",
+	"choice_timebar_timeleft": "Χρόνος που Απομένει",
+	"choice_timebar_timeelapsed": "Χρόνος που Πέρασε",
+		
+	"choice_scoredisplay_rank": "Βαθμός",
+	"choice_scoredisplay_accuracy": "Ακρίβεια",
+	"choice_scoredisplay_both": "Και τα Δύo", // both rank and accuracy
+		
+	"choice_laneUnderlayStyle_a": "Πάνω από το Σκορ Text",
+	"choice_laneUnderlayStyle_b": "Πίσω από το Σκορ Text",
+	"choice_laneUnderlayStyle_c": "Πίσω από τη Μπάρα Ζωής",
+	"choice_laneUnderlayStyle_d": "Fade",
+		
         // some new misc menu stuff
         "rand": "Τυχαίο",
         "reset":"Επαναφορά",
+        "reset_score": "Μηδενισμός Υψηλού Σκορ.",
         "select":"Επιλογή",
         "back":"Πίσω",
         "conf":"Επιβεβαίωση",
@@ -490,4 +611,3 @@
         "weirdroute7": "ΕΙΣΑΓΩΓΗ ΚΩΔΙΚΟΥ"
     }
 }
-    

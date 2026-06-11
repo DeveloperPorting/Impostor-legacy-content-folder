@@ -7,12 +7,11 @@ import flixel.text.FlxText;
 
 function onLoad()
 {
-    optionShit.remove("story_mode");
-    
 	if (!ClientPrefs.inDevMode) return;
-	var debugText = new FlxText(0, 0, -1,
+	var debugText = new FlxText(0, 0, 1280,
 		'content/scripts/states/MainMenuState.hx\nPress 9 to go to credits roll sequence\nPress Shift 7 to toggle Finale Endgame Sequence\nPress 6 to Force unlock Cosmicube requirements\nPress 5 to delete Cosmicube unlocks\nPress 4 to toggle Force Unlock for freeplay and story mode\nPress 3 to delete bought songs\nPress 2 to give a lot of moneys\nPress 1 to set money to 0',
 		12.5);
+	debugText.alignment = 'right';
 	add(debugText);
 }
 
@@ -59,7 +58,7 @@ function onUpdate()
 	}
 	if (FlxG.keys.justPressed.TWO)
 	{
-		CosmicubeData.currentMoney += 661000001;
+		CosmicubeData.currentMoney = 2_147_483_647;
 		ClientPrefs.flush();
 		trace('FREE MONEY');
 	}

@@ -1,9 +1,9 @@
 {
 	"songs": [
 		["O2", "jorsawsee", [38, 127, 230], "jorsawsee", "punkett"],
-		["Voting Time", "votingtime", [153, 67, 196], "warchief", "punkett, JADS"],
+		["Voting Time", "votingtime", [153, 67, 196], "voting", "punkett, JADS"],
 		["Turbulence", "redmungus", [255, 0, 0], "mungusp", "Keegan"],
-		["Victory", "warchief", [153, 67, 196], "warchief", "punkett"]
+		["Victory", "victory", [153, 67, 196], "voting", "punkett"]
 	],
 	
 	"section": "jams",

@@ -45,7 +45,7 @@ function onLoad()
 	add(voting4);
 	
 	redmungus = new Character(1775, 200, 'madgus');
-	startCharacterPos(redmungus);
+	//game.startCharacterPos(redmungus);
 	add(redmungus);
 	redmungus.scale.set(1.2, 1.2);
 	redmungus.danceEveryNumBeats = 1;
@@ -53,35 +53,71 @@ function onLoad()
 
 function onCreatePost()
 {
+	//pet.zIndex = 1;
+	redmungus.zIndex = 2;
 	for (playField in playFields)
 		if (playField.ID != 0) playField.playerControls = false;
 		
-	game.boyfriend.scale.x *= 1.35;
-	game.boyfriend.scale.y *= 1.35;
-	game.dad.scale.set(1.2, 1.2);
-	game.boyfriend.updateHitbox();
-	game.boyfriend.dance();
+	boyfriend.scale.x *= 1.2;
+	boyfriend.scale.y *= 1.2;
+	dad.scale.set(1.2, 1.2);
+	boyfriend.updateHitbox();
+	boyfriend.offset.set();
+	boyfriend.dance();
 	var voting5:FlxSprite = new FlxSprite(-140, 680).loadGraphic(Paths.image(ext + 'table'));
 	voting5.scale.set(1.5, 1.5);
 	voting5.updateHitbox();
+	voting5.zIndex = 3;
 	add(voting5);
 	
 	var voting6:FlxSprite = new FlxSprite(-428, -170).loadGraphic(Paths.image(ext + 'light'));
 	voting6.scale.set(1.5, 1.5);
 	voting6.updateHitbox();
 	voting6.blend = BlendMode.ADD;
+	voting6.zIndex = 3;
 	add(voting6);
 	
 	snapCamToPos(1275, 575);
 	// snapCamToPos(1800, 575);
-	game.isCameraOnForcedPos = true;
+	isCameraOnForcedPos = true;
 	
-	game.playFields.members[2].owner = game.gf;
-	game.playFields.members[2].visible = false;
-	game.playFields.members[3].owner = redmungus;
-	game.playFields.members[3].visible = false;
-	modManager.setValue("alpha", 1, 2);
-	modManager.setValue("alpha", 1, 3);
+	playFields.members[2].owner = gf;
+	playFields.members[2].isPlayer = playFields.members[3].isPlayer = false;
+	playFields.members[3].owner = redmungus;
+	
+	for (i in playFields?.members)
+	{
+		final orgID = (3 - i.ID);
+		final wrap = Math.floor(orgID / 2) == 1;
+		
+		if (i.ID != 0) i.visible = ClientPrefs.opponentStrums;
+		
+		if (wrap)
+		{
+			i.zIndex = 999;
+		}
+		else
+		{
+			//i.underlay.kill();
+			
+			modManager.setValue("noteAlpha", 1, i.ID);
+			modManager.setValue("alpha", 0.7, i.ID);
+			modManager.setValue("stealth", 0.5, i.ID);
+			// modManager.setValue("sustainSplashAlpha", 1, i.ID);
+			// modManager.setValue("reverse", 1, i.ID);
+			modManager.setValue("transformZ", -1, i.ID);
+			modManager.setValue("transformY", -90 * (ClientPrefs.downScroll ? -1 : 1), i.ID);
+			modManager.setValue("stealthPastReceptors", 1, i.ID);
+			
+			final space = 865;
+			
+			if (!ClientPrefs.middleScroll) modManager.setValue("transformX", i.ID == 2 ? -(space) : space, i.ID);
+			else i.visible = i.ID == 0 || i.ID == 3;
+			// modManager.setValue("")
+		}
+	}
+	
+	refreshZ(playFields);
 	
 	if (boyfriend.gameoverLoopDeathSound == null) boyfriend.gameoverLoopDeathSound = 'Jorsawsee_Loop';
 	if (boyfriend.gameoverConfirmDeathSound == null) boyfriend.gameoverConfirmDeathSound = 'Jorsawsee_End';

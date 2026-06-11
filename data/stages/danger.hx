@@ -5,29 +5,22 @@ var airCloseClouds:FlxBackdrop;
 var airshipPlatform:FlxBackdrop;
 var airSpeedlines:FlxBackdrop;
 var airBigCloud:FlxSprite;
-var platform2:FlxSprite;
-var platform3:FlxSprite;
-var platform4:FlxSprite;
-var platform5:FlxSprite;
+public var bfPlatform:FlxSprite;
+public var gfBoard:FlxSprite;
+public var petBoard:FlxSprite;
 var airshipskyflash:FlxSprite;
 
 // character legs
-public var dadLegs:Character;
 var blackScream:Bool = false;
-var legPosY = [13, 7, -3, -1, -1, 2, 7, 9, 7, 2, 0, 0, 3, 1, 3, 7, 13];
 
 // other vars
-var bgspeed:Float = 9; // background scroll speed
+var bgspeed:Float = (ClientPrefs.photosensitive ? 7 : 9); // background scroll speed
 var bigCloudSpeed:Float = 10;
-var dadAnchorPoint:Array<Float> = [0, 0];
 
 function onLoad()
 {
 	game.camGame.height = FlxG.height + 200;
 	game.camGame.y -= 100;
-	
-	dadLegs = new Character(0, 0, 'black-legs', false);
-	game.dadGroup.add(dadLegs);
 	
 	var sky:FlxSprite = new FlxSprite(-1500, -897.55).loadGraphic(Paths.image('stages/airship/danger/sky'));
 	sky.setGraphicSize(5000, sky.height * 1.5 * 4);
@@ -102,79 +95,67 @@ function onLoad()
 	
 	// TODO: Rewrite this this is a little dire to look at
 	
-	platform2 = new FlxSprite(1600, 350);
-	platform2.frames = Paths.getSparrowAtlas('stages/common/platform');
-	platform2.animation.addByPrefix('bop', 'danger', 24, true);
-	platform2.animation.play('bop');
-	platform2.alpha = 0.00001;
+	bfPlatform = new FlxSprite(1542, 350);
+	bfPlatform.zIndex = (boyfriendGroup.zIndex - 1);
+	bfPlatform.frames = Paths.getSparrowAtlas('stages/common/platform');
+	bfPlatform.animation.addByPrefix('bop', 'danger', 24, true);
+	bfPlatform.animation.play('bop');
+	bfPlatform.visible = false;
 	
-	add(platform2);
+	gfBoard = new FlxSprite(850, 550);
+	gfBoard.zIndex = (gfGroup.zIndex - 1);
+	gfBoard.frames = Paths.getSparrowAtlas('stages/airship/danger/dangerboards');
+	gfBoard.animation.play('bop');
+	gfBoard.visible = false;
 	
-	platform3 = new FlxSprite(850, 550);
-	platform3.frames = Paths.getSparrowAtlas('stages/airship/danger/dangerboards');
-	platform3.animation.addByPrefix('bop', 'speakerwheel', 24, true);
-	platform3.animation.play('bop');
-	platform3.alpha = 0.00001;
+	petBoard = new FlxSprite(1900, 500);
+	petBoard.zIndex = (pet.zIndex + 1);
+	petBoard.frames = Paths.getSparrowAtlas('stages/airship/danger/dangerboards');
+	petBoard.animation.addByPrefix('bop', 'cart', 24, true);
+	petBoard.animation.play('bop');
+	petBoard.visible = false;
 	
-	add(platform3);
-
-	
-	platform4 = new FlxSprite(990, 520);
-	platform4.frames = Paths.getSparrowAtlas('stages/airship/danger/dangerboards');
-	platform4.animation.addByPrefix('bop', 'skateboard', 24, true);
-	platform4.animation.play('bop');
-	platform4.alpha = 0.00001;
-	
-	add(platform4);
-	
-	platform5 = new FlxSprite(1900, 500);
-	platform5.frames = Paths.getSparrowAtlas('stages/airship/danger/dangerboards');
-	platform5.animation.addByPrefix('bop', 'cart', 24, true);
-	platform5.animation.play('bop');
-	platform5.alpha = 0.00001;
-	
-	add(platform5);
-	//pet.zIndex = 1;
-	platform5.zIndex = 2;
+	add(bfPlatform);
+	add(gfBoard);
+	add(petBoard);
 }
 
 function onCreatePost()
 {
-	/*if (hasGfSkin && game.gf.curCharacter != 'gf-ghost' && game.gf.curCharacter != 'upgirl')
+	if (hasGfSkin && gf.getFlag('floating') != true && gf.getFlag('runner') != true)
+		gfBoard.visible = true;
+	
+	if (gf.getFlag('dangerSkateboard'))
 	{
-		platform3.alpha = 1;
+		gfBoard.animation.addByPrefix('bop', 'skateboard', 24, true);
+		gfBoard.x += 110;
+		gfBoard.y -= 50;
 	}
-	if (game.gf.curCharacter == 'upgirl')
+	else
 	{
-		platform4.alpha = 1;
-		game.gf.y += 30;
-	}*/
+		gfBoard.animation.addByPrefix('bop', 'speakerwheel', 24, true);
+	}
+	
+	gfBoard.animation.play('bop');
 
-	/*if (hasBfSkin && game.boyfriend.curCharacter != 'bf-ghost')
+	if (hasBfSkin && boyfriend.getFlag('floating') != true && boyfriend.getFlag('runner') != true)
 	{
-		platform2.alpha = 1;
-		game.boyfriend.x += 60;
-		game.boyfriend.y -= 240;
-	}*/
+		bfPlatform.visible = true;
+		boyfriend.x += 50;
+		boyfriend.y -= 235;
+	}
 	
-	//if (hasPet) platform5.alpha = 1;
-	
-	dadAnchorPoint[0] = game.dad.x;
-	dadAnchorPoint[1] = game.dad.y;
-	
-	dadLegs.x = dad.x + 5;
-	dadLegs.y = dad.y + 15;
-	
+	if (hasPet && pet.getFlag('floating') != true && pet.getFlag('runner') != true)
+	{
+		petBoard.visible = true;
+		pet.y -= 20;
+	}
+
 	airSpeedlines = new FlxBackdrop(Paths.image('stages/airship/danger/speedlines'), FlxAxes.X, 1, 787.95, 0);
 	airSpeedlines.setPosition(-3352.1, -1035.95);
 	airSpeedlines.alpha = 0.2;
 	airSpeedlines.scrollFactor.set(1.3, 1.3);
 	add(airSpeedlines);
-}
-
-function onCountdownTick()
-{
-	dadLegs.dance();
 }
 
 function onUpdate(elapsed) // to anyone else reading this script I'm sorry its just huge
@@ -185,7 +166,7 @@ function onUpdate(elapsed) // to anyone else reading this script I'm sorry its j
 		if (FlxG.keys.pressed.E) bgspeed += elapsed * 15;
 	}
 	
-	final delta:Float = (elapsed * bgspeed);
+	final delta:Float = (elapsed * bgspeed * playbackRate);
 	
 	if (!isDead)
 	{
@@ -194,8 +175,6 @@ function onUpdate(elapsed) // to anyone else reading this script I'm sorry its j
 		game.camHUD.y = Math.sin((Conductor.songPosition / 300) * (Conductor.bpm / 60) * 1.0) * 0.6;
 		game.camHUD.angle = Math.sin((Conductor.songPosition / 350) * (Conductor.bpm / 60) * -1.0) * 0.6;
 	}
-	
-	game.dad.y = dadAnchorPoint[1] + legPosY[dadLegs.animation.curAnim.curFrame] - 20;
 	
 	airFarClouds.x -= (delta * 7);
 	airMidClouds.x -= (delta * 13);
@@ -222,12 +201,9 @@ function getDisplacement(left_x:Float = -4000, get_x:Float = 0, returnX:Float = 
 	return (returnX - dp);
 }
 
-function onBeatHit()
+function onGameOverStart()
 {
-	if (curBeat % 1 == 0)
-	{
-		dadLegs.dance();
-	}
+	FlxTween.tween(FlxG.camera, {zoom: .65}, 8, {ease: FlxEase.expoOut, startDelay: .5});
 }
 
 function onEvent(ev, v1, v2)
@@ -240,16 +216,21 @@ function onEvent(ev, v1, v2)
 				blackScream = true;
 				airshipskyflash.alpha = 1;
 				airshipskyflash.animation.play('bop', false);
+				
+				dad.playAnim('scream2', true);
+				dad.specialAnim = true;
+				dad.animSuffix = '-mad';
 			case 'unscream danger':
+				dadLegs.playAnim('legs-mad', true);
+				
 				blackScream = false;
 				FlxTween.tween(airshipskyflash, {alpha: 0}, 0.6, {ease: FlxEase.quartOut});
 			case 'bye gf':
-				FlxTween.tween(gf, {x: -2000}, 4, {ease: FlxEase.quartIn});
-				FlxTween.tween(platform3, {x: -2000}, 4, {ease: FlxEase.quartIn});
-				FlxTween.tween(platform4, {x: -2000}, 4, {ease: FlxEase.quartIn});
-				//FlxTween.tween(pet, {x: -1700}, 8, {ease: FlxEase.quartIn});
-				FlxTween.tween(platform5, {x: -2000}, 8, {ease: FlxEase.quartIn});
-				FlxTween.num(9, 14, 5, {ease: FlxEase.quadIn}, function(v:Float) {
+				FlxTween.tween(gf, {x: gf.x - 3500}, 4, {ease: FlxEase.quartIn, onComplete: function() gf.kill()});
+				FlxTween.tween(pet, {x: pet.x - 3500}, 8, {ease: FlxEase.quartIn, onComplete: function() pet.kill()});
+				FlxTween.tween(gfBoard, {x: gfBoard.x - 3500}, 4, {ease: FlxEase.quartIn, onComplete: function() gfBoard.kill()});
+				FlxTween.tween(petBoard, {x: petBoard.x - 3500}, 8, {ease: FlxEase.quartIn, onComplete: function() petBoard.kill()});
+				FlxTween.num(bgspeed, (ClientPrefs.photosensitive ? 9 : 14), 5, {ease: FlxEase.quadIn}, function(v:Float) {
 					bgspeed = v;
 				});
 		}

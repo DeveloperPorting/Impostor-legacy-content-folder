@@ -14,8 +14,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				1,
-				2
+				0,
+				0
 			],
 			"anim": "singRIGHT",
 			"fps": 24,
@@ -26,7 +26,7 @@
 			"loop": false,
 			"offsets": [
 				0,
-				2
+				0
 			],
 			"anim": "singDOWN",
 			"fps": 24,
@@ -36,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				3,
-				2
+				0,
+				0
 			],
 			"anim": "singLEFT",
 			"fps": 24,
@@ -117,16 +117,38 @@
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "wtf",
+			"anim": "wtf1",
 			"indices": [],
-			"name": "wtf"
+			"name": "wtf1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "wtf2",
+			"indices": [],
+			"name": "wtf2"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "ffs",
+			"indices": [],
+			"name": "ffs"
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/freeplay/whitewho",
 	"position": [
 		-400,
-		150
+		90
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
@@ -142,7 +164,7 @@
 		290
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": true
 }

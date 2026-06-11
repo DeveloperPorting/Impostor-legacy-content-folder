@@ -37,8 +37,8 @@
 	"no_antialiasing": true,
 	"image": "characters/bf/pixel/bfPixelsDEAD",
 	"position": [
-		0,
-		350
+		183,
+		547
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
@@ -50,8 +50,8 @@
 	"flip_x": true,
 	"healthbar_colour": -8661258,
 	"camera_position": [
-		100,
-		-140
+		140,
+		-110
 	],
 	"gameover_loop_sound": null,
 	"sing_duration": 4,

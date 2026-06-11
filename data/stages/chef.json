@@ -7,5 +7,10 @@
 	"boyfriend": [1581, 425],
 	"girlfriend": [1000, 300],
 	"opponent": [500, 425],
-	"secondopp": [-60, 210]
+	"secondopp": [-60, 210],
+	
+	"flags": {
+		"airship": true,
+		"chef": true
+	}
 }

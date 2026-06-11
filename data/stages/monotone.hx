@@ -3,6 +3,7 @@ import funkin.data.ClientPrefs;
 import flixel.FlxSprite;
 
 var ext = 'stages/skeld/monotone/';
+var bbg:FlxSprite;
 var introTween:FlxTween;
 var black:FlxSprite;
 var yapsesh:FlxSprite;
@@ -23,8 +24,7 @@ var lightoverlay:FlxSprite;
 var lightoverlay2:FlxSprite;
 var hsv1:HSLColorSwap = (ClientPrefs.shaders ? new funkin.game.shaders.HSLColorSwap() : null);
 var spinPet = false;
-var pet2:FlxSprite = new FlxSprite(50, 1060);
-var allmonotones = ["monotone", "red", "greenEjected", "blackdk"];
+public var copyPet:FunkinSprite;
 
 function onDestroy()
 {
@@ -59,7 +59,7 @@ function onLoad()
 	// bgref.setGraphicSize(Std.int(bgref.width * 2));
 	// add(bgref);
 	
-	var bbg:FlxSprite = new FlxSprite(50, 531).loadGraphic(Paths.image(ext + 'back'));
+	bbg = new FlxSprite(50, 531).loadGraphic(Paths.image(ext + 'back'));
 	bbg.setGraphicSize(Std.int(bbg.width * 2));
 	bbg.updateHitbox();
 	// bbg.alpha = 0.5;
@@ -82,12 +82,12 @@ function onLoad()
 	redRoom.add(floor);
 	
 	// DEFEAT!
-	defeatthing = new FlxSprite(0, 0);
-	defeatthing.frames = Paths.getSparrowAtlas('stages/void/defeat');
-	defeatthing.animation.addByPrefix('bop', 'defeat', 24, false);
-	defeatthing.animation.play('bop');
-	defeatthing.setGraphicSize(Std.int(defeatthing.width * 3));
-	defeatthing.alpha = 0.0001;
+	defeatthing = new FlxSprite(330, 500);
+	defeatthing.loadGraphic(Paths.image('stages/void/defeatpulse'));
+	defeatthing.setGraphicSize(Std.int(defeatthing.width * 4));
+	defeatthing.antialiasing = ClientPrefs.globalAntialiasing;
+	defeatthing.scrollFactor.set(0.8, 0.8);
+	defeatthing.alpha = 0;
 	add(defeatthing);
 	
 	// THIS THING
@@ -131,7 +131,7 @@ function onLoad()
 	bggreen.alpha = 0;
 	greentower.alpha = 0;
 	
-	platform = new FlxSprite(1390, 1100);
+	platform = new FlxSprite(1340, 1090);
 	platform.frames = Paths.getSparrowAtlas('stages/common/platform');
 	platform.animation.addByPrefix('bop', 'floating', 24, true);
 	platform.animation.play('bop');
@@ -145,10 +145,7 @@ function onLoad()
 	blackImage.alpha = 0.0001;
 	
 	// pet 2
-	pet2.frames = pet.frames;
-	pet2.animation.addByPrefix('idle', 'idle', 24, true);
-	pet2.scale.x = -1 * pet2.scale.x;
-	pet2.setColorTransform(1, 1, 1, 1, -64, -64, -64, 0);
+	copyPet = new funkin.objects.Pet(142, PET_Y);
 }
 
 function onGameOverStart()
@@ -158,11 +155,14 @@ function onGameOverStart()
 
 function onCreatePost()
 {
+	copyPet.loadPet(pet.curPet);
+	copyPet.flipX = !copyPet.flipX;
+	copyPet.x -= (copyPet._petOffset.x * 2);
+	copyPet.setColorTransform(1, 1, 1, 1, -16, -16, -16);
+	
 	if (Paths.fileExists('scripts/vent.hx')) initScript('scripts/vent');
-	if (hasPet)
-	{
-		add(pet2);
-	}
+	add(copyPet);
+	
 	// cache characters
 	if (!hasBfSkin) addCharacterToList('bf-fall', 0);
 	
@@ -171,28 +171,51 @@ function onCreatePost()
 	addCharacterToList('red', 1);
 	addCharacterToList('blackdk', 1);
 	
-	if (hasBfSkin && game.boyfriend.curCharacter != 'bf-ghost')
+	if (hasBfSkin)
 	{
-		triggerEventNote('Change Character', 'dad', game.boyfriend.curCharacter == 'yellowplayable' ? 'yellow' : game.boyfriend.curCharacter);
-		dad.baseFlipX = game.boyfriend.curCharacter == 'yellowplayable' ? dad.baseFlipX : !dad.baseFlipX;
+		changeCharacter(boyfriend.getFlag('customMonotone') ?? boyfriend.curCharacter, 1);
+		
+		if (dad.isPlayerInEditor) // i mean it works !
+		{
+			dad.baseFlipX = !dad.baseFlipX;
+			
+			var swapAnims:Map<String, String> = [
+				'singLEFT' => 'singRIGHT',
+				'danceLeft' => 'danceRight'
+			];
+			
+			for (anim in dad.animation.getAnimationList())
+			{
+				for (name => newName in swapAnims)
+				{
+					if (StringTools.startsWith(anim.name, name))
+					{
+						dad.swapAnims(anim.name, newName + anim.name.substr(name.length));
+						break;
+					}
+				}
+			}
+		}
+		
+		dad.x = (-boyfriend.x - dad.width + 1950); // somehow its still not symetrical but whatever
 	}
 	
-	camHUD.alpha = 0; // doy
+	camHUD.alpha = .0001; // doy
 	
-	snapCamToPos(950, 700); // fr
-	camSpecialThing([950, 700], [950, 700]); // camera
+	snapCamToPos(960, 700); // fr
+	camSpecialThing([960, 700], [960, 700]); // camera
 	
 	lightoverlay = new FlxSprite(500, 275).loadGraphic(Paths.image(ext + 'overlay'));
 	lightoverlay.setGraphicSize(Std.int(lightoverlay.width * 4));
 	lightoverlay.blend = BlendMode.SUBTRACT;
 	if (ClientPrefs.shaders) lightoverlay.shader = hsv1.shader;
-	if (!ClientPrefs.lowQuality) add(lightoverlay);
+	add(lightoverlay);
 	
 	lightoverlay2 = new FlxSprite(500, 275).loadGraphic(Paths.image(ext + 'overlay2'));
 	lightoverlay2.blend = BlendMode.ADD;
 	lightoverlay2.setGraphicSize(Std.int(lightoverlay2.width * 4));
 	if (ClientPrefs.shaders) lightoverlay2.shader = hsv1.shader;
-	if (!ClientPrefs.lowQuality) add(lightoverlay2);
+	add(lightoverlay2);
 	
 	// black screen sprite
 	black = new FlxSprite(0, 0).makeGraphic(1280, 720, 0xff000000);
@@ -234,22 +257,35 @@ function onEvent(n, v1, v2)
 		case 'Legacy': // handle all of this shit boy im lowkey editing the events in the chart editor AND visual studio
 			if (v1 == 'red' || v1 == 'green' || v1 == 'monotone' || v1 == 'black')
 			{
+				if (ClientPrefs.shaders)
+				{
+					hsv1.hue = 0;
+				}
+				else
+				{
+					lightoverlay.setColorTransform();
+					lightoverlay2.setColorTransform();
+				}
+				
+				pauseOverwrite = '';
 				if (v1 == 'green')
 				{
 					if (!hasBfSkin) triggerEventNote('Change Character', 'BF', 'bf-fall');
 				}
 				else if (!hasBfSkin) triggerEventNote('Change Character', 'BF', 'bf');
-				defeatthing.alpha = 0;
-				if (hasBfSkin && game.boyfriend.curCharacter != 'bf-ghost') platform.alpha = 0;
-				bggreen.alpha = 0;
+				defeatthing.alpha = 0.001;
+				if (hasBfSkin && game.boyfriend.curCharacter != 'bf-ghost') platform.alpha = 0.001;
+				bggreen.alpha = 0.001;
 				lightoverlay2.alpha = 1;
-				speedlines.alpha = 0;
-				greentower.alpha = 0;
-				redRoom.alpha = 0;
-				greenRoom.alpha = 0;
-				blueRoom.alpha = 0;
+				speedlines.alpha = 0.001;
+				greentower.alpha = 0.001;
+				redRoom.alpha = 0.001;
+				blueRoom.alpha = 0.001;
+				greenRoom.alpha = 0.001;
+				defeatness(v1 == 'black');
 				// we can set alphas to 0
 				// but i dont WANT TO! slams food off my desk
+				// its okay i got it
 			}
 			switch (v1)
 			{
@@ -257,6 +293,7 @@ function onEvent(n, v1, v2)
 					yapsesh.alpha = 1;
 					yapsesh.animation.play('bop');
 				case 'red': // RED'S TURN BOY
+					defeatthing.alpha = 0.001;
 					redRoom.alpha = 1;
 					if (ClientPrefs.shaders)
 					{
@@ -269,35 +306,32 @@ function onEvent(n, v1, v2)
 					}
 					triggerEventNote('Change Character', 'dad', 'red');
 					spinPet = false; // im sorry im sorry im sorry
+					bbg.alpha = 1;
 				case 'monotone': // MONTONE'S TURN BOY
 					triggerEventNote('Change Character', 'dad', 'monotone');
+					defeatthing.alpha = 0.001;
 					blueRoom.alpha = 1;
-					if (ClientPrefs.shaders)
-					{
-						hsv1.hue = 0;
-					}
-					else
-					{
-						lightoverlay.setColorTransform();
-						lightoverlay2.setColorTransform();
-					}
 					dad.originalFlipX = dad.originalFlipX;
 					spinPet = false;
+					bbg.alpha = 1;
 				case 'green':
 					triggerEventNote('Change Character', 'dad', 'greenEjected');
 					bggreen.alpha = 1;
-					lightoverlay2.alpha = 0;
+					lightoverlay2.alpha = 0.001;
 					greentower.alpha = 1;
 					speedlines.alpha = 0.5;
 					if (hasBfSkin && game.boyfriend.curCharacter != 'bf-ghost') platform.alpha = 1;
 					spinPet = true;
-					greentower.y = 0;
+					greentower.y = 0.001;
 					FlxTween.tween(greentower, {y: -300}, 20);
+					bbg.alpha = 0.001;
+					defeatthing.alpha = 0.001;
 				case 'black':
 					triggerEventNote('Change Character', 'dad', 'blackdk');
-					defeatthing.alpha = 1;
-					lightoverlay2.alpha = 0;
+					defeatthing.alpha = 0.5;
+					lightoverlay2.alpha = 0.001;
 					spinPet = false;
+					bbg.alpha = 0.001;
 				case 'ending':
 					FlxTween.tween(lightoverlay2, {alpha: 0}, 10);
 					FlxTween.tween(blackImage, {alpha: 1}, 12);
@@ -319,36 +353,33 @@ function onEvent(n, v1, v2)
 				yapsesh.visible = false;
 			}
 	}
+	
+	if (dad.curCharacter == 'monotone') copyPet.kill();
 }
 
 function onUpdate(elapsed:Float):Void
 {
-	if (!allmonotones.contains(game.dad.curCharacter))
-	{
-		pet2.alpha = 1;
-	}
-	else
-	{
-		pet2.alpha = 0;
-	}
 	var musicTime:Float = Conductor.songPosition;
 	funTime = musicTime;
 	if (speedlines != null) speedlines.y = -(funTime * 2 * (ClientPrefs.flashing ? 1.75 : .75));
 	if (spinPet)
 	{
-		pet.angle += 900 * elapsed;
-		pet.x = 1900;
-		pet.y = 800;
+		pet.x = (1850 + copyPet._petOffset.x);
+		pet.y = (800 + copyPet._petOffset.y);
 		pet.scrollFactor.set(1.2, 1.2);
-		pet.setColorTransform(1, 1, 1, 1, 0, 0, 0, -128);
+		if (pet.getFlag('spin') != false) pet.angularVelocity = 450;
+		pet.setColorTransform(1, 1, 1, 1, 0, 0, 0, -127);
+		pet.colorTransform.alphaMultiplier = 2;
+		pet.x += Math.sin(Conductor.songPosition / 100) * 200 * FlxG.elapsed;
+		pet.y = 800 + Math.sin(Conductor.songPosition / 100) * 50;
 	}
 	else
 	{
 		pet.angle = 0;
-		pet.x = 1760;
-		pet.y = 1050;
+		pet.x = (PET_X - pet.width * .5 + copyPet._petOffset.x);
+		pet.y = (PET_Y - pet.height + copyPet._petOffset.y);
 		pet.scrollFactor.set(1, 1);
-		pet.setColorTransform(1, 1, 1, 1, 0, 0, 0, 0);
+		pet.setColorTransform();
 	}
 	if (ClientPrefs.inDevMode)
 	{
@@ -375,24 +406,20 @@ function onBeatHit()
 {
 	if (curBeat % 4 == 0)
 	{
-		defeatthing.animation.play('bop', true);
+		defeatthing.scale.set(5.5, 5); 
+		defeatScaleTween = FlxTween.tween(defeatthing.scale, {x: 4, y: 4}, .8, {ease: FlxEase.sineOut});
 	}
 	
-	if (curBeat % 2 == 0)
-	{
-		pet2.animation.play('idle');
-	}
+	copyPet.dance();
 	
 	switch (curBeat)
 	{
 		case 6:
 			FlxTween.tween(black, {alpha: 0}, 15);
 			introTween = FlxTween.tween(camGame, {zoom: 0.4}, 20);
-		case 32:
-			// i dont care
-			
 		case 64:
-			camSpecialThing([950, 750], [950, 750], 0.4);
+			introTween.cancel();
+			camSpecialThing([960, 750], [960, 750], 0.4);
 		case 81:
 			camSpecialThing([850, 750], [1050, 750], 0.45);
 		case 88:
@@ -400,15 +427,15 @@ function onBeatHit()
 		case 95:
 			camSpecialThing([850, 750], [1050, 750], 0.5);
 		case 112:
-			camSpecialThing([950, 750], [950, 750], 0.5);
+			camSpecialThing([960, 750], [960, 750], 0.5);
 		case 128:
 			camSpecialThing([850, 750], [1050, 750], 0.6);
 		case 192:
-			camSpecialThing([950, 750], [950, 750], 0.5);
+			camSpecialThing([960, 750], [960, 750], 0.5);
 		case 208:
 			camSpecialThing([850, 750], [1050, 750], 0.6);
 		case 224:
-			camSpecialThing([950, 700], [950, 700], 0.5);
+			camSpecialThing([960, 700], [960, 700], 0.5);
 		case 254:
 			camSpecialThing([1300, 800], [1300, 800], 0.6);
 		case 262:
@@ -428,8 +455,63 @@ function onBeatHit()
 		case 344:
 			camSpecialThing([1400, 800], [1300, 800], 0.7);
 		case 360:
-			camSpecialThing([950, 700], [950, 700], 0.5);
+			camSpecialThing([960, 700], [960, 700], 0.5);
 		case 456:
 			camSpecialThing([850, 750], [1050, 750], 0.6);
+	}
+}
+
+var bfRimlight:ExtraDropShadowShader;
+var petRimlight:ExtraDropShadowShader;
+
+function defeatness(ya:Bool)
+{
+	if (!ClientPrefs.shaders) return;
+	
+	if (bfRimlight == null)
+	{
+		bfRimlight = new funkin.game.shaders.ExtraDropShadowShader();
+		
+		bfRimlight.threshold = .1;
+		bfRimlight.strength = .85;
+		bfRimlight.setColorMatrix([
+			  .3,  .5, -.2, 0, -50,
+			-.25,  .1, .05, 0,  10,
+			  .4, .25,  .6, 0, -92,
+			   0,   0,   0, 1,   0
+		]);
+		bfRimlight.addLayer([
+			.5, 0,   1, 0, 192,
+			.1, 1, -.5, 0,  64,
+			 0, 0, .35, 0,  64,
+			 0, 0,   0, 1,   0
+		], 10, 14, .01);
+		bfRimlight.addLayer(bfRimlight.addLayer([
+			 .9, .7, .4, 0,   4,
+			-.2, .3, .1, 0, -18,
+			 .2, .2, .4, 0, -28,
+			  0,  0,  0, 1,   0
+		], 12, 40, .01, .4).colorMatrix, 96, 24, .01, .4);
+		
+		petRimlight = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(bfRimlight);
+	}
+	
+	if (ya)
+	{
+		if (hasBfSkin && boyfriend.getFlag('backlit') != true)
+		{
+			bfRimlight.attachedSprite = boyfriend;
+			boyfriend.useRenderTexture = true;
+		}
+		
+		if (hasPet)
+		{
+			petRimlight.attachedSprite = pet;
+			pet.useRenderTexture = true;
+		}
+	}
+	else
+	{
+		boyfriend.shader = pet.shader = null;
 	}
 }

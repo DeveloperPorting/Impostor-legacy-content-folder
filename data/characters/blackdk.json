@@ -3,8 +3,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				83,
-				648
+				25,
+				-69
 			],
 			"anim": "singDOWN",
 			"fps": 24,
@@ -14,8 +14,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				104,
-				673
+				-162,
+				-15
 			],
 			"anim": "singUP",
 			"fps": 24,
@@ -25,8 +25,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-16,
-				671
+				-292,
+				-76
 			],
 			"anim": "singRIGHT",
 			"fps": 24,
@@ -36,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				212,
-				634
+				61,
+				28
 			],
 			"anim": "singLEFT",
 			"fps": 24,
@@ -89,8 +89,8 @@
 			"loop": true,
 			"flipY": false,
 			"offsets": [
-				62,
-				641
+				42,
+				34
 			],
 			"anim": "idle",
 			"fps": 24,
@@ -102,14 +102,15 @@
 	"no_antialiasing": false,
 	"image": "characters/story/black/blackdk",
 	"position": [
-		-340,
-		-9
+		-410,
+		-29
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
 	"healthicon": "black",
+	"afterimages": true,
 	"gameover_character": null,
 	"vslice_sustains": true,
 	"flip_x": false,
@@ -119,7 +120,7 @@
 		110
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": false
 }

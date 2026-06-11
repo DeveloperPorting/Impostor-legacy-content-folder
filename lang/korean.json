@@ -9,7 +9,8 @@
         "bahn.ttf": "kr.ttf",
         "vcr.ttf": "kr.ttf",
         "liber.ttf": "kr.ttf",
-        "liberbold.ttf": "krBold.ttf"
+        "liberbold.ttf": "krBold.ttf",
+        "ariblk.ttf": "krBold.ttf"
     },
     "lang": {
         "score": "점수",

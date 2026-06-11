@@ -1,138 +1,41 @@
 {
 	"animations": [
 		{
+			"loop": false,
+			"flipY": false,
 			"offsets": [
 				0,
 				0
 			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
 			"anim": "turn",
-			"flipX": false,
+			"fps": 24,
+			"name": "gfTurnRight",
 			"indices": [],
-			"name": "gfTurnRight"
+			"flipX": false
 		},
 		{
+			"loop": false,
+			"flipY": false,
 			"offsets": [
 				0,
 				0
 			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
 			"anim": "turn-left",
-			"flipX": false,
+			"fps": 24,
+			"name": "gfTurnLeft",
 			"indices": [],
-			"name": "gfTurnLeft"
+			"flipX": false
 		},
 		{
+			"loop": false,
+			"flipY": false,
 			"offsets": [
 				0,
 				0
 			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
 			"anim": "danceLeft-left",
-			"flipX": false,
-			"indices": [
-				0,
-				1,
-				2,
-				3,
-				4,
-				5,
-				6,
-				7,
-				8,
-				9,
-				10,
-				11,
-				12,
-				13
-			],
-			"name": "gfLookLeft"
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
-			"flipY": false,
-			"loop": false,
 			"fps": 24,
-			"anim": "danceRight",
-			"flipX": false,
-			"indices": [
-				14,
-				15,
-				16,
-				17,
-				18,
-				19,
-				20,
-				21,
-				22,
-				23,
-				24,
-				25,
-				26,
-				27
-			],
-			"name": "gfLookRight"
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
-			"anim": "danceRight-left",
-			"flipX": false,
-			"indices": [
-				14,
-				15,
-				16,
-				17,
-				18,
-				19,
-				20,
-				21,
-				22,
-				23,
-				24,
-				25,
-				26,
-				27
-			],
-			"name": "gfLookLeft"
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
-			"flipY": false,
-			"loop": false,
-			"fps": 24,
-			"anim": "sad",
-			"flipX": false,
-			"indices": [],
-			"name": "gfSad"
-		},
-		{
-			"loop": false,
-			"flipY": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "danceLeft",
-			"fps": 24,
-			"name": "gfLookRight",
+			"name": "gfLookLeft",
 			"indices": [
 				0,
 				1,
@@ -150,13 +53,110 @@
 				13
 			],
 			"flipX": false
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "danceRight",
+			"fps": 24,
+			"name": "gfLookRight",
+			"indices": [
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27
+			],
+			"flipX": false
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "danceRight-left",
+			"fps": 24,
+			"name": "gfLookLeft",
+			"indices": [
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27
+			],
+			"flipX": false
+		},
+		{
+			"loop": false,
+			"flipY": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "sad",
+			"fps": 24,
+			"name": "gfSad",
+			"indices": [],
+			"flipX": false
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"flipY": false,
+			"loop": false,
+			"fps": 24,
+			"anim": "danceLeft",
+			"flipX": false,
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			],
+			"name": "gfLookRight"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/gf/upgirl",
+	"image": "characters/gf/cosmicube/upgirl",
 	"position": [
-		180,
-		10
+		140,
+		40
 	],
 	"dance_every": 1,
 	"gameover_intial_sound": null,
@@ -166,7 +166,7 @@
 	"gameover_character": null,
 	"vslice_sustains": false,
 	"flip_x": false,
-	"healthbar_colour": -2883478,
+	"healthbar_colour": -2883479,
 	"camera_position": [
 		0,
 		0
@@ -174,5 +174,8 @@
 	"gameover_loop_sound": null,
 	"sing_duration": 4,
 	"scale": 0.92,
-	"_editor_isPlayer": false
+	"_editor_isPlayer": false,
+	"flags": {
+		"dangerSkateboard": true
+	}
 }

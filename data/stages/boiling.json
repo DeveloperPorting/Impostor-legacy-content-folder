@@ -9,5 +9,9 @@
 	"opponent": [950, -70],
 	"pet": [1850, 740],
 	"dadZIndex": 1,
-	"bfZIndex": 1
+	"bfZIndex": 1,
+	
+	"flags": {
+		"boiling": true
+	}
 }

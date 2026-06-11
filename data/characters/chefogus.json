@@ -14,8 +14,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				88,
-				-77
+				87,
+				-78
 			],
 			"anim": "singRIGHT",
 			"fps": 24,
@@ -25,8 +25,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-40,
-				-112
+				-33,
+				-118
 			],
 			"anim": "singDOWN",
 			"fps": 24,
@@ -36,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				57,
-				-90
+				89,
+				-75
 			],
 			"anim": "singLEFT",
 			"fps": 24,
@@ -47,8 +47,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				30,
-				-32
+				62,
+				-2
 			],
 			"anim": "singUP",
 			"fps": 24,
@@ -57,8 +57,8 @@
 		},
 		{
 			"offsets": [
-				36,
-				-77
+				77,
+				-53
 			],
 			"loop": false,
 			"fps": 24,
@@ -68,8 +68,8 @@
 		},
 		{
 			"offsets": [
-				-32,
-				-123
+				-17,
+				-125
 			],
 			"loop": false,
 			"fps": 24,
@@ -89,6 +89,7 @@
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
 	"healthicon": "chef",
+	"afterimages": true,
 	"gameover_character": null,
 	"vslice_sustains": false,
 	"flip_x": false,
@@ -98,7 +99,7 @@
 		200
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": false
 }

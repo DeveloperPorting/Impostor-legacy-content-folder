@@ -43,17 +43,12 @@ function onEvent(eventName, value1, value2)
 			if (boyfriend.curCharacter == 'bfsusreal')
 			{
 				boyfriend.playAnim('shoot', true);
-				boyfriend.specialAnim = true;
+				boyfriend.specialAnim = boyfriend.skipDance = true;
 			}
 			else if (boyfriend.hasAnim('scared'))
 			{
 				boyfriend.playAnim('scared', true);
-				boyfriend.specialAnim = true;
-				if (boyfriend.hasAnim('idle-scared')) // assuming the rest of the scared anims r loopable like bfs is then this should be temp
-				{
-					boyfriend.idleSuffix = '-scared';
-					boyfriend.recalculateDanceIdle();
-				}
+				boyfriend.specialAnim = boyfriend.skipDance = true;
 			}
 			
 			if (boyfriend.curCharacter == 'yellowplayable') playHUD.iconP1.changeIcon('yellow');

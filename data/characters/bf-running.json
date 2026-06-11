@@ -1,54 +1,39 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"loop": false,
+			"offsets": [7, 2],
+			"loop": true,
 			"fps": 24,
-			"anim": "danceLeft",
-			"indices": [
-				1,
-				2,
-				3,
-				4,
-				5,
-				6,
-				7,
-				8,
-				9
-			],
+			"anim": "idle",
+			"indices": [],
 			"name": "idle"
 		},
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"loop": false,
+			"offsets": [0, 0],
+			"loop": true,
 			"fps": 24,
-			"anim": "danceRight",
-			"indices": [
-				10,
-				11,
-				12,
-				13,
-				14,
-				15,
-				16,
-				17,
-				18,
-				19,
-				20
-			],
-			"name": "idle"
+			"anim": "legs",
+			"indices": [],
+			"name": "legs"
 		},
 		{
-			"offsets": [
-				-23,
-				-34
-			],
+			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
+			"anim": "legs-miss",
+			"indices": [],
+			"name": "legs miss"
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
 			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
@@ -56,22 +41,8 @@
 			"name": "down"
 		},
 		{
-			"offsets": [
-				-20,
-				-27
-			],
 			"loop": false,
-			"fps": 24,
-			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "m down"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				41,
-				21
-			],
+			"offsets": [0, 0],
 			"anim": "singUP",
 			"fps": 24,
 			"name": "up",
@@ -79,65 +50,130 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				33,
-				21
-			],
-			"anim": "singUPmiss",
-			"fps": 24,
-			"name": "m up",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				15,
-				-3
-			],
-			"anim": "singRIGHTmiss",
-			"fps": 24,
-			"name": "m right",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				14,
-				-4
-			],
+			"offsets": [0, 0],
 			"anim": "singRIGHT",
 			"fps": 24,
 			"name": "right",
 			"indices": []
 		},
 		{
-			"loop": false,
-			"offsets": [
-				74,
-				-11
-			],
-			"anim": "singLEFT",
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "singLEFT-loop",
 			"fps": 24,
-			"name": "left",
+			"name": "left loop",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
+			"anim": "singDOWN-loop",
+			"indices": [],
+			"name": "down loop"
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "singUP-loop",
+			"fps": 24,
+			"name": "up loop",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "singRIGHT-loop",
+			"fps": 24,
+			"name": "right loop",
 			"indices": []
 		},
 		{
 			"loop": false,
-			"offsets": [
-				74,
-				-10
-			],
+			"offsets": [0, 0],
 			"anim": "singLEFTmiss",
 			"fps": 24,
-			"name": "m left",
+			"name": "left miss",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "down miss"
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "up miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "right miss",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "singLEFTmiss-loop",
+			"fps": 24,
+			"name": "left miss loop",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
+			"anim": "singDOWNmiss-loop",
+			"indices": [],
+			"name": "down miss loop"
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "singUPmiss-loop",
+			"fps": 24,
+			"name": "up miss loop",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "singRIGHTmiss-loop",
+			"fps": 24,
+			"name": "right miss loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "hey",
+			"fps": 24,
+			"name": "hey",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "hey-loop",
+			"fps": 24,
+			"name": "hey loop",
 			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/bf/bf_running",
+	"image": "characters/bf/bfRun",
 	"position": [
-		0,
-		350
+		-450,
+		250
 	],
 	"dance_every": 1,
 	"gameover_intial_sound": null,
@@ -155,5 +191,8 @@
 	"gameover_loop_sound": null,
 	"sing_duration": 4,
 	"scale": 1,
-	"_editor_isPlayer": true
+	"_editor_isPlayer": true,
+	"flags": {
+		"runner": true
+	}
 }

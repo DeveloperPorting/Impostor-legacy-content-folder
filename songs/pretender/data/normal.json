@@ -6537,18 +6537,17 @@
 				"mustHitSection": true
 			}
 		],
-		"player2": "grey",
-		"player3": "gfmira",
+		"player2": "greythreat",
+		"gfVersion": "gf-pretender",
 		"keys": 4,
-		"allowGFskin": true,
+		"allowGFskin": false,
 		"song": "Pretender",
 		"validScore": true,
 		"allowPet": true,
 		"speed": 3.1,
 		"lanes": 2,
 		"events": [],
-		"gfVersion": "gf",
-		"allowBFskin": true,
+		"allowBFskin": false,
 		"stage": "pretender",
 		"needsVoices": true,
 		"bpm": 250

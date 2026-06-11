@@ -23,15 +23,15 @@ function onEvent(event, v1, v2)
 		switch (v1)
 		{
 			case 'what':
-				wtf.text = 'WHAT\n ';
+				wtf.text = Lang.str('o20') + '\n ';
 			case 'the':
-				wtf.text = 'WHAT THE\n ';
+				wtf.text = Lang.str('o21') + '\n ';
 			case 'fuck':
-				wtf.text = 'WHAT THE\nF-';
+				wtf.text = Lang.str('o22');
 				
 			case 'die':
 				wtf.destroy();
-				camHUD.alpha = camGame.alpha = .001;
+				camHUD.alpha = .001;
 				if (ClientPrefs.flashing) camOther.flash(0xff950000, Conductor.crotchet / 1000);
 				
 				prepareScary();

@@ -1,10 +1,10 @@
 import openfl.filters.ShaderFilter;
 
-//import funkin.game.shaders.ChromaticAbberation;
-//import funkin.game.shaders.HeatwaveShader;
+import funkin.game.shaders.ChromaticAbberation;
+import funkin.game.shaders.HeatwaveShader;
 
 var chromTween:FlxTween;
-//var caShader:ChromaticAbberation;
+var caShader:ChromaticAbberation;
 var ref:FlxSprite;
 
 function onLoad() {
@@ -12,16 +12,14 @@ function onLoad() {
 }
 function onCreatePost()
 {
-	defaultCam();
-	
-	/*caShader = new ChromaticAbberation(0);
+	caShader = new ChromaticAbberation(0);
 	caShader.amount = -0.2;
 	var heatwaveShader = new HeatwaveShader();
-	if (ClientPrefs.shaders) FlxG.camera.filters = [new ShaderFilter(heatwaveShader.shader), new ShaderFilter(caShader.shader)];*/
+	if (ClientPrefs.shaders) FlxG.camera.filters = [new ShaderFilter(heatwaveShader.shader), new ShaderFilter(caShader.shader)];
 	// ref = new FlxSprite().loadGraphic(Paths.image('ref'));
 	// ref.camera = camOther;
 	// add(ref);
-	snapCamToPos(1760, 380);
+	snapCamToPos(1760, 340);
 	defaultCamZoom = 0.7;
 	// game.isCameraOnForcedPos = true;
 }
@@ -30,13 +28,9 @@ function onCreatePost()
 	{
 	if (FlxG.keys.justPressed.Q) ref.visible = !ref.visible;
 }*/
-function defaultCam()
-{
-	camSpecialThing([1760, 380], [1900, 435]);
-}
 
 // im gonna have to plap this shit in for the gray week but its better than putting it in a global script
-/*function onEvent(eventName, value1, value2)
+function onEvent(eventName, value1, value2)
 {
 	switch (eventName)
 	{
@@ -49,7 +43,7 @@ function defaultCam()
 			if (chromTween != null) chromTween.cancel();
 			chromTween = FlxTween.tween(caShader, {amount: theAmount}, theSpeed, {ease: FlxEase.sineOut});
 	}
-}*/
+}
 /*
 	function onBeatHit()
 	{

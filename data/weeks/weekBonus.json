@@ -20,9 +20,5 @@
 	
 	"startUnlocked": true,
 	"hideStoryMode": false,
-	
-	"node": {
-		"parent": "root",
-		"direction": "east"
-	}
+	"hideFreeplay": false
 }

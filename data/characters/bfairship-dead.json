@@ -9,7 +9,7 @@
 			],
 			"anim": "firstDeath",
 			"fps": 24,
-			"name": "BF dies",
+			"name": "BF dies instance 1",
 			"indices": [],
 			"flipX": false
 		},
@@ -22,7 +22,7 @@
 			],
 			"anim": "deathLoop",
 			"fps": 24,
-			"name": "BF Dead Loop0",
+			"name": "BF Dead Loop instance 1",
 			"indices": [],
 			"flipX": false
 		},
@@ -35,13 +35,13 @@
 			],
 			"anim": "deathConfirm",
 			"fps": 24,
-			"name": "BF Dead confirm0",
+			"name": "BF Dead confirm instance 1",
 			"indices": [],
 			"flipX": false
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/bf/bfairship",
+	"image": "characters/gameover/bfairshipdeath",
 	"position": [
 		-19,
 		330

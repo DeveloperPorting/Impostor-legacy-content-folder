@@ -1,6 +1,12 @@
+var reactorIntro:Bool = (PlayState.isStoryMode && !PlayState.seenCutscene);
+
 function onCreatePost()
 {
+	if (reactorIntro) camGame.fade(FlxColor.BLACK, 0);
+	
 	camSpecialThing([1725, 1100], [1725, 1100], defaultCamZoom, 0);
+	
+	PlayState.seenCutscene = true;
 }
 
 function onEvent(n, v1, v2)
@@ -22,23 +28,24 @@ function onEvent(n, v1, v2)
 	}
 }
 
-// Jesus christ
-/*
+function onSongStart():Void
+{
+	if (!reactorIntro) return;
+	
+	camGame.alpha = 1;
+	camGame.zoom += .2;
+	camGame.scroll.y -= 400; // zzz
+	camGame.fade(FlxColor.BLACK, 2, true);
+	
+	FlxTween.tween(camGame, {zoom: camGame.zoom - .2}, 5, {ease: FlxEase.expoOut});
+}
 
-	if curBeat == 608 then
-		setProperty('defaultCamZoom',0.9)
-		followchars = true
-		xx = 1725
-		yy = 1200
-		xx2 = 1725
-		yy2 = 1200
-	end
-	if curBeat == 672 then
-		setProperty('defaultCamZoom',0.7)
-		followchars = true
-		xx = 1725
-		yy = 1100
-		xx2 = 1725
-		yy2 = 1100
-	end
- */
+function onBeatHit():Void // im sso lazy to mak this an event im sowwy
+{
+	if (PlayState.isStoryMode && curBeat == 712)
+	{
+		camGame.fade(FlxColor.BLACK, Conductor.crotchet * .024);
+		
+		FlxTween.tween(camGame, {'scroll.x': camGame.scroll.x + 400, 'scroll.y': camGame.scroll.y + 100, zoom: camGame.zoom + .2}, Conductor.crotchet * .032, {ease: FlxEase.sineInOut});
+	}
+}

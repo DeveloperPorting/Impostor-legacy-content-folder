@@ -76,7 +76,7 @@
 	"gameover_intial_sound": null,
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
-	"healthicon": "yellow",
+	"healthicon": "yellowghost",
 	"gameover_character": "genericDeath",
 	"vslice_sustains": true,
 	"flip_x": true,
@@ -88,5 +88,12 @@
 	"gameover_loop_sound": null,
 	"sing_duration": 6,
 	"scale": 1,
-	"_editor_isPlayer": true
+	"_editor_isPlayer": true,
+	"flags": {
+		"ghost": true,
+		"floating": true,
+		"seeThrough": true,
+		"finaleHealthBarColor": ["0xFFFFD452", "0xFFFFEC8E", "0xFFE0893B"],
+		"customMonotone": "yellow"
+	}
 }

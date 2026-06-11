@@ -10,5 +10,10 @@
 	"secondopp": [-60, 210],
 	
 	"bfZIndex": 3,
-	"dadZIndex": 3
+	"dadZIndex": 3,
+	
+	"flags": {
+		"alive": true,
+		"airship": true
+	}
 }

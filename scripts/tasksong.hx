@@ -16,10 +16,10 @@ function onCreatePost()
 	add(taskGroup);
 	
 	text = new FlxText(0, 0, 0, 'ME');
-	text.setFormat(Paths.font("liberbold.ttf", true), 24, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	text.setFormat(Paths.font("liberbold.ttf", false), 24, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	
 	subtext = new FlxText(0, 30, 0, 'I MADE THE SONG');
-	subtext.setFormat(Paths.font("liber.ttf", true), 24, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	subtext.setFormat(Paths.font("liber.ttf", false), 24, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	
 	bg = new FlxSprite(24 / -2, 24 / -2);
 	var info = getInfo('info');
@@ -52,7 +52,7 @@ function assignValues(info:Array<String>)
 
 function getInfo(?info = 'info')
 {
-	var txt = Paths.modFolders('songs/' + Paths.sanitize(songName) + '/' + info + '.txt');
+	var txt = Paths.getPath('songs/' + Paths.sanitize(songName) + '/' + info + '.txt', null, true);
 	var taskSong:Array<String> = CoolUtil.coolTextFile(txt);
 	// if (ClientPrefs.inDevMode) trace(taskSong);
 	

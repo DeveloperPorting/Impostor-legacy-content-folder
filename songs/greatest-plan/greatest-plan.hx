@@ -2,10 +2,9 @@ var charlesEnter:Bool = false;
 
 function onLoad()
 {
-	mom = new Character(1110, 200, isStoryMode ? 'bf' : ClientPrefs.bfSkin, true);
+	mom = new Character(1110, 200, isStoryMode ? 'bf' : ClientPrefs.equipment.get('playerSkin') ?? 'bf', true);
 	startCharacterPos(mom);
 	stage.add(mom);
-	we_have_mom_boy = true;
 }
 
 function onStartCountdown()
@@ -15,6 +14,7 @@ function onStartCountdown()
 
 function onCreatePost()
 {
+	pauseOverwrite = 'henry';
 	canFollow = false;
 	boyfriend.setPosition(308, 200);
 	dad.setPosition(-1200, 20);
@@ -50,6 +50,7 @@ function onEvent(name, v1, v2)
 		// healthBar.createColoredEmptyBar(0xFFff3333);
 		case 'enter':
 			charlesEnter = true;
+			pauseOverwrite = 'charles';
 	}
 }
 

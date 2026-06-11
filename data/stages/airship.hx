@@ -12,6 +12,7 @@ var teleporting:Bool = false;
 var isyellowdead:Bool = false;
 var ext = 'stages/airship/mando/';
 var flashers:Array<FlxSprite>;
+public var deadbody:FlxSprite;
 
 function onLoad()
 {
@@ -74,10 +75,18 @@ function onCreatePost()
 
 function onSongStart()
 {
-	var songLower = StringTools.trim(songName.toLowerCase());
-	if ((songLower == 'mando' || songLower == "d'low") && gf.curCharacter == 'gf-ghost') game.unlockAchievementPopup('oh_hey_there');
+	var songLower = Paths.sanitize(songName);
 	
-	if (hasBfSkin && game.boyfriend.curCharacter == 'yellowplayable' && (songLower == 'oversight')) game.unlockAchievementPopup('revenge');
+	switch (songLower)
+	{
+		case 'mando', 'd\'low':
+			if (gf.getFlag('seeThrough'))
+				unlockAchievementPopup('oh_hey_there');
+		
+		case 'oversight':
+			if (boyfriend.curCharacter == 'yellowplayable')
+				game.unlockAchievementPopup('revenge');
+	}
 }
 
 function onUpdate()

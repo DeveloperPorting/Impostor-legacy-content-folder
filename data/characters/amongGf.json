@@ -63,7 +63,7 @@
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/gf/amongGf",
+	"image": "characters/gf/cosmicube/amongGf",
 	"position": [
 		-1,
 		9
@@ -82,7 +82,10 @@
 		0
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
-	"_editor_isPlayer": false
+	"_editor_isPlayer": false,
+	"flags": {
+		"lightsDownSpeaker": true
+	}
 }

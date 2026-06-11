@@ -1,65 +1,52 @@
+using StringTools;
+
 public var bfLegs:Character;
+var legs:Character;
 var bfAnchorPoint:Array<Float> = [0, 0];
-var legPosY = [13, 7, -3, -1, -1, 2, 7, 9, 7, 2, 0, 0, 3, 1, 3, 7, 13];
+var legPosY = [7, 7, 4, 4, -5, -5, -7, -7, -3, -3, 7, 7, 4, 4, -5, -5, -7, -7, -3, -3];
 
-function onLoad()
+function onLoad():Void
 {
-	bfLegs = new Character(0, 0, 'bf-legs', true);
-	boyfriendGroup.insert(boyfriendGroup.members.indexOf(bfLegs) + 1, bfLegs);
-}
-
-function onCreatePost()
-{
-	bfLegs.x = game.boyfriend.x;
-	bfLegs.y = game.boyfriend.y;
-	bfAnchorPoint[0] = game.boyfriend.x;
-	bfAnchorPoint[1] = game.boyfriend.y;
-}
-
-function onUpdate(elapsed)
-{
-	game.boyfriend.y = bfAnchorPoint[1] + legPosY[bfLegs.animation.curAnim.curFrame];
+	bfLegs = legs = new Character(0, 0, parent.curCharacter, true);
+	boyfriendGroup.insert(0, legs);
 	
-	// This changes the legs from the miss version to the normal one and makes sure it starts on the same animation frame where it left off
-	if (!StringTools.contains(game.boyfriend.animation.curAnim.name, 'miss') && StringTools.contains(bfLegs.animation.curAnim.name, 'miss'))
+	legs.animation.pause();
+	setLegsAnim('legs');
+}
+
+function onCreatePost():Void
+{
+	bfAnchorPoint[0] = legs.x = parent.x;
+	bfAnchorPoint[1] = legs.y = parent.y;
+	parent.flipX = parent.baseFlipX = false;
+}
+
+function onUpdatePost(elapsed):Void
+{
+	if (!parent.getAnimName().contains('miss') && legs.getAnimName() == 'legs-miss') setLegsAnim('legs');
+	
+	legs.animCurFrame = Math.floor(FlxMath.mod(curDecBeat, 2) / 2 * legs.animation.curAnim.numFrames);
+	if (parent.animation.curAnim.looped)
 	{
-		var lastFrame:Int = 0;
-		lastFrame = bfLegs.animation.curAnim.curFrame;
-		bfLegs.idleSuffix = '';
-		bfLegs.recalculateDanceIdle();
-		bfLegs.animation.curAnim.curFrame = lastFrame;
+		parent.animation.curAnim.pause();
+		parent.animCurFrame = legs.animCurFrame;
 	}
 	
-	// Ensures that the arms and legs r always opposite from each other and only updates If bf is in his idle anim
-	if (StringTools.contains(game.boyfriend.animation.curAnim.name, 'dance'))
-	{
-		game.boyfriend.danced = bfLegs.danced;
-		game.boyfriend.animation.curAnim.curFrame = bfLegs.animation.curAnim.curFrame;
-	}
-}
-
-function onKeyRelease() game.boyfriend.danced = bfLegs.danced;
-
-function onCountdownTick()
-{
-	bfLegs.dance();
-}
-
-function onBeatHit()
-{
-	if (curBeat % 1 == 0)
-	{
-		bfLegs.dance();
-	}
+	parent.y = (bfAnchorPoint[1] + legPosY[legs.animCurFrame]);
+	legs.setPosition(bfAnchorPoint[0], bfAnchorPoint[1]);
 }
 
 // This changes the legs from the normal version to the miss version and makes sure it starts on the same animation frame where it left off
-function noteMiss(daNote)
+function noteMiss(daNote:Note):Void
 {
-	var lastFrame:Int = 0;
+	setLegsAnim('legs');
 	
-	lastFrame = bfLegs.animation.curAnim.curFrame;
-	bfLegs.idleSuffix = 'miss';
-	bfLegs.recalculateDanceIdle();
-	bfLegs.animation.curAnim.curFrame = lastFrame;
+	new FlxTimer().start(1 / 24, function() setLegsAnim('legs-miss'));
+}
+
+function setLegsAnim(anim:String):Void
+{
+	var lastFrame:Int = legs.animCurFrame;
+	legs.playAnim(anim, true);
+	legs.animCurFrame = lastFrame;
 }

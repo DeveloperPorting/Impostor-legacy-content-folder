@@ -181,5 +181,10 @@
 	"gameover_loop_sound": null,
 	"sing_duration": 4,
 	"scale": 1.2,
-	"_editor_isPlayer": true
+	"_editor_isPlayer": true,
+	"flags": {
+		"turbulenceOffset": [-90, -90],
+		"backlit": true,
+		"finaleHealthBarColor": ["0xFF381B51", "0xFF5539A0", "0xFF200A1E"]
+	}
 }

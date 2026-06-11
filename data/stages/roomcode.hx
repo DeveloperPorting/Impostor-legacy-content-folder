@@ -11,7 +11,7 @@ function onCreatePost()
 {
 	snapCamToPos(750, 580);
 	camSpecialThing([500, 580], [1000, 580]);
-};
+}
 
 function onEvent(name, v1, v2)
 {
@@ -28,7 +28,7 @@ function onEvent(name, v1, v2)
 					snapCamToPos(1000, 600);
 				case 'nene':
 					isCameraOnForcedPos = true;
-					snapCamToPos(800, 550);
+					snapCamToPos(750, 500);
 				case 'normal':
 					isCameraOnForcedPos = false;
 			}

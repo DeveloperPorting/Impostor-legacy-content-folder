@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				-1,
-				-1
+				0,
+				0
 			],
 			"loop": false,
 			"fps": 24,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				2,
-				4
+				0,
+				0
 			],
 			"loop": false,
 			"fps": 24,
@@ -36,7 +36,7 @@
 		{
 			"offsets": [
 				0,
-				1
+				0
 			],
 			"loop": false,
 			"fps": 24,
@@ -111,28 +111,50 @@
 			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"anim": "wtf",
+			"loop": false,
 			"fps": 24,
-			"name": "mwtf",
-			"indices": []
+			"anim": "wtf1",
+			"indices": [],
+			"name": "wtf1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "wtf2",
+			"indices": [],
+			"name": "wtf2"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "ffs",
+			"indices": [],
+			"name": "ffs"
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/freeplay/whitewho",
 	"position": [
 		-400,
-		150
+		90
 	],
 	"dance_every": 2,
 	"gameover_intial_sound": null,
 	"scalableOffsets": false,
 	"gameover_confirm_sound": null,
-	"healthicon": "whitewho",
+	"healthicon": "whitewhomad",
 	"gameover_character": null,
 	"vslice_sustains": false,
 	"flip_x": true,
@@ -142,7 +164,7 @@
 		290
 	],
 	"gameover_loop_sound": null,
-	"sing_duration": 6.1,
+	"sing_duration": 4,
 	"scale": 1,
 	"_editor_isPlayer": true
 }

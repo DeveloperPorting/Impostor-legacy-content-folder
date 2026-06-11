@@ -119,6 +119,19 @@
 			"flipX": false,
 			"indices": [],
 			"name": "scared"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"flipY": false,
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"flipX": false,
+			"indices": [],
+			"name": "hey"
 		}
 	],
 	"no_antialiasing": false,
@@ -143,5 +156,15 @@
 	"gameover_loop_sound": null,
 	"sing_duration": 4,
 	"scale": 0.8,
-	"_editor_isPlayer": true
+	"_editor_isPlayer": true,
+	"flags": {
+		"variants": {
+			"alive": "yellow-ghost"
+		},
+		"turbulenceOffset": [20, 110],
+		"finaleHealthBarColor": ["0xFFFFD452", "0xFFFFEC8E", "0xFFE0893B"],
+		"customMonotone": "yellow",
+		"ghost": true,
+		"i mean": "it isnt really a ghost but like like yeah"
+	}
 }

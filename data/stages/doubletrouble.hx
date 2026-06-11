@@ -1,23 +1,30 @@
-//import funkin.game.shaders.ColorMatrixShader;
-import funkin.backend.FunkinShader.FunkinRuntimeShader;
-//import funkin.utils.ProgressionUtil;
-import funkin.objects.FunkinSprite;
-import funkin.scripting.PluginsManager;
+import funkin.game.shaders.ExtraDropShadowShader;
+import funkin.utils.ProgressionUtil;
 
 import openfl.filters.ShaderFilter;
 
 import StringTools;
 
-var greenShader:FunkinRuntimeShader;
-var bfShader:FunkinRuntimeShader;
-var overlayShader:OverlayShader;
 var ext = 'stages/mira/reactorRuined/';
+
+var overlayShader:OverlayShader;
+
+var greenShader:ExtraDropShadowShader = new ExtraDropShadowShader();
+var bfShader:ExtraDropShadowShader = new ExtraDropShadowShader();
+var gfShader:ExtraDropShadowShader = new ExtraDropShadowShader();
+var petShader:ExtraDropShadowShader = new ExtraDropShadowShader();
+var drops:Array<ExtraDropShadowShader> = [greenShader, bfShader, gfShader, petShader];
+
+var thunderGroup:FlxSpriteGroup;
+
 var toogusorange:FlxSprite;
 var toogusblue:FlxSprite;
 var tooguswhite:FlxSprite;
 var red:Character;
 var redElement:FlxSpriteElement;
 var introFade:FlxSprite;
+var wall:FlxSprite;
+var glow:FlxSprite;
 var mist:FlxBackdrop;
 var mist2:FlxBackdrop;
 var mist3:FlxBackdrop;
@@ -30,10 +37,19 @@ var rainIntensity:Float = .1;
 var heartRad:Float = 0;
 var rainShader; // ty base game
 
+var lightningDarken:Array<FlxSprite>;
+var lightningLighten:Array<FlxSprite>;
+
 var bfIntro:FunkinSprite;
+
+public var nextThunder:Int = 4;
+public var canThunder:Bool = true;
 
 function onLoad()
 {
+	for (i in 1 ... 5) Paths.image('${ext}thunder$i');
+	for (i in 1 ... 4) Paths.sound('stage/dtThunder$i');
+	
 	var sky:FlxSprite = new FlxSprite(-300, -900, Paths.image(ext + 'nightSky'));
 	sky.antialiasing = true;
 	sky.scrollFactor.set(.2, .2);
@@ -43,7 +59,7 @@ function onLoad()
 	add(sky);
 	
 	var stars:FlxSprite = new FlxSprite(-200, -200, Paths.image(ext + 'stars'));
-	stars.scrollFactor.set(.2, .2);
+	stars.scrollFactor.set(.03, .1);
 	stars.active = false;
 	add(stars);
 	
@@ -54,23 +70,33 @@ function onLoad()
 	clouds.scrollFactor.set(.3, .3);
 	add(clouds);
 	
-	var bg0:FlxSprite = new FlxSprite(-320, -520, Paths.image(ext + 'wall'));
-	bg0.scrollFactor.set(.9, .9);
-	bg0.active = false;
-	add(bg0);
+	thunderGroup = new FlxSpriteGroup();
+	add(thunderGroup);
 	
-	var bg:FlxSprite = new FlxSprite(-140, 750, Paths.image(ext + 'floor'));
-	bg.active = false;
-	add(bg);
+	glow = new FlxSprite(-200, -400, Paths.image('${ext}thunderGlow'));
+	glow.blend = BlendMode.ADD;
+	glow.scrollFactor.set(.05, .1);
+	glow.scale.set(10, 12);
+	glow.updateHitbox();
+	add(glow);
+	
+	wall = new FlxSprite(-320, -520, Paths.image(ext + 'wall'));
+	wall.scrollFactor.set(.9, .9);
+	wall.active = false;
+	add(wall);
+	
+	var floor:FlxSprite = new FlxSprite(-140, 750, Paths.image(ext + 'floor'));
+	floor.active = false;
+	add(floor);
 	
 	var blood:FlxSprite = new FlxSprite(640, 1280, Paths.image(ext + 'blood'));
 	blood.blend = BlendMode.MULTIPLY;
 	blood.active = false;
 	add(blood);
 	
-	var bg3:FlxSprite = new FlxSprite(-120, 610, Paths.image(ext + 'pillars'));
-	bg3.active = false;
-	add(bg3);
+	var pillars:FlxSprite = new FlxSprite(-120, 610, Paths.image(ext + 'pillars'));
+	pillars.active = false;
+	add(pillars);
 	
 	var bodies:FlxSprite = new FlxSprite(50, 1140, Paths.image(ext + 'bodies'));
 	bodies.active = false;
@@ -122,11 +148,76 @@ function onLoad()
 	shine.y -= 930;
 	shine.alpha = .001;
 	add(shine);
+	
+	wall.setColorTransform(1, 1, 1, 1, -18, -16, -12);
+	
+	lightningDarken = [boyfriendGroup, dadGroup, gfGroup, pet, bodies, bfIntro];
+	lightningLighten = [wall, floor, pillars, blood, sky];
+	
+	new FlxTimer().start(2.6, thunder);
+	
+	FlxTween.tween(mist6, {alpha: 0}, 18, {onComplete: function(_) mist6.kill()});
+	FlxTween.tween(mist7, {alpha: 0}, 24, {onComplete: function(_) mist7.kill()});
+}
+
+function thunder():Void // MAKE IT CLAP YES !!!
+{
+	nextThunder = -1;
+	
+	var thunder:FlxSprite = thunderGroup.recycle(FlxSprite);
+	thunder.scrollFactor.set(.05, .05);
+	thunder.loadGraphic(Paths.image('${ext}thunder${FlxG.random.int(1, 4)}'));
+	thunder.flipX = FlxG.random.bool(50);
+	thunder.x = FlxG.random.float(-1500, 1000);
+	thunder.y = -700;
+	
+	thunder.alpha = 0;
+	thunder.blend = BlendMode.ADD;
+	FlxTween.tween(thunder, {alpha: FlxG.random.float(.5, 1)}, .1, {ease: FlxEase.sineIn, onComplete: function(_) {
+		FlxTween.tween(thunder, {alpha: 0}, FlxG.random.float(1.5, 2.2), {ease: FlxEase.sineIn, onComplete: function(_) thunder.kill()});
+	}});
+	
+	new FlxTimer().start(FlxG.random.float(.1, 2), function(_) FlxG.sound.play(Paths.sound('stage/dtThunder${FlxG.random.int(1, 3)}'), FlxG.random.float(.7, 1)));
+	
+	FlxTween.num(FlxG.random.float(.5, .7), .4, .5, {ease: FlxEase.elasticInOut, onComplete: function(_) {
+		FlxTween.num(.4, 0, FlxG.random.float(.7, 1.2), {ease: FlxEase.sineIn, onComplete: function() setNextThunder()}, lightningStuff);
+	}}, lightningStuff);
+}
+
+function lightningStuff(intensity:Float):Void
+{
+	var c:FlxColor = FlxColor.interpolate(FlxColor.WHITE, FlxColor.BLACK, (1 - Math.pow(1 - intensity, 2)) * .8);
+	for (sprite in lightningDarken)
+	{
+		if (sprite == null || !sprite.exists) continue;
+		
+		sprite.color = c;
+	}
+	
+	var m:Float = (1 + intensity * 1.25);
+	for (sprite in lightningLighten)
+	{
+		final ct = sprite.colorTransform;
+		
+		ct.redMultiplier = ct.greenMultiplier = ct.blueMultiplier = m;
+	}
+	
+	for (drop in drops)
+	{
+		drop.layers[0].threshold = Math.pow(1 - intensity, 3);
+	}
+	
+	glow.alpha = intensity;
+}
+
+function setNextThunder():Void
+{
+	nextThunder = (Math.ceil((curBeat + FlxG.random.int(4, 32)) / 2) * 2);
 }
 
 function checkIntro():Void
 {
-	//if (ProgressionUtil.songIsClear('double-trouble') && (ClientPrefs.bfSkin != 'default' || ClientPrefs.gfSkin != 'default')) return;
+	if (ProgressionUtil.songIsClear('double-trouble') && (ClientPrefs.bfSkin != 'default' || ClientPrefs.gfSkin != 'default')) return;
 	
 	allowBFSkin = allowGFSkin = false;
 	
@@ -168,14 +259,12 @@ function intro():Void
 		FlxTween.tween(camHUD, {alpha: 1}, 2, {ease: FlxEase.sineInOut});
 		
 		new FlxTimer().start(5, function(_) {
+			bfShader.attachedSprite = boyfriend;
 			remove(bfIntro, true);
 			bfIntro.destroy();
 			boyfriend.revive();
 		});
 	});
-	
-	FlxTween.tween(mist6, {alpha: 0}, 22, {onComplete: function(_) mist6.kill()});
-	FlxTween.tween(mist7, {alpha: 0}, 30, {onComplete: function(_) mist7.kill()});
 	
 	new FlxTimer().start(1 / 30, function(_) introSound.play());
 }
@@ -187,14 +276,18 @@ function onMoveCamera(who:String):Void
 
 function onCreatePost()
 {
+	boyfriend.useRenderTexture = gf.useRenderTexture = dad.useRenderTexture = pet.useRenderTexture = bfIntro.useRenderTexture = true;
+	
 	if (inCutscene)
 	{
 		boyfriend.kill();
 		stage.insert(stage.members.indexOf(boyfriendGroup) - 1, bfIntro);
+		bfShader.attachedSprite = bfIntro;
 	}
 	else
 	{
 		bfIntro.destroy();
+		bfShader.attachedSprite = boyfriend;
 	}
 	
 	var core:FlxSprite = new FlxSprite(500, 1560, Paths.image(ext + 'core')); // well wats left of it anyway
@@ -254,18 +347,19 @@ function onCreatePost()
 	add(mist6);
 	add(mist7);
 	
-	bfShader = newShader('Nightmare/AdjustColor');
-	//bfShader.setAdjustColor(-78, -25, -15, -58);
-	bfShader.setFloat('brightness', -78.0);
-	bfShader.setFloat('contrast', -25.0);
-	bfShader.setFloat('saturation', -15.0);
-	bfShader.setFloat('hue', 0.0);
-	//greenShader.setAdjustColor(-28, -22, -10, -60);
-	greenShader = newShader('Nightmare/AdjustColor');
-	greenShader.setFloat('brightness', -28.0);
-	greenShader.setFloat('contrast', -22.0);
-	greenShader.setFloat('saturation', -10.0);
-	greenShader.setFloat('hue', 0.0);
+	bfShader.setAdjustColor(-78, -25, -15, -58);
+	bfShader.addLayer([
+		.8, 0, 0, 0, 0,
+		0, 1, 0, 0, 0,
+		.3, 0, 1, 0, 0,
+		0, 0, 0, 1, 0
+	], 90, 35, .01, 1, .5);
+	
+	greenShader.copyFrom(petShader.copyFrom(gfShader.copyFrom(bfShader)));
+	greenShader.setAdjustColor(-28, -22, -10, -60);
+	
+	bfShader.layers[0].angle = 110;
+	greenShader.layers[0].angle = 70;
 	
 	camSpecialThing([1300, 900], [2000, 1100]);
 	// camGame.zoom = 1;
@@ -278,9 +372,10 @@ function onCreatePost()
 	
 	FlxTween.tween(introFade, {alpha: 0}, 2);
 	
-	red = new Character(-420, -380, 'doubleTroubleRed');
+	red = new Character(-420, -390, 'doubleTroubleRed');
 	red.danceEveryNumBeats = 2;
 	red.origin.set();
+	red.animation.onFrameChange.add(function(_, _, _) dad._renderTextureDirty = true);
 	
 	var lightoverlay:FlxSprite = new FlxSprite(1850, 1100).loadGraphic(Paths.image(ext + 'light'));
 	lightoverlay.antialiasing = true;
@@ -306,39 +401,38 @@ function onCreatePost()
 	redElement = new animate.internal.elements.FlxSpriteElement(red);
 	redElement.active = false;
 	
-	var placeholder = dad.library.getSymbol('red placeholder');
-	
-	placeholder.timeline.layers[0].forEachFrame((frame) -> {
-		for (i in frame.elements)
-			i.visible = false;
-			
-		frame.add(redElement);
-	});
+	if (dad.library != null)
+	{
+		var placeholder = dad.library.getSymbol('red placeholder');
+		
+		if (placeholder != null)
+			placeholder.timeline.layers[0].forEachFrame((frame) -> {
+				for (i in frame.elements)
+					i.visible = false;
+					
+				frame.add(redElement);
+			});
+	}
 	
 	// overlayShader = new funkin.game.shaders.OverlayShader();
 	// overlayShader.setBitmapOverlay(Paths.image(ext + 'overlay').bitmap);
 	
 	rainShader = newShader('rain');
-	rainShader.setFloatArray('uScreenResolution', [FlxG.width, FlxG.height]);
-	rainShader.setFloat('uTime', 0);
-	rainShader.setFloat('uScale', FlxG.height / 200);
-	rainShader.setFloat('uIntensity', rainIntensity);
+	if (rainShader != null)
+	{
+		rainShader.setFloatArray('uScreenResolution', [FlxG.width, FlxG.height]);
+		rainShader.setFloat('uTime', 0);
+		rainShader.setFloat('uScale', FlxG.height / 200);
+		rainShader.setFloat('uIntensity', rainIntensity);
+	}
 	
 	camGame.filters = [new ShaderFilter(rainShader) /*, new ShaderFilter(overlayShader)*/];
 	
-	bfIntro.shader = boyfriend.shader = gf.shader /*= pet.shader*/ = bfShader;
-	red.shader = dad.shader = greenShader;
+	gfShader.attachedSprite = gf;
+	petShader.attachedSprite = pet;
+	greenShader.attachedSprite = dad;
 	
-	var overlay:FlxSprite = new FlxSprite(0, 0, Paths.image(ext + 'subtract'));
-	overlay.blend = BlendMode.SUBTRACT;
-	overlay.scrollFactor.set(.5, .5);
-	overlay.scale.set(6, 6);
-	overlay.updateHitbox();
-	overlay.screenCenter();
-	overlay.active = false;
-	overlay.x += 500;
-	overlay.y += 300;
-	add(overlay);
+	lightningStuff(0);
 }
 
 function onGameOverStart()
@@ -392,6 +486,7 @@ function onEvent(eventName, value1, value2)
 		{
 			FlxTween.tween(camGame, {alpha: 0}, 2);
 			FlxTween.tween(camHUD, {alpha: 0}, 2);
+			canThunder = false;
 		}
 	}
 }
@@ -408,15 +503,18 @@ function onDestroy():Void
 
 function onUpdatePost(elapsed:Float):Void
 {
-	heartRad += elapsed;
-	rainShader.setFloatArray('uCameraBounds',
-		[game.camGame.scroll.x + game.camGame.viewMarginX, game.camGame.scroll.y + game.camGame.viewMarginY, game.camGame.scroll.x
-			+ game.camGame.viewMarginX
-			+ game.camGame.width, game.camGame.scroll.y
-			+ game.camGame.viewMarginY
-			+ game.camGame.height]);
-	rainShader.setFloat('uTime', heartRad);
-	rainShader.setFloat('uIntensity', rainIntensity);
+	if (rainShader != null)
+	{
+		heartRad += elapsed;
+		rainShader.setFloatArray('uCameraBounds',
+			[game.camGame.scroll.x + game.camGame.viewMarginX, game.camGame.scroll.y + game.camGame.viewMarginY, game.camGame.scroll.x
+				+ game.camGame.viewMarginX
+				+ game.camGame.width, game.camGame.scroll.y
+				+ game.camGame.viewMarginY
+				+ game.camGame.height]);
+		rainShader.setFloat('uTime', heartRad);
+		rainShader.setFloat('uIntensity', rainIntensity);
+	}
 }
 
 function opponentNoteHitPre(note)
@@ -426,7 +524,7 @@ function opponentNoteHitPre(note)
 	if (note.noteType == 'Both Opponents Sing')
 	{
 		if (redSnap) note.animSuffix = '-mad'; // im jsut so tired
-		PluginsManager.callPluginFunc('PlayStateLegacy', 'characterSing', [red, note]);
+		characterSing(red, note);
 		if (redSnap) note.animSuffix = '';
 	}
 	else if (!greenSing)
@@ -447,6 +545,8 @@ function opponentNoteHitPre(note)
 function onBeatHit()
 {
 	red.onBeatHit(curBeat);
+	
+	if (canThunder && nextThunder >= 0 && curBeat >= nextThunder) thunder();
 }
 
 function onCountdownTick()

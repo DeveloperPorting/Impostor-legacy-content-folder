@@ -1,5 +1,3 @@
-import funkin.scripting.PluginsManager;
-
 var bothSing:Bool = false;
 var twoSing:Bool = false;
 public var cargoDark:FlxSprite;
@@ -12,6 +10,8 @@ var cargoAirship:FlxSprite;
 
 
 	Post-note: I manually moved all of the events 10ms to the left in the .json
+	
+	heh. new eve nts order fixes this.
  */
 var ext = 'stages/airship/double-kill/';
 public var yellow:Character;
@@ -28,7 +28,7 @@ function onLoad()
 	bg.active = false;
 	add(bg);
 	
-	cargoDark = new FlxSprite(-1000, -1000).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+	cargoDark = new FlxSprite(-1000, -1000).makeScaledGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
 	cargoDark.antialiasing = true;
 	cargoDark.scrollFactor.set(0, 0);
 	cargoDark.alpha = 0.001;
@@ -37,8 +37,7 @@ function onLoad()
 
 function goodNoteHit(note)
 {
-	// trace('wait this my jam!' + note.noteType);
-	if (mandoSing) PluginsManager.callPluginFunc('PlayStateLegacy', 'characterSing', [yellow, note]);
+	if (mandoSing) characterSing(yellow, note);
 }
 
 function onBeatHit()
@@ -48,44 +47,33 @@ function onBeatHit()
 
 function onCreatePost()
 {
-	isBfGhost = (boyfriend.curCharacter == 'bf-ghost' || boyfriend.curCharacter == 'yellowplayable');
+	isBfGhost = boyfriend.getFlag('ghost');
 	
 	if (isBfGhost)
 	{
 		mandoSing = true;
 		
-		yellow = new Character(3100, 650, 'yellow-ghost');
+		yellow = new Character(3100, 650, 'yellow-ghost', true);
 		yellow.alpha = 0.001;
-		yellow.scale.x = -1 * yellow.scale.x;
 		startCharacterPos(yellow);
 		
 		add(yellow);
 	}
 	
-	lightoverlayDK = new FlxSprite(0, 0).loadGraphic(Paths.image(ext + 'scvavd'));
-	lightoverlayDK.scale.set(2, 2);
+	mainoverlayDK = new FlxSprite(1000, 350).loadGraphic(Paths.image(ext + 'newoverlay1'));
+	mainoverlayDK.scale.set(1.8, 1.6);
+	mainoverlayDK.updateHitbox();
+	mainoverlayDK.alpha = .51;
+	mainoverlayDK.blend = BlendMode.SUBTRACT;
+	add(mainoverlayDK);
+	
+	lightoverlayDK = new FlxSprite(1000, 350).loadGraphic(Paths.image(ext + 'newoverlay2'));
+	lightoverlayDK.scale.set(1.8, 1.6);
 	lightoverlayDK.updateHitbox();
-	lightoverlayDK.alpha = 0.51;
+	lightoverlayDK.alpha = 0.60;
 	lightoverlayDK.blend = BlendMode.ADD;
 	add(lightoverlayDK);
-	
-	mainoverlayDK = new FlxSprite(-100, 0).loadGraphic(Paths.image(ext + 'overlay ass dk'));
-	mainoverlayDK.scale.set(4, 4);
-	mainoverlayDK.updateHitbox();
-	mainoverlayDK.alpha = 0.6;
-	mainoverlayDK.blend = BlendMode.ADD;
-	add(mainoverlayDK);
-	// FlxG.camera.bgColor = FlxColor.RED;
-	// add(cargoDarkFG);
 }
-
-function startCharacterPos(char:Character) {
-    char.x += char.positionArray[0];
-    char.y += char.positionArray[1];
-}
-
-// function onGameOver() FlxG.camera.bgColor = FlxColor.BLACK;
-// LOL
 
 function onEvent(eventName, value1, value2)
 {
@@ -110,7 +98,7 @@ function onEvent(eventName, value1, value2)
 
 function refreshDoubleKillIcon()
 {
-	if (hasColor) playHUD.scoreTxt.color = (twoSing ? gf : dad).healthColour;
+	if (hasColor) scoreTxt.color = (twoSing ? gf : dad).healthColour;
 	playHUD.healthBar.setColors((twoSing ? gf : dad).healthColour, boyfriend.healthColour);
 	playHUD.iconP2.changeIcon(twoSing ? 'black' : 'white');
 }
@@ -121,9 +109,12 @@ function opponentNoteHitPre(note)
 	{
 		note.owner = gf;
 	}
-	else if (bothSing)
+	else if (bothSing || note.noteType == 'Both Opponents Sing')
 	{
-		PluginsManager.callPluginFunc('PlayStateLegacy', 'characterSing', [gf, note]);
+		// TODO: despite doing the same fraeking thing, note.singers isnt playing gohst animations  ?!?!
+		characterSing(dad, note);
+		characterSing(gf, note);
+		note.noAnimation = true;
 	}
 	else if (twoSing)
 	{

@@ -1,9 +1,10 @@
+import funkin.Mods;
+
 var modManager:ModManager;
 var blackAtlas:FunkinSprite;
 var music:FlxSound;
 var prevBpm:Float = Conductor.bpm;
 var title:FlxText;
-var extra:FunkinSprite;
 var portrait:FunkinSprite;
 var portraitBorder:FunkinSprite;
 var thx:FlxText;
@@ -14,6 +15,7 @@ var creditsGroup:FlxSpriteGroup;
 var dtCam:FlxCamera;
 var didHandleMusicEnd:Bool = false;
 
+var hasDLC:Bool = false;
 var credits:Array<CreditInfo> = [
 	{image: 'credits/motorfrog', scale: .45, x: 90},
 	{name: 'VS IMPOSTOR LEGACY'},
@@ -81,6 +83,7 @@ var credits:Array<CreditInfo> = [
 	{name: 'Localization'},
 	{icon: 'flags/portuguese', name: 'Apoto'},
 	{icon: 'flags/turkish', name: 'BulutMete'},
+	{icon: 'flags/turkish', name: 'feresk'},
 	{icon: 'flags/japan', name: 'Buruaru'},
 	{icon: 'flags/french', name: 'Moon'},
 	{icon: 'flags/korea', name: 'Remi'},
@@ -98,12 +101,14 @@ var credits:Array<CreditInfo> = [
 	{icon: 'flags/ukrainian', name: 'ギ (G)', font: 'jp.ttf'},
 	{icon: 'flags/palestinian', name: 'GamerZone'},
 	{icon: 'flags/mor', name: 'IlyasDF'},
+	{icon: 'flags/egypt', name: 'AsserelrefaeyYT'},
 	{icon: 'flags/norway', name: 'Hokago'},
-	{icon: 'flags/chile', name: 'Kako'},
-	{icon: 'flags/england', name: 'Lethrial'},
+	{icon: 'flags/chile', name: 'Kakow0'},
+	{icon: 'flags/uk', name: 'Lethrial'},
 	{icon: 'flags/greek', name: 'Noobaki'},
 	{icon: 'flags/noogurt', name: 'noogurt'},
-	{icon: 'flags/chinese', name: 'slenty0013'},
+	{icon: 'flags/chinese', name: 'DramaCa'},
+	{icon: 'flags/chinese', name: 'Yoruseri'},
 	{icon: 'flags/polish', name: 'NotQuba'},
 	{icon: 'flags/czech', name: 'Poiiscool'},
 	{icon: 'flags/italian', name: 'Serby'},
@@ -112,6 +117,8 @@ var credits:Array<CreditInfo> = [
 	{icon: 'flags/danish', name: 'Certain Bubble'},
 	{icon: 'flags/german', name: 'IrrationalBunches'},
 	{icon: 'flags/russia', name: 'Тøха'},
+	{icon: 'flags/brazil', name: 'SquidBoy84'},
+	{icon: 'flags/brazil', name: 'Thales'},
 	{name: 'Playtesters'},
 	{icon: 'none', name: 'angel'},
 	{icon: 'none', name: 'lemlem_mew'},
@@ -213,10 +220,12 @@ function onLoad():Void
 	// Nigga typing like serious Samuel im crying. But yea
 	if (Paths.fileExists('securitydlc/meta.json', null, true))
 	{
+		hasDLC = true;
+		
 		var insertPos:Int = credits.length - 3;
 		var dlcEntries:Array<Dynamic> = [
 			{name: 'DLC'},
-			{icon: 'none', name: 'Kimirittoz'},
+			{icon: 'kim', name: 'Kimirittoz'},
 			{icon: 'none', name: 'Ra_TanG'},
 			{icon: 'none', name: 'rodreal'},
 			{icon: 'none', name: 'vonspad'},
@@ -238,9 +247,11 @@ function onLoad():Void
 			{icon: 'none', name: 'Crash'},
 			{icon: 'none', name: 'Bixteus'},
 			{icon: 'none', name: 'GamerZone'},
-			{icon: 'none', name: 'DeepFriedBolonese'},
-			
+			{icon: 'none', name: 'DeepFriedBolognese'},
+			{icon: 'none', name: 'kokosan'},
+			{icon: 'none', name: 'GallyCidPizza'},
 		];
+		
 		for (i in 0...dlcEntries.length)
 			credits.insert(insertPos + i, dlcEntries[i]);
 	}
@@ -307,12 +318,6 @@ function onLoad():Void
 	songCreditGroup.add(disc);
 	songCreditGroup.add(songCredit);
 	
-	extra = add(new FunkinSprite(0, 0, rollImage('extra')));
-	extra.scrollFactor.set();
-	extra.setGraphicSize(640);
-	extra.updateHitbox();
-	extra.x = title.x;
-	
 	modManager.queueEase(0, 28 * 4, 'rollSize', 1080, 'linear', 0, 640);
 	queueRollImage(0, 'introA');
 	queueRollImage(8, 'introB');
@@ -343,7 +348,7 @@ function onLoad():Void
 		updateRoll();
 		
 		portrait.x = title.x;
-		portrait.screenCenter(0x10);
+		portrait.screenCenter(FlxAxes.Y);
 		
 		title.y = (portrait.y - title.height - 20);
 	});
@@ -365,7 +370,7 @@ function onLoad():Void
 	
 	queueRollImage(192, 'black');
 	modManager.queueFuncOnce(192 * 4, function(_) {
-		portraitBorder.kill(); // mh,gnhgmfdn c i have to reexport to add the border
+		portraitBorder.kill();
 		
 		portrait.addAnimByPrefix('idle', 'black idle', 24, false);
 		portrait.addAnimByPrefix('jumpscare', 'black jumpscare', 24, false);
@@ -389,13 +394,32 @@ function onLoad():Void
 	queueRollImage(368, 'tittyB', '"Humane Heartbeat"');
 	queueRollImage(400, 'tittyC', '"Deadly Delusion"');
 	queueRollImage(432, 'jam', '"Jorsawsee\'s Jams"');
-	queueRollImage(464);
-	// the scroller
+	
 	queueRollImage(528, 'outroA');
 	queueRollImage(544, 'outroB');
 	queueRollImage(560, 'outroC');
 	queueRollImage(576, 'outroD');
 	queueRollImage(592);
+	
+	// the scroller
+	modManager.queueFuncOnce(464 * 4, function(_) portraitBorder.kill());
+	
+	queueRollImage(464, 'extra', '');
+	
+	if (hasDLC)
+	{
+		Mods.currentModDirectory = 'securitydlc'; // its geniuse
+		
+		queueRollImage(496, 'dlc');
+		
+		Mods.currentModDirectory = null;
+	}
+		
+	modManager.queueFuncOnce(528 * 4, function(_) {
+		portrait.screenCenter(FlxAxes.Y);
+		portrait.clipRect = null;
+		portraitBorder.revive();
+	});
 	
 	modManager.queueFuncOnce(592 * 4, function(_) victory());
 	modManager.queueFuncOnce(604 * 4, function(_) camCredits.fade(FlxColor.BLACK, Conductor.crotchet / 1000 * 6));
@@ -469,13 +493,13 @@ function victory():Void
 	
 	var victory:FlxText = new FlxText(0, 40, 600, 'VICTORY');
 	victory.setFormat(Paths.font('vcr'), 112, 0xff80ffff, 'center');
-	victory.screenCenter(0x01);
+	victory.screenCenter(FlxAxes.X);
 	victory.scrollFactor.set();
 	add(victory);
 	
 	var thanks:FlxText = new FlxText(0, 600, 900, 'Thank you for playing!');
 	thanks.setFormat(Paths.font('vcr'), 56, 0xff80ffff, 'center');
-	thanks.screenCenter(0x01);
+	thanks.screenCenter(FlxAxes.X);
 	thanks.scrollFactor.set();
 	thanks.alpha = 0;
 	add(thanks);
@@ -561,8 +585,10 @@ function loadCredits():Void
 function rollImage(image:String):Null<FlxGraphic>
 {
 	var rollPath:String = ('credits/roll/' + image);
-	return (Paths.fileExists('images/' + rollPath + '.png') ?
+	var graphic:Null<FlxGraphic> = (Paths.fileExists('images/' + rollPath + '.png') ?
 		{/*trace('load roll image ' + image);*/ Paths.image(rollPath);} : null);
+	
+	return graphic;
 }
 
 function queueRollImage(beat:Float, ?image:String, ?titleName:String):Void
@@ -618,14 +644,42 @@ function onUpdate(elapsed:Float):Void
 		}
 	}
 	
-	Conductor.songPosition = music.time;
+	Conductor.songPosition += (elapsed * 1000);
+	if (Math.abs(Conductor.songPosition - music.time) > 1000 / 60) Conductor.songPosition = music.time;
 }
 
 function onUpdatePost(elapsed:Float):Void
 {
-	camCredits.scroll.y = FlxMath.remapToRange(Conductor.songPosition, Conductor.crotchet * 30, Conductor.crotchet * 592, 0, creditsHeight
+	var beat:Float = Conductor.crotchet;
+	
+	camCredits.scroll.y = FlxMath.remapToRange(Conductor.songPosition, beat * 30, beat * 592, 0, creditsHeight
 		+ camCredits.height);
-	extra.y = FlxMath.remapToRange(Conductor.songPosition, Conductor.crotchet * 464, Conductor.crotchet * 528, FlxG.height, -extra.height);
+	
+	if (hasDLC)
+	{
+		// look im just lazy im sorry :<
+		
+		if (Conductor.songPosition >= beat * 464 && Conductor.songPosition < beat * 496)
+		{
+			portrait.y = FlxMath.remapToRange(Conductor.songPosition, beat * 464, beat * 496, 56, FlxG.height - portrait.height - 48);
+		}
+		else if (Conductor.songPosition >= beat * 496 && Conductor.songPosition < beat * 528)
+		{
+			portrait.y = FlxMath.remapToRange(Math.min(Conductor.songPosition, beat * 524), beat * 496, beat * 524, 56, FlxG.height - portrait.height - 48);
+		}
+	}
+	else if (Conductor.songPosition >= beat * 464 && Conductor.songPosition < beat * 528)
+	{
+		portrait.y = FlxMath.remapToRange(Math.min(Conductor.songPosition, beat * 524), beat * 464, beat * 524, 56, FlxG.height - portrait.height - 48);
+	}
+	
+	if (Conductor.songPosition >= beat * 464 && Conductor.songPosition < beat * 528)
+	{
+		portrait.clipRect ??= new flixel.math.FlxRect();
+		
+		var offset:Float = ((48 - portrait.y) / portrait.scale.y);
+		portrait.clipRect.set(0, offset, portrait.frameWidth, (FlxG.height - 96) / portrait.scale.y);
+	}
 	
 	modManager.updateTimeline(curDecStep);
 	modManager.update(elapsed);

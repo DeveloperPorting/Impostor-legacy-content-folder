@@ -1,12 +1,11 @@
 import flixel.FlxSprite;
 import flixel.effects.particles.FlxEmitterMode;
-import flixel.effects.particles.FlxParticle;
 
 import funkin.game.shaders.DropShadowShader;
-//import funkin.objects.SnowEmitter;
+import funkin.objects.SnowEmitter;
 
 var snowAlpha = 0.3;
-//var snowEmitter:SnowEmitter;
+var snowEmitter:SnowEmitter;
 var emberEmitter:FlxEmitter;
 var ext = 'stages/polus/maroon/boiling/';
 var lavaOverlay:FlxSprite;
@@ -15,30 +14,14 @@ var ground:FlxSprite;
 
 function onLoad()
 {
-	lava = new FlxSprite(-650, -694); // FlxSprite(-400, -650);
+	lava = new FlxSprite(270, -330);
 	lava.frames = Paths.getSparrowAtlas(ext + 'wallBP');
 	lava.animation.addByPrefix('bop', 'Back wall and lava', 24, true);
-	lava.animation.play('bop');
+	if (!ClientPrefs.lowQuality) lava.animation.play('bop');
 	lava.scrollFactor.set(0.8, 0.8);
 	add(lava);
 	
-	FlxTween.tween(lava, {y: -750}, 200);
-	
-	/*switch (pet.curPet) // change pet
-	{
-		case 'snowball':
-			pet.loadPet('snowballmelted');
-		case 'snowmate':
-			pet.loadPet('snowmatemelted');
-		case 'fishus':
-			pet.loadPet('fishuscooked');
-		case 'thenug':
-			pet.loadPet('thenugcrisp');
-		case 'slugmate':
-			pet.loadPet('deadslugmate');
-		case 'fribbit':
-			pet.loadPet('fribbitsweat');
-	}*/
+	FlxTween.tween(lava, {y: -500}, 200);
 	
 	ground = new FlxSprite(1050, 650).loadGraphic(Paths.image(ext + 'platform'));
 	add(ground);
@@ -70,14 +53,14 @@ function onLoad()
 	emberEmitter.lifespan.set(4, 4.5);
 	// heartEmitter.loadParticles(Paths.image('mira/littleheart', 'impostor'), 500, 16, true);
 	
-	/*snowEmitter = new SnowEmitter(900, -800, 2700);
+	snowEmitter = new SnowEmitter(900, -800, 2700);
 	snowEmitter.start(false, ClientPrefs.lowQuality ? 0.5 : 0.5);
 	snowEmitter.scrollFactor.x.set(1, 1.5);
 	snowEmitter.scrollFactor.y.set(1, 1.5);
 	add(snowEmitter);
 	snowEmitter.alpha.active = false;
 	snowEmitter.onEmit.add((particle) -> particle.alpha = snowAlpha);
-	snowEmitter.zIndex = 13;*/
+	snowEmitter.zIndex = 13;
 	
 	redscreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFFF24400);
 	redscreen.scrollFactor.set();
@@ -90,6 +73,8 @@ function onLoad()
 
 function onCreatePost()
 {
+	camSpecialThing([1760, 300], [1900, 400]);
+
 	lavaOverlay = new FlxSprite(1000, -50).loadGraphic(Paths.image(ext + 'overlaythjing'));
 	lavaOverlay.scale.set(1.5, 1.5);
 	lavaOverlay.blend = BlendMode.ADD;
@@ -98,56 +83,56 @@ function onCreatePost()
 	add(lavaOverlay);
 	if (!ClientPrefs.lowQuality) add(emberEmitter);
 	
-	/*if (hasBfSkin && game.boyfriend.curCharacter == 'bfpolus')
+	if (hasBfSkin && game.boyfriend.curCharacter == 'bfpolus')
 	{
-		triggerEventNote('Change Character', 'dad', 'maroonplayableop');
+		triggerEventNote('Change Character', 'dad', 'maroonplayableoplava');
 		game.dad.x = 1050;
-		game.dad.y = 320;
+		game.dad.y = 330;
 		triggerEventNote('Change Character', 'boyfriend', 'bf-lava');
-	}*/
+		camSpecialThing([1760, 400], [1900, 400]);
+	}
+	if (game.boyfriend.curCharacter == 'maroonplayable')
+	{
+		triggerEventNote('Change Character', 'boyfriend', 'maroonplayablelava');
+	}
 	
-	//pet.zIndex = 0;
+	pet.zIndex = 0;
 	lavaOverlay.zIndex = 2;
 	emberEmitter.zIndex = 2;
-	//snowEmitter.zIndex = 2;
+	snowEmitter.zIndex = 2;
 	redscreen.zIndex = 3;
 	
 	if (ClientPrefs.shaders)
 	{
-		/*if (hasBfSkin && game.boyfriend.curCharacter != 'bf-lava')
-		{
-			var bfRim:DropShadowShader;
-			bfRim = new DropShadowShader();
-			bfRim.setAdjustColor(-30, -15, -20, 10);
-			bfRim.color = 0xFFFF9100;
-			bfRim.angle = 0;
-			bfRim.threshold = 0.07;
-			bfRim.distance = 15;
-			boyfriend.shader = bfRim;
-			bfRim.attachedSprite = boyfriend;
-			boyfriend.animation.onFrameChange.add(function() {
-				if (bfRim.attachedSprite != null)
-					bfRim.updateFrameInfo(boyfriend.frame);
-			});
-			boyfriend.useRenderTexture = true;
-		}
+		var blackRimlightBase:ExtraDropShadowShader = new funkin.game.shaders.ExtraDropShadowShader();
 		
+		blackRimlightBase.setColorMatrix([
+			0.8,   0,   0, 0, 16,
+			-.1, 0.6, -.1, 0,  0,
+			  0,   0, 0.6, 0,  8,
+			  0,   0,   0, 1,  0
+		]);
+		blackRimlightBase.addLayer([
+			1.5, -.1, .2, 0, 64,
+			-.3, 1.2,  0, 0, 32,
+			  0,   0,  1, 0,  0,
+			  0,   0,  0, 1,  0
+		], 330, 25, .01);
+		
+		if (hasBfSkin && boyfriend.curCharacter != 'bf-lava' && boyfriend.curCharacter != 'maroonplayablelava')
+		{
+			bfRim = blackRimlightBase;
+			bfRim.attachedSprite = boyfriend;
+			boyfriend.useRenderTexture = (boyfriend.curCharacter == 'bf-ghost');
+		}
 		if (hasPet)
 		{
-			var petRim:DropShadowShader;
-			petRim = new DropShadowShader();
-			petRim.setAdjustColor(-30, -15, -20, 10);
-			petRim.color = 0xFFFF9100;
-			petRim.angle = 50;
-			petRim.distance = 10;
-			petRim.threshold = 0.1;
-			pet.shader = petRim;
+			petRim = new funkin.game.shaders.ExtraDropShadowShader().copyFrom(blackRimlightBase);
+			petRim.layers[0].angle = 50;
+			petRim.layers[1].angle = 50;
 			petRim.attachedSprite = pet;
-			pet.animation.onFrameChange.add(function() {
-				if (petRim.attachedSprite != null)
-					petRim.updateFrameInfo(pet.frame);
-			});
-		}*/
+			pet.useRenderTexture = false;
+		}
 	}
 }
 
@@ -165,7 +150,7 @@ function onEvent(n, v1, v2)
 					// FlxTween.tween(pet, {y: 1500}, 2, {ease: FlxEase.expoInOut});
 					// FlxTween.cancelTweensOf(lava);
 					// FlxTween.tween(lava, {y: -550}, 4, {ease: FlxEase.expoInOut});
-					camSpecialThing(null, [2000, 635], 0.8);
+					camSpecialThing(null, [1900, 300], 0.8);
 					triggerEventNote('setChrom', '-5', '2');
 					FlxTween.tween(redscreen, {alpha: 1}, 2, {ease: FlxEase.expoInOut});
 			}
